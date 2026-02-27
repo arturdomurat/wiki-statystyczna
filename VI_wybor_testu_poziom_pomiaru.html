@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wybór testu a poziom pomiaru (świat statystyki nie jest czarno-biały) — Wiki Statystyczna UŚ</title>
+    <style>
+:root {
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --accent: #2c5282;
+    --accent-light: #ebf4ff;
+    --border: #d0d7de;
+    --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5;
+    --nav-hover: #e2e8f0;
+    --link: #2c5282;
+    --muted: #636c76;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    min-height: 100vh;
+}
+/* ── Sidebar ── */
+nav.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+}
+nav.sidebar .logo {
+    padding: 8px 20px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+    text-decoration: none;
+    display: block;
+}
+nav.sidebar .logo:hover { opacity: 0.8; }
+nav.sidebar .section-title {
+    padding: 10px 20px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+}
+nav.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 28px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    line-height: 1.4;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+nav.sidebar a:hover {
+    background: var(--nav-hover);
+    border-left-color: var(--accent);
+}
+nav.sidebar a.active {
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+    font-weight: 600;
+    color: var(--accent);
+}
+/* ── Main ── */
+main {
+    margin-left: 280px;
+    flex: 1;
+    max-width: 860px;
+    padding: 40px 50px 80px;
+}
+/* ── Typography ── */
+h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
+p { margin-bottom: 0.85em; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--link); }
+/* ── Lists ── */
+ul, ol { margin: 0.5em 0 1em 1.5em; }
+li { margin-bottom: 0.3em; }
+li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
+/* ── Code ── */
+code {
+    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
+    font-size: 0.9em;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+pre {
+    background: var(--code-bg);
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1em 0;
+    border: 1px solid var(--border);
+    font-size: 0.88em;
+    line-height: 1.5;
+}
+pre code { background: none; padding: 0; }
+/* ── Tables ── */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0 1.5em;
+    font-size: 0.92em;
+}
+th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+}
+th {
+    background: var(--sidebar-bg);
+    font-weight: 600;
+    font-size: 0.92em;
+}
+tr:nth-child(even) { background: #f8f9fa; }
+/* ── Blockquote (admonitions) ── */
+blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 12px 20px;
+    margin: 1em 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+    color: #374151;
+}
+blockquote p:last-child { margin-bottom: 0; }
+/* ── Subscript / superscript ── */
+sub { font-size: 0.78em; }
+sup { font-size: 0.78em; }
+/* ── "Zobacz też" section links ── */
+.see-also a {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 3px 4px;
+    background: var(--accent-light);
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background 0.15s;
+}
+.see-also a:hover { background: #d0e0f5; }
+/* ── Breadcrumb ── */
+.breadcrumb {
+    font-size: 0.85em;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+.breadcrumb a { color: var(--muted); }
+.breadcrumb a:hover { color: var(--accent); }
+/* ── Footer ── */
+.page-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82em;
+    color: var(--muted);
+}
+/* ── Mobile ── */
+@media (max-width: 900px) {
+    nav.sidebar { display: none; }
+    main { margin-left: 0; padding: 20px; max-width: 100%; }
+}
+@media (max-width: 900px) {
+    .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 10px; left: 10px;
+        z-index: 200;
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+}
+.mobile-menu-btn { display: none; }
+</style>
+</head>
+<body>
+    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
+    <nav class="sidebar" id="sidebar">
+  <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
+  <div class="section-title">Start</div>
+  <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
+  <div class="section-title">Planowanie badania</div>
+  <a href="I_analiza_mocy.html">Analiza mocy</a>
+  <a href="I_dobor_zmiennych_i_skala.html">Jak dobrać zmienne i skalę pomiaru?</a>
+  <a href="I_planowanie_wielkosci_proby.html">Jak zaplanować wielkość próby?</a>
+  <a href="I_schemat_badawczy.html">Jak zaplanować schemat badawczy?</a>
+  <div class="section-title">Porównywanie grup</div>
+  <a href="II_ANCOVA.html">Kowariancja jako kontrola</a>
+  <a href="II_MANOVA.html">Wieloczynnikowa zmienna zależna</a>
+  <a href="II_dwie_grupy_niezalezne.html">Dwie grupy niezależne</a>
+  <a href="II_dwie_grupy_zalezne.html">Dwie grupy zależne (pomiary powtarzane)</a>
+  <a href="II_jedna_proba.html">Jedna próba</a>
+  <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
+  <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <div class="section-title">Związki i predykcja</div>
+  <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
+  <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
+  <a href="III_regresja.html">Predykcja zmiennej ciągłej</a>
+  <a href="III_regresja_logistyczna.html">Predykcja zmiennej kategorialnej</a>
+  <a href="III_zmienne_kategorialne.html">Dwie zmienne kategorialne</a>
+  <div class="section-title">Struktura danych</div>
+  <a href="IV_CFA.html">Konfirmacyjna analiza czynnikowa (CFA)</a>
+  <a href="IV_EFA.html">Eksploracyjna analiza czynnikowa (EFA)</a>
+  <a href="IV_SEM.html">Modelowanie równań strukturalnych (SEM)</a>
+  <a href="IV_analiza_skupien.html">Analiza skupień (cluster analysis)</a>
+  <div class="section-title">Psychometria</div>
+  <a href="V_rzetelnosc.html">Rzetelność pomiaru</a>
+  <a href="V_trafnosc.html">Trafność pomiaru</a>
+  <div class="section-title">Kuchnia statystyczna</div>
+  <a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące</a>
+  <a href="VI_hipoteza_vs_zalozenie.html">Hipoteza vs. założenie</a>
+  <a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji</a>
+  <a href="VI_moc_testu.html">Moc testu</a>
+  <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
+  <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_procedura_NHST.html">Procedura NHST</a>
+  <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
+  <a href="VI_skale_Likerta.html">Skale Likerta</a>
+  <a href="VI_standardy_APA7.html">Standardy raportowania APA 7</a>
+  <a href="VI_statystyka_opisowa.html">Statystyka opisowa</a>
+  <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
+  <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
+  <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html" class="active">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
+  <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
+  <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
+  <div class="section-title">Metody zaawansowane</div>
+  <a href="VII_analiza_przezycia.html">Analiza przeżycia (survival analysis)</a>
+  <a href="VII_metaanaliza.html">Meta-analiza</a>
+  <a href="VII_modele_mieszane.html">Modele mieszane (mixed-effects models)</a>
+  <div class="section-title">Narzędzia</div>
+  <a href="VIII_GPower.html">G*Power</a>
+  <a href="VIII_JASP.html">JASP</a>
+  <a href="VIII_R_poradnik.html">R</a>
+  <a href="VIII_SPSS.html">SPSS</a>
+  <div class="section-title">Pojęcia fundamentalne</div>
+  <a href="IX_blad_standardowy.html">Błąd standardowy</a>
+  <a href="IX_centrowanie.html">Centrowanie zmiennych</a>
+  <a href="IX_estymacja.html">Estymacja punktowa vs. przedziałowa</a>
+  <a href="IX_niezaleznosc.html">Niezależność</a>
+  <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
+  <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
+  <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+</nav>
+    <main>
+        <div class="breadcrumb">
+            <a href="index.html">Wiki Statystyczna</a> › Kuchnia statystyczna
+        </div>
+        <h1 id="wybór-testu-a-poziom-pomiaru-świat-statystyki-nie-jest-czarno-biały">Wybór testu a poziom pomiaru (świat statystyki nie jest czarno-biały)</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Stoisz przed wyborem testu i szukasz prostej odpowiedzi: „mam takie dane — jaki test?". Szybko odkrywasz, że sytuacja jest bardziej skomplikowana niż tabela z podręcznika. Świat statystyki nie jest czarno-biały — wybór metody wymaga uwzględnienia wielu czynników jednocześnie.</p><h2 id="zasada-ogólna">Zasada ogólna</h2><p>Wybór odpowiedniego testu <strong>nie jest sprawą zerojedynkową</strong>. W jednych sytuacjach ratuje nas duża próba i pozbycie się obserwacji odstających. W innych — stwierdzenie, że wprawdzie wymagany jest rozkład normalny, ale rozkłady naszych zmiennych są całkiem „ładne" (prawie symetryczne, jednomodalne, „nieposzarpane", bez outlierów). Na takie odstępstwa dość odporne są np. testy <em>t</em> Studenta czy jednoczynnikowa ANOVA — przy spełnieniu pozostałych założeń.</p><p>Jeszcze w innych sytuacjach celom naszego badania nie zaszkodzi zdegradowanie zmiennych do słabszego poziomu pomiaru (np. zmiennej przedziałowej do porządkowej). Coś jednak za coś: testy nieparametryczne zwykle dają słabsze możliwości interpretacyjne i mają mniejszą moc niż testy parametryczne.</p><p>Używając narzędzi statystycznych trzeba pamiętać, że statystyka (jako dziedzina) jest tylko próbą przybliżenia rzeczywistości na podstawie pomiarów i testów, a nie samym światem realnym. Na przykład statystyka testowa w teście χ² niezależności tak naprawdę nigdy nie ma idealnego rozkładu chi-kwadrat; przy spełnieniu założenia o <em>f</em><sub>e</sub> &gt; 5 rozkład χ² jedynie dość dobrze przybliża rzeczywisty rozkład statystyki.</p><h2 id="poziomy-pomiaru-co-naprawdę-mamy">Poziomy pomiaru — co naprawdę mamy</h2><p>Określając poziom pomiaru, rozróżniamy:</p><p><strong>Skale nominalne:</strong></p><ul><li>dychotomiczne (dwie kategorie: tak/nie, kobieta/mężczyzna)</li><li>o większej liczbie kategorii (grupa zawodowa, kierunek studiów)</li></ul><p><strong>Skale porządkowe:</strong></p><ul><li>krótkie (np. skala Likerta 1–5 — → <em>patrz:</em> Skale Likerta)</li><li>„właściwe" (np. ranking, pozycja w klasyfikacji)</li></ul><p><strong>Skale ilościowe (przedziałowe lub ilorazowe):</strong></p><ul><li>zmienne o rozkładach „problematycznych" (silna skośność, wielomodalność, ciężkie ogony, obserwacje odstające)</li><li>zmienne o rozkładach „ładnych" — jednomodalnych, z określoną wartością oczekiwaną, skończoną wariancją, stabilnymi oszacowaniami parametrów</li></ul><p>W podręcznikach zwykle opisuje się czyste sytuacje wyboru metody. W praktyce trzeba uwzględniać niuanse.</p><h2 id="schematy-decyzyjne">Schematy decyzyjne</h2><h3 id="jedna-grupa-osób-pomiar-jednokrotny-lub-powtarzany">Jedna grupa osób — pomiar jednokrotny lub powtarzany</h3><table><colgroup><col style="width: 11%" /><col style="width: 31%" /><col style="width: 27%" /><col style="width: 29%" /></colgroup><thead><tr class="header"><th>Skala</th><th>Pomiar jednokrotny</th><th>Powtarzany (2×)</th><th>Powtarzany (3+×)</th></tr></thead><tbody><tr class="odd"><td><strong>Dychotomiczna</strong></td><td>Test proporcji</td><td>Test McNemara</td><td>Test Q Cochrana</td></tr><tr class="even"><td><strong>Nominalna</strong></td><td>χ² zgodności</td><td>—</td><td>—</td></tr><tr class="odd"><td><strong>Porządkowa</strong></td><td>Wilcoxon jednej próby</td><td>Wilcoxon signed-rank</td><td>Friedman</td></tr><tr class="even"><td><strong>Ilościowa</strong> (dobrze określone parametry)</td><td>Test <em>t</em> jednej próby</td><td>Test <em>t</em> prób zależnych</td><td>ANOVA z powtórzeniami</td></tr><tr class="odd"><td><strong>Ilościowa</strong> (parametry słabo określone)</td><td>Wilcoxon jednej próby</td><td>Wilcoxon signed-rank</td><td>Friedman</td></tr></tbody></table><h3 id="dwie-lub-więcej-grup-niezależnych">Dwie lub więcej grup niezależnych</h3><table><colgroup><col style="width: 23%" /><col style="width: 36%" /><col style="width: 40%" /></colgroup><thead><tr class="header"><th>Skala</th><th>Dwie grupy</th><th>Trzy+ grupy</th></tr></thead><tbody><tr class="odd"><td><strong>Dychotomiczna / nominalna</strong></td><td>χ² niezależności / Fisher</td><td>χ² niezależności</td></tr><tr class="even"><td><strong>Porządkowa</strong></td><td><em>U</em> Manna-Whitneya</td><td>Kruskal-Wallis</td></tr><tr class="odd"><td><strong>Ilościowa</strong> (dobrze określone parametry, wariancje równe)</td><td>Test <em>t</em> Studenta</td><td>ANOVA jednoczynnikowa</td></tr><tr class="even"><td><strong>Ilościowa</strong> (dobrze określone parametry, wariancje nierówne)</td><td>Test <em>t</em> Welcha</td><td>Welch ANOVA</td></tr><tr class="odd"><td><strong>Ilościowa</strong> (parametry słabo określone)</td><td><em>U</em> Manna-Whitneya</td><td>Kruskal-Wallis</td></tr></tbody></table><h3 id="związek-między-dwiema-zmiennymi">Związek między dwiema zmiennymi</h3><table><colgroup><col style="width: 40%" /><col style="width: 28%" /><col style="width: 32%" /></colgroup><thead><tr class="header"><th>Sytuacja</th><th>Skala</th><th>Metoda</th></tr></thead><tbody><tr class="odd"><td>Obie ciągłe, liniowy związek</td><td>Ilościowa, normalność dwuwymiarowa</td><td><em>r</em> Pearsona</td></tr><tr class="even"><td>Co najmniej jedna porządkowa</td><td>Porządkowa</td><td>ρ Spearmana / τ Kendalla</td></tr><tr class="odd"><td>Obie nominalne</td><td>Nominalna</td><td>χ², <em>V</em> Craméra, φ</td></tr><tr class="even"><td>Predykcja zmiennej ciągłej</td><td>Predyktory ilościowe/dychotomiczne</td><td>Regresja liniowa</td></tr><tr class="odd"><td>Predykcja zmiennej dychotomicznej</td><td>Predyktory ilościowe/dychotomiczne</td><td>Regresja logistyczna</td></tr></tbody></table><h2 id="kluczowe-niuanse">Kluczowe niuanse</h2><ol type="1"><li><p><strong>Duża próba łagodzi wiele grzechów.</strong> Centralne twierdzenie graniczne sprawia, że przy dużych <em>n</em> (≥ 30 w grupie) rozkład statystyki testowej zbliża się do normalnego, nawet jeśli zmienna X nie jest normalna. Dlatego przy dużych próbach testy parametryczne „działają" nawet przy naruszeniu normalności.</p></li><li><p><strong>Odporność testów (robustness).</strong> Test <em>t</em> i ANOVA są dość odporne na umiarkowane naruszenia normalności — szczególnie przy równolicznych grupach. Kluczowe jest, by rozkłady były „ładne" (symetryczne, jednomodalne, bez ekstremalnych outlierów).</p></li><li><p><strong>Degradacja skali nie zawsze szkodzi.</strong> Zamiana zmiennej przedziałowej na porządkową (rangowanie) jest zawsze możliwa i pozwala użyć testu nieparametrycznego. Tracimy jednak moc i precyzję interpretacji.</p></li><li><p><strong>Nie ma jednej „właściwej" ścieżki.</strong> Przy tych samych danych różni kompetentni statystycy mogą wybrać różne metody — i obie będą poprawne. Ważne jest uzasadnienie wyboru.</p></li></ol><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Sztywne trzymanie się tabel „jaka skala → jaki test".</strong> Tabele z podręczników opisują czyste sytuacje. Rzeczywistość wymaga elastyczności i rozumienia, <em>dlaczego</em> dane założenie jest istotne.</p></li><li><p><strong>Stosowanie testu nieparametrycznego „na wszelki wypadek".</strong> Jeśli założenia testu parametrycznego są spełnione, test parametryczny ma większą moc. Niepotrzebne przechodzenie na test nieparametryczny to marnowanie mocy.</p></li><li><p><strong>Ignorowanie kształtu rozkładu.</strong> Samo stwierdzenie „skala ilościowa" nie wystarczy — trzeba sprawdzić, jak rozkład faktycznie wygląda (outliers, skośność, multimodalność).</p></li><li><p><strong>Mechaniczne stosowanie testu normalności.</strong> Przy dużych próbach Shapiro-Wilk odrzuci normalność nawet przy nieistotnych odchyleniach. Przy małych — nie wykryje poważnych problemów. Zawsze patrz <a href="II_jedna_proba.html">na</a>strong>wykres</strong> (Q-Q plot, histogram).</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="II_dwie_grupy_niezalezne.html">Dwie grupy niezależne — który test?</a></li><li><a href="VI_normalnosc_rozkladu.html">Normalność rozkładu — kiedy naprawdę potrzebna?</a></li><li><a href="VI_skale_Likerta.html">Skale Likerta — porządkowe czy przedziałowe?</a></li><li><a href="VI_zalozenia_niespelnione.html">Założenia niespełnione — co robić?</a></li><li><a href="VI_wielkosc_efektu.html">Wielkość efektu — po co i jak?</a></li></ul><h2 id="literatura">Literatura</h2><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><p>Howell, D. C. (2012). <em>Statistical methods for psychology</em> (8th ed.). Wadsworth.</p><hr /><p>[A. Domurat]</p>
+
+        <div class="page-footer">
+            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
+        </div>
+    </main>
+</body>
+</html>

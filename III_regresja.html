@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predykcja zmiennej ciągłej — regresja liniowa — Wiki Statystyczna UŚ</title>
+    <style>
+:root {
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --accent: #2c5282;
+    --accent-light: #ebf4ff;
+    --border: #d0d7de;
+    --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5;
+    --nav-hover: #e2e8f0;
+    --link: #2c5282;
+    --muted: #636c76;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    min-height: 100vh;
+}
+/* ── Sidebar ── */
+nav.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+}
+nav.sidebar .logo {
+    padding: 8px 20px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+    text-decoration: none;
+    display: block;
+}
+nav.sidebar .logo:hover { opacity: 0.8; }
+nav.sidebar .section-title {
+    padding: 10px 20px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+}
+nav.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 28px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    line-height: 1.4;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+nav.sidebar a:hover {
+    background: var(--nav-hover);
+    border-left-color: var(--accent);
+}
+nav.sidebar a.active {
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+    font-weight: 600;
+    color: var(--accent);
+}
+/* ── Main ── */
+main {
+    margin-left: 280px;
+    flex: 1;
+    max-width: 860px;
+    padding: 40px 50px 80px;
+}
+/* ── Typography ── */
+h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
+p { margin-bottom: 0.85em; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--link); }
+/* ── Lists ── */
+ul, ol { margin: 0.5em 0 1em 1.5em; }
+li { margin-bottom: 0.3em; }
+li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
+/* ── Code ── */
+code {
+    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
+    font-size: 0.9em;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+pre {
+    background: var(--code-bg);
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1em 0;
+    border: 1px solid var(--border);
+    font-size: 0.88em;
+    line-height: 1.5;
+}
+pre code { background: none; padding: 0; }
+/* ── Tables ── */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0 1.5em;
+    font-size: 0.92em;
+}
+th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+}
+th {
+    background: var(--sidebar-bg);
+    font-weight: 600;
+    font-size: 0.92em;
+}
+tr:nth-child(even) { background: #f8f9fa; }
+/* ── Blockquote (admonitions) ── */
+blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 12px 20px;
+    margin: 1em 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+    color: #374151;
+}
+blockquote p:last-child { margin-bottom: 0; }
+/* ── Subscript / superscript ── */
+sub { font-size: 0.78em; }
+sup { font-size: 0.78em; }
+/* ── "Zobacz też" section links ── */
+.see-also a {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 3px 4px;
+    background: var(--accent-light);
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background 0.15s;
+}
+.see-also a:hover { background: #d0e0f5; }
+/* ── Breadcrumb ── */
+.breadcrumb {
+    font-size: 0.85em;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+.breadcrumb a { color: var(--muted); }
+.breadcrumb a:hover { color: var(--accent); }
+/* ── Footer ── */
+.page-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82em;
+    color: var(--muted);
+}
+/* ── Mobile ── */
+@media (max-width: 900px) {
+    nav.sidebar { display: none; }
+    main { margin-left: 0; padding: 20px; max-width: 100%; }
+}
+@media (max-width: 900px) {
+    .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 10px; left: 10px;
+        z-index: 200;
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+}
+.mobile-menu-btn { display: none; }
+</style>
+</head>
+<body>
+    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
+    <nav class="sidebar" id="sidebar">
+  <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
+  <div class="section-title">Start</div>
+  <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
+  <div class="section-title">Planowanie badania</div>
+  <a href="I_analiza_mocy.html">Analiza mocy</a>
+  <a href="I_dobor_zmiennych_i_skala.html">Jak dobrać zmienne i skalę pomiaru?</a>
+  <a href="I_planowanie_wielkosci_proby.html">Jak zaplanować wielkość próby?</a>
+  <a href="I_schemat_badawczy.html">Jak zaplanować schemat badawczy?</a>
+  <div class="section-title">Porównywanie grup</div>
+  <a href="II_ANCOVA.html">Kowariancja jako kontrola</a>
+  <a href="II_MANOVA.html">Wieloczynnikowa zmienna zależna</a>
+  <a href="II_dwie_grupy_niezalezne.html">Dwie grupy niezależne</a>
+  <a href="II_dwie_grupy_zalezne.html">Dwie grupy zależne (pomiary powtarzane)</a>
+  <a href="II_jedna_proba.html">Jedna próba</a>
+  <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
+  <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <div class="section-title">Związki i predykcja</div>
+  <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
+  <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
+  <a href="III_regresja.html" class="active">Predykcja zmiennej ciągłej</a>
+  <a href="III_regresja_logistyczna.html">Predykcja zmiennej kategorialnej</a>
+  <a href="III_zmienne_kategorialne.html">Dwie zmienne kategorialne</a>
+  <div class="section-title">Struktura danych</div>
+  <a href="IV_CFA.html">Konfirmacyjna analiza czynnikowa (CFA)</a>
+  <a href="IV_EFA.html">Eksploracyjna analiza czynnikowa (EFA)</a>
+  <a href="IV_SEM.html">Modelowanie równań strukturalnych (SEM)</a>
+  <a href="IV_analiza_skupien.html">Analiza skupień (cluster analysis)</a>
+  <div class="section-title">Psychometria</div>
+  <a href="V_rzetelnosc.html">Rzetelność pomiaru</a>
+  <a href="V_trafnosc.html">Trafność pomiaru</a>
+  <div class="section-title">Kuchnia statystyczna</div>
+  <a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące</a>
+  <a href="VI_hipoteza_vs_zalozenie.html">Hipoteza vs. założenie</a>
+  <a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji</a>
+  <a href="VI_moc_testu.html">Moc testu</a>
+  <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
+  <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_procedura_NHST.html">Procedura NHST</a>
+  <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
+  <a href="VI_skale_Likerta.html">Skale Likerta</a>
+  <a href="VI_standardy_APA7.html">Standardy raportowania APA 7</a>
+  <a href="VI_statystyka_opisowa.html">Statystyka opisowa</a>
+  <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
+  <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
+  <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
+  <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
+  <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
+  <div class="section-title">Metody zaawansowane</div>
+  <a href="VII_analiza_przezycia.html">Analiza przeżycia (survival analysis)</a>
+  <a href="VII_metaanaliza.html">Meta-analiza</a>
+  <a href="VII_modele_mieszane.html">Modele mieszane (mixed-effects models)</a>
+  <div class="section-title">Narzędzia</div>
+  <a href="VIII_GPower.html">G*Power</a>
+  <a href="VIII_JASP.html">JASP</a>
+  <a href="VIII_R_poradnik.html">R</a>
+  <a href="VIII_SPSS.html">SPSS</a>
+  <div class="section-title">Pojęcia fundamentalne</div>
+  <a href="IX_blad_standardowy.html">Błąd standardowy</a>
+  <a href="IX_centrowanie.html">Centrowanie zmiennych</a>
+  <a href="IX_estymacja.html">Estymacja punktowa vs. przedziałowa</a>
+  <a href="IX_niezaleznosc.html">Niezależność</a>
+  <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
+  <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
+  <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+</nav>
+    <main>
+        <div class="breadcrumb">
+            <a href="index.html">Wiki Statystyczna</a> › Związki i predykcja
+        </div>
+        <h1 id="predykcja-zmiennej-ciągłej-regresja-liniowa">Predykcja zmiennej ciągłej — regresja liniowa</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Chcesz przewidzieć wartość zmiennej zależnej (ciągłej) na podstawie jednego lub kilku predyktorów. Np. czy refleksyjność poznawcza i potrzeba poznania przewidują wyniki w teście racjonalnego myślenia?</p><h2 id="rodzaje-regresji-liniowej">Rodzaje regresji liniowej</h2><p><strong>Prosta:</strong> jeden predyktor → Y = b<sub>0</sub> + b<sub>1</sub>X + e</p><p><strong>Wieloraka:</strong> wiele predyktorów → Y = b<sub>0</sub> + b<sub>1</sub>X<sub>1</sub> + b<sub>2</sub>X<sub>2</sub> + … + e</p><h2 id="metody-wprowadzania-predyktorów">Metody wprowadzania predyktorów</h2><ul><li><strong>Enter</strong> (wszystkie naraz): preferowana, gdy masz hipotezy — wprowadzasz wszystkie predyktory jednocześnie.</li><li><strong>Hierarchiczna</strong> (bloki): gdy chcesz testować przyrost <em>R</em>² po dodaniu bloku predyktorów. Np. blok 1 = zmienne demograficzne, blok 2 = zmienne psychologiczne → Δ<em>R</em>² mówi, ile dodają zmienne psychologiczne ponad demografię.</li><li><strong>Stepwise</strong> (krokowa): <strong>OSTROŻNIE</strong> — metoda eksploracyjna, kapitalizacja na przypadku, wyniki zależne od próby. Nie zalecana w badaniach konfirmacyjnych.</li></ul><h2 id="założenia">Założenia</h2><ol type="1"><li><p><strong>Liniowość</strong> — związek między predyktorem a Y jest liniowy. Sprawdzenie: wykres reszt vs. wartości przewidywane (reszty losowo rozrzucone = OK; wzorzec krzywoliniowy = problem).</p></li><li><p><strong>Niezależność obserwacji</strong> — obserwacje nie mogą być ze sobą powiązane (np. zagnieżdżone w klasach, powtarzane w czasie). To kwestia schematu badawczego, nie testu statystycznego. Jeśli dane mają naturalny porządek czasowy (trend, szereg czasowy), dodatkowo sprawdź brak autokorelacji reszt testem Durbina-Watsona (<em>d</em> ≈ 2 = OK) — ale w typowej regresji na danych przekrojowych D-W jest zbędny (patrz: Częste błędy).</p></li><li><p><strong>Homoscedastyczność</strong> — stały rozrzut reszt dla wszystkich wartości przewidywanych. Sprawdzenie: wykres reszt vs. fitted (lejek = heteroscedastyczność). Rozwiązanie: estymatory HC (→ <em>patrz:</em> Homogeniczność wariancji).</p></li><li><p><strong>Normalność reszt</strong> — nie zmiennych! Sprawdzenie: histogram reszt, Q-Q plot. Ważne przy małych <em>n</em>; przy dużych CTG łagodzi.</p></li><li><p><strong>Brak współliniowości</strong> — predyktory nie powinny być zbyt silnie skorelowane. Sprawdzenie: VIF (Variance Inflation Factor) — VIF &lt; 5 OK, VIF &gt; 10 problem. Tolerance = 1/VIF &gt; 0.1.</p></li><li><p><strong>Brak wpływowych obserwacji</strong> — odległość Cooka &gt; 4/<em>n</em> → obserwacja wpływowa.</p></li></ol><h2 id="przyczynowość-a-predykcja">Przyczynowość a predykcja</h2><p>Regresja — jak żadna inna analiza statystyczna — <strong>nie dowodzi związku przyczynowo-skutkowego</strong>. Choć model ma kierunek (predyktory „wyjaśniają" zmienną zależną), jest to kierunek wyjaśniania zmienności, nie kierunek przyczynowy. To, że X przewiduje Y, nie oznacza, że X powoduje Y — związek może być odwrotny lub wynikać ze zmiennej trzeciej. Wnioskowanie przyczynowe wymaga odpowiedniego schematu badawczego (eksperyment, quasi-eksperyment), nie samej metody statystycznej.</p><h2 id="interpretacja">Interpretacja</h2><ul><li><strong><em>R</em>²</strong> — proporcja wariancji Y wyjaśnionej przez model. Np. <em>R</em>² = .34 → model wyjaśnia 34% zmienności Y.</li><li><strong>Skorygowane <em>R</em>²</strong> — koryguje za liczbę predyktorów (zapobiega inflacji <em>R</em>² przy wielu predyktorach). Raportuj oba.</li><li><strong><em>b</em></strong> (niestandardyzowane) — zmiana Y przy wzroście X o 1 jednostkę (w oryginalnych jednostkach).</li><li><strong>β</strong> (standaryzowane) — pozwala porównywać siłę predyktorów w jednym modelu (w jednostkach odchyleń standardowych).</li><li><strong>Δ<em>R</em>²</strong> — przyrost wariancji wyjaśnionej po dodaniu bloku (w regresji hierarchicznej).</li></ul><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><h3 id="model-ogólny">Model ogólny</h3><p>„Model regresji był istotny, <em>R</em>² = .34, <em>F</em>(3, 96) = 16.45, <em>p</em> &lt; .001. Model wyjaśniał 34% wariancji wyników testu racjonalnego myślenia."</p><h3 id="pojedyncze-predyktory">Pojedyncze predyktory</h3><table><thead><tr class="header"><th>Predyktor</th><th><em>b</em></th><th><em>SE</em></th><th>β</th><th><em>t</em></th><th><em>p</em></th></tr></thead><tbody><tr class="odd"><td>Stała</td><td>12.34</td><td>2.11</td><td></td><td>5.85</td><td>&lt; .001</td></tr><tr class="even"><td>CRT</td><td>0.89</td><td>0.23</td><td>.35</td><td>3.87</td><td>&lt; .001</td></tr><tr class="odd"><td>NFC</td><td>0.45</td><td>0.19</td><td>.22</td><td>2.37</td><td>.020</td></tr></tbody></table><h3 id="regresja-hierarchiczna">Regresja hierarchiczna</h3><p>„W kroku 1 (zmienne demograficzne) <em>R</em>² = .08, <em>F</em>(2, 97) = 4.23, <em>p</em> = .017. W kroku 2 (dodanie CRT i NFC) <em>R</em>² = .34, Δ<em>R</em>² = .26, Δ<em>F</em>(2, 95) = 18.72, <em>p</em> &lt; .001."</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Sprawdzanie normalności zmiennych zamiast reszt.</strong> W regresji zakładamy normalność RESZT, nie zmiennych wejściowych.</p></li><li><p><strong>Stosowanie regresji stepwise jako jedynej metody.</strong> Stepwise wykorzystuje przypadkowe zależności w danych — wyniki mogą się nie replikować. Lepiej stosować enter lub hierarchiczną.</p></li><li><p><strong>Interpretowanie <em>R</em>² jako „procent przyczynowości".</strong> <em>R</em>² to proporcja wyjaśnionej wariancji, nie dowód na przyczynowość.</p></li><li><p><strong>Ignorowanie współliniowości.</strong> Wysoka korelacja między predyktorami destabilizuje współczynniki <em>b</em> i <em>β</em> — mogą zmieniać znak (supresja).</p></li><li><p><strong>Raportowanie tylko β bez <em>b</em>.</strong> β pozwala porównywać predyktory, ale <em>b</em> daje interpretację w jednostkach zmiennej — potrzebne są oba.</p></li><li><p><strong>Dodawanie zbyt wielu predyktorów.</strong> Reguła kciuka: ≥ 10–15 obserwacji na predyktor (Green, 1991). Przy 50 osobach nie wstawiaj 10 predyktorów.</p></li><li><p><strong>Rutynowe sprawdzanie testu Durbina-Watsona w regresji na danych przekrojowych.</strong> D-W bada autokorelację reszt, czyli zależność między resztami sąsiadującymi w szeregu. Ma to sens tylko gdy dane mają naturalny porządek (szereg czasowy, trend, czas jako predyktor). W typowym badaniu psychologicznym na danych przekrojowych kolejność obserwacji jest przypadkowa — D-W daje wtedy wynik zależny od arbitralnego porządku wierszy, nie od żadnej rzeczywistej zależności. Ten błąd wynika z niedokładnego omawiania założeń regresji w wielu podręcznikach.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="III_korelacja.html">Dwie zmienne ciągłe — jaka korelacja?</a></li><li>Regresja logistyczna — predykcja zmiennej dychotomicznej</li><li><a href="III_mediacja_moderacja.html">Mediacja i moderacja — testowanie mechanizmów</a></li><li><a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji — kiedy naprawdę problem?</a></li><li><a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące — co z nimi robić?</a></li></ul><h2 id="literatura">Literatura</h2><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><p>Tabachnick, B. G., &amp; Fidell, L. S. (2013). <em>Using multivariate statistics</em> (6th ed.). Pearson.</p><hr /><p>[A. Domurat]</p>
+
+        <div class="page-footer">
+            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
+        </div>
+    </main>
+</body>
+</html>

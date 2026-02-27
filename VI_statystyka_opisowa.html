@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statystyka opisowa — co podać i jak? — Wiki Statystyczna UŚ</title>
+    <style>
+:root {
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --accent: #2c5282;
+    --accent-light: #ebf4ff;
+    --border: #d0d7de;
+    --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5;
+    --nav-hover: #e2e8f0;
+    --link: #2c5282;
+    --muted: #636c76;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    min-height: 100vh;
+}
+/* ── Sidebar ── */
+nav.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+}
+nav.sidebar .logo {
+    padding: 8px 20px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+    text-decoration: none;
+    display: block;
+}
+nav.sidebar .logo:hover { opacity: 0.8; }
+nav.sidebar .section-title {
+    padding: 10px 20px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+}
+nav.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 28px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    line-height: 1.4;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+nav.sidebar a:hover {
+    background: var(--nav-hover);
+    border-left-color: var(--accent);
+}
+nav.sidebar a.active {
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+    font-weight: 600;
+    color: var(--accent);
+}
+/* ── Main ── */
+main {
+    margin-left: 280px;
+    flex: 1;
+    max-width: 860px;
+    padding: 40px 50px 80px;
+}
+/* ── Typography ── */
+h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
+p { margin-bottom: 0.85em; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--link); }
+/* ── Lists ── */
+ul, ol { margin: 0.5em 0 1em 1.5em; }
+li { margin-bottom: 0.3em; }
+li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
+/* ── Code ── */
+code {
+    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
+    font-size: 0.9em;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+pre {
+    background: var(--code-bg);
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1em 0;
+    border: 1px solid var(--border);
+    font-size: 0.88em;
+    line-height: 1.5;
+}
+pre code { background: none; padding: 0; }
+/* ── Tables ── */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0 1.5em;
+    font-size: 0.92em;
+}
+th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+}
+th {
+    background: var(--sidebar-bg);
+    font-weight: 600;
+    font-size: 0.92em;
+}
+tr:nth-child(even) { background: #f8f9fa; }
+/* ── Blockquote (admonitions) ── */
+blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 12px 20px;
+    margin: 1em 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+    color: #374151;
+}
+blockquote p:last-child { margin-bottom: 0; }
+/* ── Subscript / superscript ── */
+sub { font-size: 0.78em; }
+sup { font-size: 0.78em; }
+/* ── "Zobacz też" section links ── */
+.see-also a {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 3px 4px;
+    background: var(--accent-light);
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background 0.15s;
+}
+.see-also a:hover { background: #d0e0f5; }
+/* ── Breadcrumb ── */
+.breadcrumb {
+    font-size: 0.85em;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+.breadcrumb a { color: var(--muted); }
+.breadcrumb a:hover { color: var(--accent); }
+/* ── Footer ── */
+.page-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82em;
+    color: var(--muted);
+}
+/* ── Mobile ── */
+@media (max-width: 900px) {
+    nav.sidebar { display: none; }
+    main { margin-left: 0; padding: 20px; max-width: 100%; }
+}
+@media (max-width: 900px) {
+    .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 10px; left: 10px;
+        z-index: 200;
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+}
+.mobile-menu-btn { display: none; }
+</style>
+</head>
+<body>
+    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
+    <nav class="sidebar" id="sidebar">
+  <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
+  <div class="section-title">Start</div>
+  <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
+  <div class="section-title">Planowanie badania</div>
+  <a href="I_analiza_mocy.html">Analiza mocy</a>
+  <a href="I_dobor_zmiennych_i_skala.html">Jak dobrać zmienne i skalę pomiaru?</a>
+  <a href="I_planowanie_wielkosci_proby.html">Jak zaplanować wielkość próby?</a>
+  <a href="I_schemat_badawczy.html">Jak zaplanować schemat badawczy?</a>
+  <div class="section-title">Porównywanie grup</div>
+  <a href="II_ANCOVA.html">Kowariancja jako kontrola</a>
+  <a href="II_MANOVA.html">Wieloczynnikowa zmienna zależna</a>
+  <a href="II_dwie_grupy_niezalezne.html">Dwie grupy niezależne</a>
+  <a href="II_dwie_grupy_zalezne.html">Dwie grupy zależne (pomiary powtarzane)</a>
+  <a href="II_jedna_proba.html">Jedna próba</a>
+  <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
+  <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <div class="section-title">Związki i predykcja</div>
+  <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
+  <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
+  <a href="III_regresja.html">Predykcja zmiennej ciągłej</a>
+  <a href="III_regresja_logistyczna.html">Predykcja zmiennej kategorialnej</a>
+  <a href="III_zmienne_kategorialne.html">Dwie zmienne kategorialne</a>
+  <div class="section-title">Struktura danych</div>
+  <a href="IV_CFA.html">Konfirmacyjna analiza czynnikowa (CFA)</a>
+  <a href="IV_EFA.html">Eksploracyjna analiza czynnikowa (EFA)</a>
+  <a href="IV_SEM.html">Modelowanie równań strukturalnych (SEM)</a>
+  <a href="IV_analiza_skupien.html">Analiza skupień (cluster analysis)</a>
+  <div class="section-title">Psychometria</div>
+  <a href="V_rzetelnosc.html">Rzetelność pomiaru</a>
+  <a href="V_trafnosc.html">Trafność pomiaru</a>
+  <div class="section-title">Kuchnia statystyczna</div>
+  <a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące</a>
+  <a href="VI_hipoteza_vs_zalozenie.html">Hipoteza vs. założenie</a>
+  <a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji</a>
+  <a href="VI_moc_testu.html">Moc testu</a>
+  <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
+  <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_procedura_NHST.html">Procedura NHST</a>
+  <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
+  <a href="VI_skale_Likerta.html">Skale Likerta</a>
+  <a href="VI_standardy_APA7.html">Standardy raportowania APA 7</a>
+  <a href="VI_statystyka_opisowa.html" class="active">Statystyka opisowa</a>
+  <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
+  <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
+  <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
+  <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
+  <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
+  <div class="section-title">Metody zaawansowane</div>
+  <a href="VII_analiza_przezycia.html">Analiza przeżycia (survival analysis)</a>
+  <a href="VII_metaanaliza.html">Meta-analiza</a>
+  <a href="VII_modele_mieszane.html">Modele mieszane (mixed-effects models)</a>
+  <div class="section-title">Narzędzia</div>
+  <a href="VIII_GPower.html">G*Power</a>
+  <a href="VIII_JASP.html">JASP</a>
+  <a href="VIII_R_poradnik.html">R</a>
+  <a href="VIII_SPSS.html">SPSS</a>
+  <div class="section-title">Pojęcia fundamentalne</div>
+  <a href="IX_blad_standardowy.html">Błąd standardowy</a>
+  <a href="IX_centrowanie.html">Centrowanie zmiennych</a>
+  <a href="IX_estymacja.html">Estymacja punktowa vs. przedziałowa</a>
+  <a href="IX_niezaleznosc.html">Niezależność</a>
+  <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
+  <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
+  <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+</nav>
+    <main>
+        <div class="breadcrumb">
+            <a href="index.html">Wiki Statystyczna</a> › Kuchnia statystyczna
+        </div>
+        <h1 id="statystyka-opisowa-co-podać-i-jak">Statystyka opisowa — co podać i jak?</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Zawsze. Zanim przejdziesz do jakichkolwiek testów, musisz opisać swoje dane. Statystyki opisowe to pierwszy rozdział wynikowy każdej pracy — i jednocześnie miejsce, w którym łatwo popełnić błąd, podając nieadekwatne miary.</p><h2 id="pięć-kategorii-charakterystyk-rozkładu">Pięć kategorii charakterystyk rozkładu</h2><p>Statystyki opisowe to nie tylko „średnia i odchylenie" — pełny opis rozkładu obejmuje <strong>pięć kategorii</strong>:</p><ol type="1"><li><strong>Tendencja centralna</strong> — wokół jakiej wartości koncentrują się dane (średnia, mediana, moda)</li><li><strong>Dyspersja (rozproszenie)</strong> — jak bardzo dane odbiegają od centrum (odchylenie standardowe, wariancja, IQR, rozstęp, współczynnik zmienności)</li><li><strong>Asymetria (skośność)</strong> — czy rozkład jest symetryczny, czy „przeciągnięty" w jedną stronę (skośność = 0 → symetria; &gt; 0 → prawostronna; &lt; 0 → lewostronna)</li><li><strong>Kurtoza (spłaszczenie)</strong> — czy rozkład jest „wysmukły" czy „płaski" w porównaniu z normalnym (kurtoza &gt; 0 → leptokurtyczny, spiczasty; &lt; 0 → platykurtyczny, spłaszczony)</li><li><strong>Miary pozycyjne</strong> — kwartyle (Q<sub>1</sub>, Q<sub>2</sub> = mediana, Q<sub>3</sub>), decyle, percentyle — opisują pozycję obserwacji w rozkładzie</li></ol><p>W praktyce: przy rozkładach symetrycznych wystarczą kategorie 1–2. Przy rozkładach problematycznych (skośnych, z ciężkimi ogonami) — kategorie 3–5 pomagają zrozumieć, co się dzieje z danymi.</p><h2 id="jakie-miary-dla-jakiej-skali">Jakie miary dla jakiej skali</h2><h3 id="skala-nominalna-kategorialna">Skala nominalna (kategorialna)</h3><ul><li><strong>Częstości</strong> (<em>n</em>) i <strong>procenty</strong> (%)</li><li><strong>Moda</strong> (dominanta) — najczęstsza kategoria</li><li>Nie obliczamy średniej ani mediany — nie mają sensu</li></ul><p>Przykład: „W badaniu uczestniczyło 120 kobiet (60%) i 80 mężczyzn (40%)."</p><h3 id="skala-porządkowa">Skala porządkowa</h3><ul><li><strong>Mediana</strong> (Mdn) i <strong>rozstęp kwartylowy</strong> (IQR = Q<sub>3</sub> − Q<sub>1</sub>)</li><li>Częstości dla poszczególnych kategorii (jeśli jest ich niewiele)</li><li><strong>Kwartyle, percentyle</strong> — naturalne miary pozycyjne dla tej skali</li><li><strong>Formalnie nie średnia</strong> — choć w praktyce przy skalach Likerta bywa stosowana (→ <em>patrz:</em> Skale Likerta)</li></ul><p>Przykład: „Mediana satysfakcji z życia wynosiła Mdn = 4 (IQR = 2), na skali 1–7."</p><h3 id="skala-przedziałowa-ilorazowa">Skala przedziałowa / ilorazowa</h3><ul><li><strong>Średnia</strong> (<em>M</em>) i <strong>odchylenie standardowe</strong> (<em>SD</em>) — gdy rozkład zbliżony do symetrycznego</li><li><strong>Mediana</strong> (Mdn) i <strong>IQR</strong> — gdy rozkład silnie skośny lub są outliery</li><li><strong>Skośność i kurtoza</strong> — raportuj, gdy sprawdzasz normalność lub gdy rozkład odbiega od symetrycznego</li><li><strong>Miary pozycyjne</strong> (kwartyle, percentyle) — przydatne przy zmiennych o niesymetrycznych rozkładach lub przy konstruowaniu norm</li><li>Zakres (min–max) — informacja o rozpiętości danych</li></ul><p>Przykład: „Wynik w teście inteligencji wynosił <em>M</em> = 105.3, <em>SD</em> = 14.7, skośność = −0.12, kurtoza = 0.34."</p><h3 id="podsumowanie">Podsumowanie</h3><table><colgroup><col style="width: 9%" /><col style="width: 25%" /><col style="width: 14%" /><col style="width: 27%" /><col style="width: 22%" /></colgroup><thead><tr class="header"><th>Skala</th><th>Tendencja centralna</th><th>Dyspersja</th><th>Asymetria i kurtoza</th><th>Miary pozycyjne</th></tr></thead><tbody><tr class="odd"><td>Nominalna</td><td>Moda</td><td>Częstości, %</td><td>—</td><td>—</td></tr><tr class="even"><td>Porządkowa</td><td>Mediana</td><td>IQR, zakres</td><td>—</td><td>Kwartyle, percentyle</td></tr><tr class="odd"><td>Przedziałowa/ilorazowa (syt. rozkład)</td><td>Średnia (<em>M</em>)</td><td><em>SD</em></td><td>Skośność, kurtoza (opcjonalnie)</td><td>Kwartyle (opcjonalnie)</td></tr><tr class="even"><td>Przedziałowa/ilorazowa (skośny rozkład)</td><td>Mediana</td><td>IQR</td><td>Skośność, kurtoza (raportuj!)</td><td>Kwartyle, percentyle</td></tr></tbody></table><h2 id="tabela-statystyk-opisowych-apa-7">Tabela statystyk opisowych (APA 7)</h2><p>Standardowa tabela opisowa w pracy magisterskiej:</p><ul><li><strong>Wiersze:</strong> zmienne</li><li><strong>Kolumny:</strong> <em>M</em>, <em>SD</em> (lub Mdn, IQR), <em>n</em>, zakres — stosownie do skali</li><li>Jeśli porównujesz grupy: <strong>osobne kolumny</strong> dla każdej grupy</li><li><strong>Tytuł tabeli</strong> kursywą, nad tabelą (np. <em>Table 1. Descriptive Statistics by Group</em>)</li><li><strong>Notatka</strong> pod tabelą — wyjaśnienia, skróty</li><li>Bez pionowych linii, minimalne linie poziome (styl APA)</li></ul><p>Przykład struktury:</p><table><thead><tr class="header"><th>Zmienna</th><th>Grupa eksp. <em>M</em> (<em>SD</em>)</th><th>Grupa kontr. <em>M</em> (<em>SD</em>)</th></tr></thead><tbody><tr class="odd"><td>Lęk (STAI)</td><td>42.3 (8.7)</td><td>38.1 (9.2)</td></tr><tr class="even"><td>Empatia (SWE)</td><td>3.8 (0.9)</td><td>3.5 (1.1)</td></tr></tbody></table><h2 id="współczynnik-zmienności-v">Współczynnik zmienności (<em>v</em>)</h2><p>Współczynnik zmienności pozwala porównywać rozproszenie zmiennych mierzonych w różnych jednostkach (np. wzrost w cm vs. waga w kg):</p><p><em>v</em> = (<em>s</em> / x̄) × 100%</p><p><strong>Kiedy stosować:</strong> tylko dla skal <strong>ilorazowych</strong> (z prawdziwym zerem) i tylko gdy wszystkie wartości są <strong>jednego znaku</strong> (wszystkie nieujemne albo wszystkie niedodatnie). Jeśli średnia jest bliska 0 lub dane zawierają wartości ujemne i dodatnie, <em>v</em> traci sens (może dać absurdalne wyniki).</p><p><strong>Interpretacja:</strong> im wyższy <em>v</em>, tym większa względna zmienność. Reguły kciuka: <em>v</em> &lt; 20% = niska zmienność, 20–40% = umiarkowana, &gt; 40% = wysoka.</p><p><strong>Uwaga JASP:</strong> JASP podaje współczynnik zmienności jako <strong>ułamek</strong> (np. 0.067), a nie jako procent (6.7%). Trzeba samodzielnie pomnożyć razy 100, żeby uzyskać wartość procentową.</p><h2 id="co-jeszcze-raportować">Co jeszcze raportować</h2><ul><li><strong>N</strong> (łączna liczebność) i <strong>n</strong> (w podgrupach)</li><li><strong>Braki danych</strong>: jeśli &gt; 5%, raportuj ile i jak je obsłużono (listwise deletion, imputacja itp.)</li><li><strong>Rozkłady</strong>: histogram, boxplot, wykres Q-Q — jako ryciny lub przynajmniej opisz kształt rozkładu słownie</li></ul><p>→ <em>Patrz:</em> Wizualizacja danych — po co i kiedy</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Podawanie średniej dla zmiennych porządkowych.</strong> Średnia z odpowiedzi na pięciostopniowej skali Likerta (pojedynczy item) jest dyskusyjna. Przy sumie/średniej z wielu itemów — bardziej akceptowalne.</p></li><li><p><strong>Podawanie <em>SD</em> = 0.00.</strong> Jeśli <em>SD</em> wynosi 0, to nie masz zmienności — coś jest nie tak z danymi lub zmienną. Sprawdź.</p></li><li><p><strong>Brak <em>SD</em> przy średniej.</strong> Średnia bez miary rozproszenia jest bezużyteczna. Zawsze <em>M</em> i <em>SD</em> razem.</p></li><li><p><strong>Podawanie SE zamiast <em>SD</em> w tabeli opisowej.</strong> <em>SD</em> opisuje zmienność obserwacji, SE opisuje precyzję średniej. W tabelach opisowych standardem jest <em>SD</em>.</p></li><li><p><strong>Ignorowanie outlierów.</strong> Jeśli są obserwacje odstające, same <em>M</em> i <em>SD</em> mogą wprowadzać w błąd. Rozważ medianę + IQR lub raportuj osobno dane z outlierami i bez.</p></li><li><p><strong>Nadmierna szczegółowość.</strong> Nie trzeba podawać wszystkich możliwych statystyk dla każdej zmiennej. Dobierz miary do skali pomiaru i celu analizy.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="VI_wizualizacja_danych.html">Wizualizacja danych — po co i kiedy</a></li><li><a href="VI_standardy_APA7.html">Standardy raportowania APA 7</a></li><li><a href="VI_normalnosc_rozkladu.html">Normalność rozkładu — kiedy naprawdę potrzebna?</a></li><li><a href="VI_skale_Likerta.html">Skale Likerta — porządkowe czy przedziałowe?</a></li><li><a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania — opis a interpretacja</a></li></ul><h2 id="literatura">Literatura</h2><p>APA. (2020). <em>Publication manual of the American Psychological Association</em> (7th ed.). American Psychological Association.</p><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><hr /><p>[A. Domurat]</p>
+
+        <div class="page-footer">
+            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
+        </div>
+    </main>
+</body>
+</html>

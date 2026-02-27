@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jedna próba — porównanie z wartością referencyjną — Wiki Statystyczna UŚ</title>
+    <style>
+:root {
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --accent: #2c5282;
+    --accent-light: #ebf4ff;
+    --border: #d0d7de;
+    --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5;
+    --nav-hover: #e2e8f0;
+    --link: #2c5282;
+    --muted: #636c76;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    min-height: 100vh;
+}
+/* ── Sidebar ── */
+nav.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+}
+nav.sidebar .logo {
+    padding: 8px 20px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+    text-decoration: none;
+    display: block;
+}
+nav.sidebar .logo:hover { opacity: 0.8; }
+nav.sidebar .section-title {
+    padding: 10px 20px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+}
+nav.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 28px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    line-height: 1.4;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+nav.sidebar a:hover {
+    background: var(--nav-hover);
+    border-left-color: var(--accent);
+}
+nav.sidebar a.active {
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+    font-weight: 600;
+    color: var(--accent);
+}
+/* ── Main ── */
+main {
+    margin-left: 280px;
+    flex: 1;
+    max-width: 860px;
+    padding: 40px 50px 80px;
+}
+/* ── Typography ── */
+h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
+p { margin-bottom: 0.85em; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--link); }
+/* ── Lists ── */
+ul, ol { margin: 0.5em 0 1em 1.5em; }
+li { margin-bottom: 0.3em; }
+li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
+/* ── Code ── */
+code {
+    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
+    font-size: 0.9em;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+pre {
+    background: var(--code-bg);
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1em 0;
+    border: 1px solid var(--border);
+    font-size: 0.88em;
+    line-height: 1.5;
+}
+pre code { background: none; padding: 0; }
+/* ── Tables ── */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0 1.5em;
+    font-size: 0.92em;
+}
+th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+}
+th {
+    background: var(--sidebar-bg);
+    font-weight: 600;
+    font-size: 0.92em;
+}
+tr:nth-child(even) { background: #f8f9fa; }
+/* ── Blockquote (admonitions) ── */
+blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 12px 20px;
+    margin: 1em 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+    color: #374151;
+}
+blockquote p:last-child { margin-bottom: 0; }
+/* ── Subscript / superscript ── */
+sub { font-size: 0.78em; }
+sup { font-size: 0.78em; }
+/* ── "Zobacz też" section links ── */
+.see-also a {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 3px 4px;
+    background: var(--accent-light);
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background 0.15s;
+}
+.see-also a:hover { background: #d0e0f5; }
+/* ── Breadcrumb ── */
+.breadcrumb {
+    font-size: 0.85em;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+.breadcrumb a { color: var(--muted); }
+.breadcrumb a:hover { color: var(--accent); }
+/* ── Footer ── */
+.page-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82em;
+    color: var(--muted);
+}
+/* ── Mobile ── */
+@media (max-width: 900px) {
+    nav.sidebar { display: none; }
+    main { margin-left: 0; padding: 20px; max-width: 100%; }
+}
+@media (max-width: 900px) {
+    .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 10px; left: 10px;
+        z-index: 200;
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+}
+.mobile-menu-btn { display: none; }
+</style>
+</head>
+<body>
+    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
+    <nav class="sidebar" id="sidebar">
+  <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
+  <div class="section-title">Start</div>
+  <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
+  <div class="section-title">Planowanie badania</div>
+  <a href="I_analiza_mocy.html">Analiza mocy</a>
+  <a href="I_dobor_zmiennych_i_skala.html">Jak dobrać zmienne i skalę pomiaru?</a>
+  <a href="I_planowanie_wielkosci_proby.html">Jak zaplanować wielkość próby?</a>
+  <a href="I_schemat_badawczy.html">Jak zaplanować schemat badawczy?</a>
+  <div class="section-title">Porównywanie grup</div>
+  <a href="II_ANCOVA.html">Kowariancja jako kontrola</a>
+  <a href="II_MANOVA.html">Wieloczynnikowa zmienna zależna</a>
+  <a href="II_dwie_grupy_niezalezne.html">Dwie grupy niezależne</a>
+  <a href="II_dwie_grupy_zalezne.html">Dwie grupy zależne (pomiary powtarzane)</a>
+  <a href="II_jedna_proba.html" class="active">Jedna próba</a>
+  <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
+  <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <div class="section-title">Związki i predykcja</div>
+  <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
+  <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
+  <a href="III_regresja.html">Predykcja zmiennej ciągłej</a>
+  <a href="III_regresja_logistyczna.html">Predykcja zmiennej kategorialnej</a>
+  <a href="III_zmienne_kategorialne.html">Dwie zmienne kategorialne</a>
+  <div class="section-title">Struktura danych</div>
+  <a href="IV_CFA.html">Konfirmacyjna analiza czynnikowa (CFA)</a>
+  <a href="IV_EFA.html">Eksploracyjna analiza czynnikowa (EFA)</a>
+  <a href="IV_SEM.html">Modelowanie równań strukturalnych (SEM)</a>
+  <a href="IV_analiza_skupien.html">Analiza skupień (cluster analysis)</a>
+  <div class="section-title">Psychometria</div>
+  <a href="V_rzetelnosc.html">Rzetelność pomiaru</a>
+  <a href="V_trafnosc.html">Trafność pomiaru</a>
+  <div class="section-title">Kuchnia statystyczna</div>
+  <a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące</a>
+  <a href="VI_hipoteza_vs_zalozenie.html">Hipoteza vs. założenie</a>
+  <a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji</a>
+  <a href="VI_moc_testu.html">Moc testu</a>
+  <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
+  <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_procedura_NHST.html">Procedura NHST</a>
+  <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
+  <a href="VI_skale_Likerta.html">Skale Likerta</a>
+  <a href="VI_standardy_APA7.html">Standardy raportowania APA 7</a>
+  <a href="VI_statystyka_opisowa.html">Statystyka opisowa</a>
+  <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
+  <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
+  <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
+  <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
+  <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
+  <div class="section-title">Metody zaawansowane</div>
+  <a href="VII_analiza_przezycia.html">Analiza przeżycia (survival analysis)</a>
+  <a href="VII_metaanaliza.html">Meta-analiza</a>
+  <a href="VII_modele_mieszane.html">Modele mieszane (mixed-effects models)</a>
+  <div class="section-title">Narzędzia</div>
+  <a href="VIII_GPower.html">G*Power</a>
+  <a href="VIII_JASP.html">JASP</a>
+  <a href="VIII_R_poradnik.html">R</a>
+  <a href="VIII_SPSS.html">SPSS</a>
+  <div class="section-title">Pojęcia fundamentalne</div>
+  <a href="IX_blad_standardowy.html">Błąd standardowy</a>
+  <a href="IX_centrowanie.html">Centrowanie zmiennych</a>
+  <a href="IX_estymacja.html">Estymacja punktowa vs. przedziałowa</a>
+  <a href="IX_niezaleznosc.html">Niezależność</a>
+  <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
+  <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
+  <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+</nav>
+    <main>
+        <div class="breadcrumb">
+            <a href="index.html">Wiki Statystyczna</a> › Porównywanie grup
+        </div>
+        <h1 id="jedna-próba-porównanie-z-wartością-referencyjną">Jedna próba — porównanie z wartością referencyjną</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Masz jedną grupę osób i chcesz sprawdzić, czy ich średnia (lub mediana) różni się od znanej wartości — np. normy testowej (IQ = 100), wartości teoretycznej (punkt środkowy skali), średniej populacyjnej z literatury.</p><h2 id="kontekst-próby">Kontekst próby</h2><p><strong>(a) Wykonano analizę mocy i osiągnięto wymagane <em>n</em></strong> Zwykle ścieżka parametryczna (test <em>t</em> dla jednej próby). Przy dużym <em>n</em> CTG zapewnia normalność statystyki testowej.</p><p><strong>(b) Badanie bez analizy mocy</strong> Sprawdź <em>n</em> i rozkład → pełny algorytm poniżej.</p><p><strong>(c) Małe próby kliniczne</strong> Rozważ test Wilcoxona jednej próby (signed-rank) lub dokładny test znakowany. Raportuj ograniczenia mocy.</p><h2 id="algorytm-decyzyjny">Algorytm decyzyjny</h2><h3 id="zmienna-przedziałowailorazowa">1. Zmienna przedziałowa/ilorazowa</h3><h4 id="a.-duża-próba-n-30-lub-normalność-potwierdzona">1a. Duża próba (<em>n</em> ≥ 30) lub normalność potwierdzona</h4><p>→ <strong>Test <em>t</em> dla jednej próby</strong> (<em>one-sample t-test</em>)</p><p>H<sub>0</sub>: μ = μ<sub>0</sub> (średnia populacji = wartość referencyjna)</p><p>Statystyka: <em>t</em> = (x̄ − μ<sub>0</sub>) / (s / √n), <em>df</em> = <em>n</em> − 1</p><p>Przy dużym <em>n</em> CTG działa — normalność zmiennej X nie jest wymagana.</p><h4 id="b.-mała-próba-n-30-i-brak-normalności">1b. Mała próba (<em>n</em> &lt; 30) i brak normalności</h4><p>→ <strong>Test Wilcoxona jednej próby</strong> (signed-rank test)</p><p>Testuje, czy mediana różni się od wartości referencyjnej. Nie wymaga normalności, ale zakłada symetrię rozkładu wokół mediany (jeśli testujemy medianę).</p><p>Alternatywnie: <strong>test znakowany</strong> (sign test) — nie zakłada symetrii, ale ma mniejszą moc.</p><h3 id="zmienna-porządkowa">2. Zmienna porządkowa</h3><p>→ <strong>Test Wilcoxona jednej próby</strong> lub <strong>test znakowany</strong></p><h3 id="zmienna-nominalna-proporcja">3. Zmienna nominalna (proporcja)</h3><p>→ <strong>Test proporcji</strong> (binomial test) lub <strong>test χ² dobroci dopasowania</strong></p><p>H<sub>0</sub>: π = π<sub>0</sub> (proporcja w populacji = wartość referencyjna)</p><p>Np. czy odsetek odpowiedzi „tak" różni się od 50%?</p><h2 id="założenia">Założenia</h2><h3 id="test-t-dla-jednej-próby">Test <em>t</em> dla jednej próby</h3><ol type="1"><li><strong>Niezależność obserwacji</strong> — każda osoba badana niezależnie od pozostałych.</li><li><strong>Skala co najmniej przedziałowa.</strong></li><li><strong>Normalność rozkładu</strong> w populacji — przy małych <em>n</em>. Przy dużych CTG łagodzi to wymaganie.</li></ol><h3 id="test-wilcoxona-jednej-próby">Test Wilcoxona jednej próby</h3><ol type="1"><li><strong>Niezależność obserwacji.</strong></li><li><strong>Skala co najmniej porządkowa.</strong></li><li><strong>Symetryczny rozkład</strong> wokół mediany (jeśli testujemy medianę). Jeśli niespełnione → test znakowany.</li></ol><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><h3 id="test-t-jednej-próby">Test <em>t</em> jednej próby</h3><p>„Średni wynik grupy (<em>M</em> = 107.3, <em>SD</em> = 14.2) różnił się istotnie od normy populacyjnej (μ = 100), <em>t</em>(49) = 3.63, <em>p</em> &lt; .001, <em>d</em> = 0.51."</p><p>Wielkość efektu <em>d</em> = (x̄ − μ<sub>0</sub>) / <em>s</em>.</p><h3 id="test-wilcoxona-jednej-próby-1">Test Wilcoxona jednej próby</h3><p>„Mediana wyników (Mdn = 4) różniła się istotnie od wartości referencyjnej (3), <em>W</em> = 245, <em>p</em> = .012, <em>r</em> = .34."</p><h3 id="test-proporcji">Test proporcji</h3><p>„Odsetek odpowiedzi trafnych (62%) różnił się istotnie od poziomu losowego (50%), test dwumianowy, <em>p</em> = .041."</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Porównywanie średniej z próby z inną średnią z próby za pomocą testu jednej próby.</strong> Test <em>t</em> jednej próby porównuje średnią z próby z <strong>wartością stałą</strong> (np. normą). Jeśli obie wartości to średnie z prób <a href="VI_moc_testu.html">→ test</a> <em>t</em> dla prób niezależnych.</p></li><li><p><strong>Stosowanie testu <em>z</em> zamiast <em>t</em>.</strong> Test <em>z</em> wymaga znajomości σ populacji (rzadko znane). Test <em>t</em> jest praktycznie zawsze odpowiedniejszy.</p></li><li><p><strong>Ignorowanie kierunkowości hipotezy.</strong> Jeśli spodziewasz się, że grupa ma wyższy wynik niż norma (nie tylko „inny") — możesz użyć testu jednostronnego. Ale decyzja o jednostronności musi być a priori.</p></li><li><p><strong>Mylenie μ<sub>0</sub> z x̄.</strong> W hipotezie po obu stronach są parametry lub stałe: H<sub>0</sub>: μ = 100, nie H<sub>0</sub>: μ = x̄.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="II_dwie_grupy_niezalezne.html">Dwie grupy niezależne — który test?</a></li><li><a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator — rozróżnienie pojęć</a></li><li><a href="VI_normalnosc_rozkladu.html">Normalność rozkładu — kiedy naprawdę potrzebna?</a></li><li><a href="VI_moc_testu.html">Moc testu — co to jest i dlaczego ma znaczenie</a></li></ul><h2 id="literatura">Literatura</h2><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><hr /><p>[A. Domurat]</p>
+
+        <div class="page-footer">
+            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
+        </div>
+    </main>
+</body>
+</html>

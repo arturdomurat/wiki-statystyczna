@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiza mocy — a priori i post hoc — Wiki Statystyczna UŚ</title>
+    <style>
+:root {
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --accent: #2c5282;
+    --accent-light: #ebf4ff;
+    --border: #d0d7de;
+    --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5;
+    --nav-hover: #e2e8f0;
+    --link: #2c5282;
+    --muted: #636c76;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    min-height: 100vh;
+}
+/* ── Sidebar ── */
+nav.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+}
+nav.sidebar .logo {
+    padding: 8px 20px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+    text-decoration: none;
+    display: block;
+}
+nav.sidebar .logo:hover { opacity: 0.8; }
+nav.sidebar .section-title {
+    padding: 10px 20px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+}
+nav.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 28px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    line-height: 1.4;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+nav.sidebar a:hover {
+    background: var(--nav-hover);
+    border-left-color: var(--accent);
+}
+nav.sidebar a.active {
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+    font-weight: 600;
+    color: var(--accent);
+}
+/* ── Main ── */
+main {
+    margin-left: 280px;
+    flex: 1;
+    max-width: 860px;
+    padding: 40px 50px 80px;
+}
+/* ── Typography ── */
+h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
+p { margin-bottom: 0.85em; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--link); }
+/* ── Lists ── */
+ul, ol { margin: 0.5em 0 1em 1.5em; }
+li { margin-bottom: 0.3em; }
+li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
+/* ── Code ── */
+code {
+    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
+    font-size: 0.9em;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+pre {
+    background: var(--code-bg);
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1em 0;
+    border: 1px solid var(--border);
+    font-size: 0.88em;
+    line-height: 1.5;
+}
+pre code { background: none; padding: 0; }
+/* ── Tables ── */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0 1.5em;
+    font-size: 0.92em;
+}
+th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+}
+th {
+    background: var(--sidebar-bg);
+    font-weight: 600;
+    font-size: 0.92em;
+}
+tr:nth-child(even) { background: #f8f9fa; }
+/* ── Blockquote (admonitions) ── */
+blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 12px 20px;
+    margin: 1em 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+    color: #374151;
+}
+blockquote p:last-child { margin-bottom: 0; }
+/* ── Subscript / superscript ── */
+sub { font-size: 0.78em; }
+sup { font-size: 0.78em; }
+/* ── "Zobacz też" section links ── */
+.see-also a {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 3px 4px;
+    background: var(--accent-light);
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background 0.15s;
+}
+.see-also a:hover { background: #d0e0f5; }
+/* ── Breadcrumb ── */
+.breadcrumb {
+    font-size: 0.85em;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+.breadcrumb a { color: var(--muted); }
+.breadcrumb a:hover { color: var(--accent); }
+/* ── Footer ── */
+.page-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82em;
+    color: var(--muted);
+}
+/* ── Mobile ── */
+@media (max-width: 900px) {
+    nav.sidebar { display: none; }
+    main { margin-left: 0; padding: 20px; max-width: 100%; }
+}
+@media (max-width: 900px) {
+    .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 10px; left: 10px;
+        z-index: 200;
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+}
+.mobile-menu-btn { display: none; }
+</style>
+</head>
+<body>
+    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
+    <nav class="sidebar" id="sidebar">
+  <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
+  <div class="section-title">Start</div>
+  <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
+  <div class="section-title">Planowanie badania</div>
+  <a href="I_analiza_mocy.html" class="active">Analiza mocy</a>
+  <a href="I_dobor_zmiennych_i_skala.html">Jak dobrać zmienne i skalę pomiaru?</a>
+  <a href="I_planowanie_wielkosci_proby.html">Jak zaplanować wielkość próby?</a>
+  <a href="I_schemat_badawczy.html">Jak zaplanować schemat badawczy?</a>
+  <div class="section-title">Porównywanie grup</div>
+  <a href="II_ANCOVA.html">Kowariancja jako kontrola</a>
+  <a href="II_MANOVA.html">Wieloczynnikowa zmienna zależna</a>
+  <a href="II_dwie_grupy_niezalezne.html">Dwie grupy niezależne</a>
+  <a href="II_dwie_grupy_zalezne.html">Dwie grupy zależne (pomiary powtarzane)</a>
+  <a href="II_jedna_proba.html">Jedna próba</a>
+  <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
+  <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <div class="section-title">Związki i predykcja</div>
+  <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
+  <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
+  <a href="III_regresja.html">Predykcja zmiennej ciągłej</a>
+  <a href="III_regresja_logistyczna.html">Predykcja zmiennej kategorialnej</a>
+  <a href="III_zmienne_kategorialne.html">Dwie zmienne kategorialne</a>
+  <div class="section-title">Struktura danych</div>
+  <a href="IV_CFA.html">Konfirmacyjna analiza czynnikowa (CFA)</a>
+  <a href="IV_EFA.html">Eksploracyjna analiza czynnikowa (EFA)</a>
+  <a href="IV_SEM.html">Modelowanie równań strukturalnych (SEM)</a>
+  <a href="IV_analiza_skupien.html">Analiza skupień (cluster analysis)</a>
+  <div class="section-title">Psychometria</div>
+  <a href="V_rzetelnosc.html">Rzetelność pomiaru</a>
+  <a href="V_trafnosc.html">Trafność pomiaru</a>
+  <div class="section-title">Kuchnia statystyczna</div>
+  <a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące</a>
+  <a href="VI_hipoteza_vs_zalozenie.html">Hipoteza vs. założenie</a>
+  <a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji</a>
+  <a href="VI_moc_testu.html">Moc testu</a>
+  <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
+  <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_procedura_NHST.html">Procedura NHST</a>
+  <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
+  <a href="VI_skale_Likerta.html">Skale Likerta</a>
+  <a href="VI_standardy_APA7.html">Standardy raportowania APA 7</a>
+  <a href="VI_statystyka_opisowa.html">Statystyka opisowa</a>
+  <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
+  <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
+  <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
+  <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
+  <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
+  <div class="section-title">Metody zaawansowane</div>
+  <a href="VII_analiza_przezycia.html">Analiza przeżycia (survival analysis)</a>
+  <a href="VII_metaanaliza.html">Meta-analiza</a>
+  <a href="VII_modele_mieszane.html">Modele mieszane (mixed-effects models)</a>
+  <div class="section-title">Narzędzia</div>
+  <a href="VIII_GPower.html">G*Power</a>
+  <a href="VIII_JASP.html">JASP</a>
+  <a href="VIII_R_poradnik.html">R</a>
+  <a href="VIII_SPSS.html">SPSS</a>
+  <div class="section-title">Pojęcia fundamentalne</div>
+  <a href="IX_blad_standardowy.html">Błąd standardowy</a>
+  <a href="IX_centrowanie.html">Centrowanie zmiennych</a>
+  <a href="IX_estymacja.html">Estymacja punktowa vs. przedziałowa</a>
+  <a href="IX_niezaleznosc.html">Niezależność</a>
+  <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
+  <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
+  <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+</nav>
+    <main>
+        <div class="breadcrumb">
+            <a href="index.html">Wiki Statystyczna</a> › Planowanie badania
+        </div>
+        <h1 id="analiza-mocy-a-priori-i-post-hoc">Analiza mocy — a priori i post hoc</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Projektujesz badanie i musisz uzasadnić liczebność próby (analiza a priori). Albo masz już wyniki i recenzent pyta o moc (post hoc / sensitivity). Albo piszesz grant i potrzebujesz power analysis w sekcji metodologicznej.</p><h2 id="czym-jest-moc-testu-statystycznego">Czym jest moc testu statystycznego</h2><p>Moc (1 − β) to prawdopodobieństwo wykrycia efektu, jeśli efekt rzeczywiście istnieje w populacji. Zależy od czterech elementów — „trójkąta mocy" (a w zasadzie czworokąta):</p><ol type="1"><li><strong>Wielkość efektu</strong> w populacji (im większy → łatwiej wykryć)</li><li><strong>Liczebność próby <em>n</em></strong> (im większa → większa moc)</li><li><strong>Poziom istotności α</strong> (im liberalniejszy → większa moc, ale większe ryzyko błędu I rodzaju)</li><li><strong>Typ testu</strong> (jedno- vs. dwustronny; parametryczny vs. nieparametryczny)</li></ol><p>Znając trzy z czterech elementów, obliczasz czwarty. To podstawa <strong>analizy mocy</strong>.</p><h2 id="trzy-typy-analizy-mocy">Trzy typy analizy mocy</h2><h3 id="a-priori-przed-badaniem-zalecana">1. A priori — PRZED badaniem (ZALECANA)</h3><p><strong>Pytanie:</strong> „Ile osób potrzebuję?"</p><ul><li>Wejście: oczekiwana wielkość efektu, α, żądana moc (1 − β)</li><li>Wyjście: wymagana <em>n</em></li><li><strong>To jest standard.</strong> Wymagana przez APA, instytucje finansujące badania, pre-rejestracje.</li></ul><p><strong>Skąd brać oczekiwaną wielkość efektu?</strong></p><ol type="1"><li><strong>Meta-analiza</strong> — najlepsze źródło</li><li><strong>Poprzednie badania</strong> — ale ostrożnie (publication bias zawyża efekty!)</li><li><strong>Pilotaż</strong> — daje orientację, ale CI jest bardzo szerokie</li><li><strong>Konwencje Cohena</strong> — ostateczność: <em>d</em> = 0.20/0.50/0.80, <em>r</em> = .10/.30/.50, <em>f</em> = 0.10/0.25/0.40</li></ol><p><strong>Uwaga o zawyżaniu efektów w literaturze:</strong> efekty z opublikowanych badań bywają przeszacowane (publication bias, efekt „przekleństwa zwycięzcy"). Zabezpieczenie: użyj efektu mniejszego niż raportowany, np. 80% wartości z meta-analizy.</p><h3 id="sensitivity-przed-lub-po-badaniu-rekomendowana-jako-alternatywa">2. Sensitivity — PRZED lub PO badaniu (REKOMENDOWANA JAKO ALTERNATYWA)</h3><p><strong>Pytanie:</strong> „Jaki najmniejszy efekt mogę wykryć przy moim <em>n</em>?"</p><ul><li>Wejście: <em>n</em>, α, żądana moc</li><li>Wyjście: minimalna wykrywalna wielkość efektu</li><li>Przydatna, gdy <em>n</em> jest z góry ustalone (dostęp do populacji klinicznej, archiwalne dane)</li></ul><h3 id="post-hoc-observed-power-po-badaniu-odradzana">3. Post hoc (observed power) — PO badaniu (ODRADZANA)</h3><p><strong>Pytanie:</strong> „Jaką moc miało moje badanie?"</p><ul><li>Wejście: <em>n</em>, α, <strong>uzyskana</strong> wielkość efektu</li><li>Wyjście: observed power</li></ul><p><strong>Dlaczego jest problematyczna:</strong></p><ul><li>Observed power jest <strong>matematycznie zdeterminowana</strong> przez <em>p</em>-value → nie wnosi nowej informacji</li><li>Jeśli <em>p</em> &lt; .05 → observed power jest wysoka; jeśli <em>p</em> &gt; .05 → niska. Zawsze.</li><li>Obliczanie mocy post hoc na podstawie uzyskanego efektu to błąd logiczny (Hoenig &amp; Heisey, 2001)</li><li><strong>Lepsza alternatywa:</strong> sensitivity analysis — daje interpretowalny wynik bez błędu logicznego</li></ul><h3 id="kiedy-post-hoc-ma-sens">Kiedy post hoc ma sens?</h3><p>Jedyny akceptowalny wariant: obliczenie mocy dla <strong>hipotetycznego efektu z literatury</strong> (nie uzyskanego w badaniu) przy uzyskanym <em>n</em>. To de facto sensitivity analysis z odwróconym pytaniem.</p><h2 id="narzędzia">Narzędzia</h2><table><colgroup><col style="width: 47%" /><col style="width: 21%" /><col style="width: 30%" /></colgroup><thead><tr class="header"><th>Narzędzie</th><th>Typ</th><th>Uwagi</th></tr></thead><tbody><tr class="odd"><td>**G*Power**</td><td>Desktop</td><td>Darmowy, złoty standard, GUI, wiele testów → patrz VIII</td></tr><tr class="even"><td><strong>pwr</strong> (R)</td><td>Pakiet R</td><td>Proste testy: t, ANOVA, korelacja, χ², proporcje</td></tr><tr class="odd"><td><strong>simr</strong> (R)</td><td>Pakiet R</td><td>Symulacyjna analiza mocy dla modeli mieszanych</td></tr><tr class="even"><td><strong>WebPower</strong></td><td>Online</td><td>webpower.psychstat.org — SEM, wielopoziomowe</td></tr><tr class="odd"><td><strong>JASP</strong></td><td>Desktop</td><td>Moduł Learn Bayes ma kalkulatory mocy</td></tr></tbody></table><h2 id="orientacyjne-liczebności-prób">Orientacyjne liczebności prób</h2><p>Poniższa tabela podaje <strong>przybliżone</strong> minimalne liczebności prób dla najpopularniejszych metod, przy założeniach: moc = .80, α = .05, testy dwustronne (bez kierunku). Trzy scenariusze odpowiadają konwencjom Cohena (1992) dla efektów małych, umiarkowanych i dużych.</p><p><strong>To tylko orientacja — zawsze policz dokładnie dla swojej sytuacji</strong> (w G*Power lub pakiecie <code>pwr</code> w R), uwzględniając oczekiwaną wielkość efektu z literatury.</p><table><colgroup><col style="width: 15%" /><col style="width: 23%" /><col style="width: 38%" /><col style="width: 23%" /></colgroup><thead><tr class="header"><th>Metoda</th><th style="text-align: center;">Efekt mały</th><th style="text-align: center;">Efekt umiarkowany</th><th style="text-align: center;">Efekt duży</th></tr></thead><tbody><tr class="odd"><td>Test <em>t</em> jednej próby</td><td style="text-align: center;">~200</td><td style="text-align: center;">~35</td><td style="text-align: center;">~15</td></tr><tr class="even"><td>Test <em>t</em> dla prób niezależnych</td><td style="text-align: center;">~395 na grupę (~790)</td><td style="text-align: center;">~65 na grupę (~130)</td><td style="text-align: center;">~26 na grupę (~52)</td></tr><tr class="odd"><td>Test <em>t</em> dla prób zależnych</td><td style="text-align: center;">~200 par</td><td style="text-align: center;">~35 par</td><td style="text-align: center;">~15 par</td></tr><tr class="even"><td>ANOVA — 3 grupy</td><td style="text-align: center;">~325 na grupę (~975)</td><td style="text-align: center;">~55 na grupę (~165)</td><td style="text-align: center;">~22 na grupę (~66)</td></tr><tr class="odd"><td>ANOVA — 4 grupy</td><td style="text-align: center;">~275 na grupę (~1100)</td><td style="text-align: center;">~45 na grupę (~180)</td><td style="text-align: center;">~19 na grupę (~76)</td></tr><tr class="even"><td>ANOVA — 5 grup</td><td style="text-align: center;">~240 na grupę (~1200)</td><td style="text-align: center;">~40 na grupę (~200)</td><td style="text-align: center;">~16 na grupę (~80)</td></tr><tr class="odd"><td>χ² — tabela 2×2</td><td style="text-align: center;">~785</td><td style="text-align: center;">~88</td><td style="text-align: center;">~32</td></tr><tr class="even"><td>χ² — tabela 2×3</td><td style="text-align: center;">~964</td><td style="text-align: center;">~108</td><td style="text-align: center;">~39</td></tr><tr class="odd"><td>χ² — tabela 2×4</td><td style="text-align: center;">~1091</td><td style="text-align: center;">~122</td><td style="text-align: center;">~44</td></tr><tr class="even"><td>χ² — tabela 3×4</td><td style="text-align: center;">~1363</td><td style="text-align: center;">~152</td><td style="text-align: center;">~55</td></tr><tr class="odd"><td>Korelacja <em>r</em> Pearsona</td><td style="text-align: center;">~782</td><td style="text-align: center;">~85</td><td style="text-align: center;">~29</td></tr><tr class="even"><td>Regresja — 1 predyktor</td><td style="text-align: center;">~395</td><td style="text-align: center;">~55</td><td style="text-align: center;">~25</td></tr><tr class="odd"><td>Regresja — 2 predyktory</td><td style="text-align: center;">~485</td><td style="text-align: center;">~68</td><td style="text-align: center;">~31</td></tr></tbody></table><p>Obliczenia wykonano pakietem <code>pwr</code> w R (Champely, 2020).</p><p><strong>Uwaga:</strong> nawet jeśli dana metoda (np. test <em>t</em> dla prób niezależnych) dopuszcza nierównoliczne grupy, <strong>największą moc uzyskuje się przy grupach równolicznych</strong>. Nierówne grupy przy tym samym łącznym <em>N</em> oznaczają marnowanie zasobów — moc spada.</p><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><h3 id="a-priori">A priori</h3><p>„Analizę mocy a priori przeprowadzono w G<em>Power 3.1 (Faul i in., 2007). Dla jednoczynnikowej ANOVA z trzema grupami, przy oczekiwanej wielkości efektu </em>f* = 0.25 (na podstawie meta-analizy: Kowalski i in., 2019), α = .05 i mocy 1 − β = .80, minimalna liczebność wynosiła <em>n</em> = 53 na grupę (<em>N</em> = 159). Rekrutowano 180 osób, uwzględniając 10% braków."</p><h3 id="sensitivity">Sensitivity</h3><p>„Przeprowadzono analizę wrażliwości (G<em>Power 3.1). Przy uzyskanym </em>N* = 86, α = .05 i mocy .80, test korelacji Pearsona miał wystarczającą moc do wykrycia efektów <em>r</em> ≥ .30."</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Raportowanie observed power jako dowodu mocy badania.</strong> „Moc wynosiła .43, więc badanie miało niską moc" — ale ta wartość jest pochodną <em>p</em>, nie niezależną informacją. Użyj sensitivity analysis.</p></li><li><p><strong>Brak analizy mocy w pracy.</strong> Coraz częściej wymagana w recenzjach. Nawet retrospektywna sensitivity analysis jest lepsza niż nic.</p></li><li><p><strong>Używanie zawyżonych efektów z literatury.</strong> Publication bias zawyża raportowane efekty. Uwzględnij to, używając efektu nieco mniejszego niż w literaturze.</p></li><li><p><strong>Analiza mocy dla niewłaściwego testu.</strong> Obliczasz moc dla <em>t</em>, a potem używasz regresji z 5 predyktorami. Moc zależy od konkretnego testu i schematu.</p></li><li><p><strong>Ignorowanie mocy przy badaniach nieparametrycznych.</strong> Testy nieparametryczne mają niższą moc niż parametryczne (przy spełnionych założeniach). Uwzględnij to w planowaniu — potrzebujesz większego <em>n</em>.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="I_planowanie_wielkosci_proby.html">Jak zaplanować wielkość próby?</a></li><li><a href="VI_moc_testu.html">Moc testu — co to jest i dlaczego ma znaczenie</a></li><li><a href="VI_wielkosc_efektu.html">Wielkość efektu — po co i jak?</a></li><li>G*Power — kalkulacja krok po kroku</li><li><a href="VI_wynik_nieistotny.html">Wynik nieistotny — co to znaczy?</a></li></ul><h2 id="literatura">Literatura</h2><p>Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Erlbaum.</p><p>Cohen, J. (1992). A power primer. <em>Psychological Bulletin</em>, <em>112</em>(1), 155–159. https://doi.org/10.1037/0033-2909.112.1.155</p><p>Faul, F., Erdfelder, E., Lang, A.-G., &amp; Buchner, A. (2007). G<em>Power 3: A flexible statistical power analysis program for the social, behavioral, and biomedical sciences. </em>Behavior Research Methods, 39*(2), 175–191.</p><p>Hoenig, J. M., &amp; Heisey, D. M. (2001). The abuse of power: The pervasive fallacy of power calculations for data analysis. <em>The American Statistician, 55</em>(1), 19–24.</p><hr /><p>[A. Domurat]</p>
+
+        <div class="page-footer">
+            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
+        </div>
+    </main>
+</body>
+</html>

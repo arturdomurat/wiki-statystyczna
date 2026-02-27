@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G*Power — kalkulacja mocy krok po kroku — Wiki Statystyczna UŚ</title>
+    <style>
+:root {
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --accent: #2c5282;
+    --accent-light: #ebf4ff;
+    --border: #d0d7de;
+    --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5;
+    --nav-hover: #e2e8f0;
+    --link: #2c5282;
+    --muted: #636c76;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    min-height: 100vh;
+}
+/* ── Sidebar ── */
+nav.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+}
+nav.sidebar .logo {
+    padding: 8px 20px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+    text-decoration: none;
+    display: block;
+}
+nav.sidebar .logo:hover { opacity: 0.8; }
+nav.sidebar .section-title {
+    padding: 10px 20px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+}
+nav.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 28px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    line-height: 1.4;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+nav.sidebar a:hover {
+    background: var(--nav-hover);
+    border-left-color: var(--accent);
+}
+nav.sidebar a.active {
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+    font-weight: 600;
+    color: var(--accent);
+}
+/* ── Main ── */
+main {
+    margin-left: 280px;
+    flex: 1;
+    max-width: 860px;
+    padding: 40px 50px 80px;
+}
+/* ── Typography ── */
+h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
+p { margin-bottom: 0.85em; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--link); }
+/* ── Lists ── */
+ul, ol { margin: 0.5em 0 1em 1.5em; }
+li { margin-bottom: 0.3em; }
+li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
+/* ── Code ── */
+code {
+    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
+    font-size: 0.9em;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+pre {
+    background: var(--code-bg);
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1em 0;
+    border: 1px solid var(--border);
+    font-size: 0.88em;
+    line-height: 1.5;
+}
+pre code { background: none; padding: 0; }
+/* ── Tables ── */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0 1.5em;
+    font-size: 0.92em;
+}
+th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+}
+th {
+    background: var(--sidebar-bg);
+    font-weight: 600;
+    font-size: 0.92em;
+}
+tr:nth-child(even) { background: #f8f9fa; }
+/* ── Blockquote (admonitions) ── */
+blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 12px 20px;
+    margin: 1em 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+    color: #374151;
+}
+blockquote p:last-child { margin-bottom: 0; }
+/* ── Subscript / superscript ── */
+sub { font-size: 0.78em; }
+sup { font-size: 0.78em; }
+/* ── "Zobacz też" section links ── */
+.see-also a {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 3px 4px;
+    background: var(--accent-light);
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background 0.15s;
+}
+.see-also a:hover { background: #d0e0f5; }
+/* ── Breadcrumb ── */
+.breadcrumb {
+    font-size: 0.85em;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+.breadcrumb a { color: var(--muted); }
+.breadcrumb a:hover { color: var(--accent); }
+/* ── Footer ── */
+.page-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82em;
+    color: var(--muted);
+}
+/* ── Mobile ── */
+@media (max-width: 900px) {
+    nav.sidebar { display: none; }
+    main { margin-left: 0; padding: 20px; max-width: 100%; }
+}
+@media (max-width: 900px) {
+    .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 10px; left: 10px;
+        z-index: 200;
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+}
+.mobile-menu-btn { display: none; }
+</style>
+</head>
+<body>
+    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
+    <nav class="sidebar" id="sidebar">
+  <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
+  <div class="section-title">Start</div>
+  <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
+  <div class="section-title">Planowanie badania</div>
+  <a href="I_analiza_mocy.html">Analiza mocy</a>
+  <a href="I_dobor_zmiennych_i_skala.html">Jak dobrać zmienne i skalę pomiaru?</a>
+  <a href="I_planowanie_wielkosci_proby.html">Jak zaplanować wielkość próby?</a>
+  <a href="I_schemat_badawczy.html">Jak zaplanować schemat badawczy?</a>
+  <div class="section-title">Porównywanie grup</div>
+  <a href="II_ANCOVA.html">Kowariancja jako kontrola</a>
+  <a href="II_MANOVA.html">Wieloczynnikowa zmienna zależna</a>
+  <a href="II_dwie_grupy_niezalezne.html">Dwie grupy niezależne</a>
+  <a href="II_dwie_grupy_zalezne.html">Dwie grupy zależne (pomiary powtarzane)</a>
+  <a href="II_jedna_proba.html">Jedna próba</a>
+  <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
+  <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <div class="section-title">Związki i predykcja</div>
+  <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
+  <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
+  <a href="III_regresja.html">Predykcja zmiennej ciągłej</a>
+  <a href="III_regresja_logistyczna.html">Predykcja zmiennej kategorialnej</a>
+  <a href="III_zmienne_kategorialne.html">Dwie zmienne kategorialne</a>
+  <div class="section-title">Struktura danych</div>
+  <a href="IV_CFA.html">Konfirmacyjna analiza czynnikowa (CFA)</a>
+  <a href="IV_EFA.html">Eksploracyjna analiza czynnikowa (EFA)</a>
+  <a href="IV_SEM.html">Modelowanie równań strukturalnych (SEM)</a>
+  <a href="IV_analiza_skupien.html">Analiza skupień (cluster analysis)</a>
+  <div class="section-title">Psychometria</div>
+  <a href="V_rzetelnosc.html">Rzetelność pomiaru</a>
+  <a href="V_trafnosc.html">Trafność pomiaru</a>
+  <div class="section-title">Kuchnia statystyczna</div>
+  <a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące</a>
+  <a href="VI_hipoteza_vs_zalozenie.html">Hipoteza vs. założenie</a>
+  <a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji</a>
+  <a href="VI_moc_testu.html">Moc testu</a>
+  <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
+  <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_procedura_NHST.html">Procedura NHST</a>
+  <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
+  <a href="VI_skale_Likerta.html">Skale Likerta</a>
+  <a href="VI_standardy_APA7.html">Standardy raportowania APA 7</a>
+  <a href="VI_statystyka_opisowa.html">Statystyka opisowa</a>
+  <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
+  <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
+  <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
+  <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
+  <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
+  <div class="section-title">Metody zaawansowane</div>
+  <a href="VII_analiza_przezycia.html">Analiza przeżycia (survival analysis)</a>
+  <a href="VII_metaanaliza.html">Meta-analiza</a>
+  <a href="VII_modele_mieszane.html">Modele mieszane (mixed-effects models)</a>
+  <div class="section-title">Narzędzia</div>
+  <a href="VIII_GPower.html" class="active">G*Power</a>
+  <a href="VIII_JASP.html">JASP</a>
+  <a href="VIII_R_poradnik.html">R</a>
+  <a href="VIII_SPSS.html">SPSS</a>
+  <div class="section-title">Pojęcia fundamentalne</div>
+  <a href="IX_blad_standardowy.html">Błąd standardowy</a>
+  <a href="IX_centrowanie.html">Centrowanie zmiennych</a>
+  <a href="IX_estymacja.html">Estymacja punktowa vs. przedziałowa</a>
+  <a href="IX_niezaleznosc.html">Niezależność</a>
+  <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
+  <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
+  <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+</nav>
+    <main>
+        <div class="breadcrumb">
+            <a href="index.html">Wiki Statystyczna</a> › Narzędzia
+        </div>
+        <h1 id="gpower-kalkulacja-mocy-krok-po-kroku">G*Power — kalkulacja mocy krok po kroku</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Musisz obliczyć wymaganą wielkość próby przed badaniem (a priori), sprawdzić jaki efekt możesz wykryć przy danym <em>n</em> (sensitivity), lub — mniej rekomendowane — obliczyć moc po badaniu (post hoc). G*Power to darmowy, złoty standard kalkulacji mocy w psychologii.</p><h2 id="co-to-jest-gpower">Co to jest G*Power</h2><p>G<em>Power to darmowy program do analizy mocy statystycznej (Faul i in., 2007, 2009). Obsługuje większość testów stosowanych w psychologii: </em>t<em>, </em>F* (ANOVA, regresja), χ², korelacja, testy nieparametryczne. Interfejs graficzny, działa na Windows i Mac.</p><p><strong>Pobieranie:</strong> https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower</p><h2 id="interfejs-co-gdzie">Interfejs — co gdzie</h2><p>G*Power ma pięć kluczowych pól:</p><ol type="1"><li><strong>Test family:</strong> rodzina testów (<em>t</em>, <em>F</em>, χ², exact, <em>z</em>)</li><li><strong>Statistical test:</strong> konkretny test (np. „Means: Difference between two independent means (two groups)")</li><li><strong>Type of power analysis:</strong> a priori / post hoc / sensitivity / criterion</li><li><strong>Input parameters:</strong> α, moc (1-β), wielkość efektu, <em>n</em> (w zależności od typu analizy)</li><li><strong>Output parameters:</strong> wynik obliczenia (np. wymagane <em>n</em>)</li></ol><h2 id="krok-po-kroku-typowe-scenariusze">Krok po kroku — typowe scenariusze</h2><h3 id="scenariusz-1-t-test-dla-prób-niezależnych-a-priori">Scenariusz 1: <em>t</em> test dla prób niezależnych (a priori)</h3><p><strong>Pytanie:</strong> „Ile osób potrzebuję, żeby wykryć średni efekt <em>d</em> = 0.50?"</p><ol type="1"><li>Test family: <strong>t tests</strong></li><li>Statistical test: <strong>Means: Difference between two independent means (two groups)</strong></li><li>Type: <strong>A priori: Compute required sample size</strong></li><li>Input:<ul><li>Tail(s): Two</li><li>Effect size d: <strong>0.50</strong></li><li>α err prob: <strong>0.05</strong></li><li>Power (1-β err prob): <strong>0.80</strong></li><li>Allocation ratio N2/N1: <strong>1</strong> (równe grupy)</li></ul></li><li>→ Calculate</li><li><strong>Output: Total sample size = 128</strong> (64 na grupę)</li></ol><h3 id="scenariusz-2-anova-jednoczynnikowa-a-priori">Scenariusz 2: ANOVA jednoczynnikowa (a priori)</h3><p><strong>Pytanie:</strong> „3 grupy, oczekuję średniego efektu <em>f</em> = 0.25, ile osób?"</p><ol type="1"><li>Test family: <strong>F tests</strong></li><li>Statistical test: <strong>ANOVA: Fixed effects, omnibus, one-way</strong></li><li>Type: <strong>A priori</strong></li><li>Input:<ul><li>Effect size f: <strong>0.25</strong></li><li>α err prob: <strong>0.05</strong></li><li>Power: <strong>0.80</strong></li><li>Number of groups: <strong>3</strong></li></ul></li><li><strong>Output: Total sample size = 159</strong> (~53 na grupę)</li></ol><h3 id="scenariusz-3-korelacja-pearsona-a-priori">Scenariusz 3: Korelacja Pearsona (a priori)</h3><p><strong>Pytanie:</strong> „Jaka <em>n</em>, żeby wykryć <em>r</em> = .30?"</p><ol type="1"><li>Test family: <strong>Exact</strong></li><li>Statistical test: <strong>Correlation: Bivariate normal model</strong></li><li>Type: <strong>A priori</strong></li><li>Input:<ul><li>Tail(s): Two</li><li>Correlation ρ H1: <strong>0.30</strong></li><li>α: <strong>0.05</strong></li><li>Power: <strong>0.80</strong></li><li>Correlation ρ H0: <strong>0</strong></li></ul></li><li><strong>Output: Total sample size = 84</strong></li></ol><h3 id="scenariusz-4-regresja-wieloraka-a-priori">Scenariusz 4: Regresja wieloraka (a priori)</h3><p><strong>Pytanie:</strong> „5 predyktorów, średni efekt <em>f</em>² = 0.15, ile osób?"</p><ol type="1"><li>Test family: <strong>F tests</strong></li><li>Statistical test: <strong>Linear multiple regression: Fixed model, R² deviation from zero</strong></li><li>Type: <strong>A priori</strong></li><li>Input:<ul><li>Effect size f²: <strong>0.15</strong></li><li>α: <strong>0.05</strong></li><li>Power: <strong>0.80</strong></li><li>Number of tested predictors: <strong>5</strong></li><li>Total number of predictors: <strong>5</strong></li></ul></li><li><strong>Output: Total sample size = 92</strong></li></ol><h3 id="scenariusz-5-sensitivity-analysis">Scenariusz 5: Sensitivity analysis</h3><p><strong>Pytanie:</strong> „Mam <em>n</em> = 50 na grupę, jaki najmniejszy <em>d</em> mogę wykryć?"</p><ol type="1"><li>Test family: <strong>t tests</strong></li><li>Statistical test: <strong>Means: Difference between two independent means</strong></li><li>Type: <strong>Sensitivity: Compute required effect size</strong></li><li>Input:<ul><li>α: <strong>0.05</strong></li><li>Power: <strong>0.80</strong></li><li>Sample size group 1: <strong>50</strong></li><li>Sample size group 2: <strong>50</strong></li></ul></li><li><strong>Output: Effect size d = 0.567</strong></li></ol><h2 id="przeliczanie-wielkości-efektów">Przeliczanie wielkości efektów</h2><p>G*Power wymaga specyficznych miar efektu dla każdego testu. Przeliczenia:</p><table><thead><tr class="header"><th>Z</th><th>Na</th><th>Wzór</th></tr></thead><tbody><tr class="odd"><td><em>d</em> Cohena</td><td><em>f</em> (ANOVA)</td><td><em>f</em> = <em>d</em> / 2 (dla 2 grup)</td></tr><tr class="even"><td>η²</td><td><em>f</em></td><td><em>f</em> = √(η² / (1 − η²))</td></tr><tr class="odd"><td><em>R</em>²</td><td><em>f</em>² (regresja)</td><td><em>f</em>² = <em>R</em>² / (1 − <em>R</em>²)</td></tr><tr class="even"><td><em>r</em></td><td><em>d</em></td><td><em>d</em> = 2<em>r</em> / √(1 − <em>r</em>²)</td></tr></tbody></table><p>G*Power ma wbudowany kalkulator przeliczania: menu <strong>Determine</strong> obok pola Effect size.</p><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><p>„Wymaganą wielkość próby obliczono za pomocą G<em>Power 3.1.9.7 (Faul i in., 2007). Dla testu </em>t* dla prób niezależnych (dwustronny), przy oczekiwanej wielkości efektu <em>d</em> = 0.50 (na podstawie meta-analizy: Kowalski i in., 2022), α = .05 i mocy 1 − β = .80, minimalna łączna liczebność wynosiła <em>N</em> = 128 (64 na grupę)."</p><p><strong>Zawsze podaj:</strong> program i wersję, typ testu, wielkość efektu (skąd pochodzi), α, moc, wynik.</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p>**Wybór niewłaściwego testu w G*Power.** G*Power ma wiele wariantów każdego testu. Upewnij się, że wybrałeś właściwy (np. „one-way" vs. „repeated measures" ANOVA).</p></li><li><p><strong>Mylenie <em>f</em> Cohena z <em>f</em>² lub <em>d</em>.</strong> Każdy test wymaga innej miary efektu. Użyj wbudowanego kalkulatora Determine.</p></li><li><p><strong>Zapominanie o Allocation ratio.</strong> Przy nierównych grupach (np. kliniczna <em>n</em> = 30, kontrolna <em>n</em> = 60) ustaw ratio = 2.</p></li><li><p>**Raportowanie G*Power bez podania wersji.** Różne wersje mogą dawać lekko różne wyniki. Podaj numer wersji.</p></li><li><p><strong>Używanie konwencji Cohena bez uzasadnienia.</strong> G*Power ułatwia wpisanie .20/.50/.80, ale to nie zwalnia z uzasadnienia oczekiwanego efektu.</p></li><li><p><strong>Post hoc power z uzyskanym efektem.</strong> G*Power umożliwia takie obliczenie, ale jest ono logicznie problematyczne (<a href="I_analiza_mocy.html">→ patrz: <a href="I_analiza_mocy.html">Analiza mocy)</a> Lepiej zastosować sensitivity analysis.</a></p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="I_planowanie_wielkosci_proby.html">Jak zaplanować wielkość próby?</a></li><li><a href="I_analiza_mocy.html">Analiza mocy — a priori i post hoc</a></li><li><a href="VI_wielkosc_efektu.html">Wielkość efektu — po co i jak?</a></li><li><a href="VI_moc_testu.html">Moc testu — co to jest i dlaczego ma znaczenie</a></li></ul><h2 id="literatura">Literatura</h2><p>Faul, F., Erdfelder, E., Lang, A.-G., &amp; Buchner, A. (2007). G<em>Power 3: A flexible statistical power analysis program for the social, behavioral, and biomedical sciences. </em>Behavior Research Methods, 39*(2), 175–191.</p><p>Faul, F., Erdfelder, E., Buchner, A., &amp; Lang, A.-G. (2009). Statistical power analyses using G<em>Power 3.1: Tests for correlation and regression analyses. </em>Behavior Research Methods, 41*(4), 1149–1160.</p><hr /><p>[A. Domurat]</p>
+
+        <div class="page-footer">
+            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
+        </div>
+    </main>
+</body>
+</html>

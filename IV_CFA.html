@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmacyjna analiza czynnikowa (CFA) — Wiki Statystyczna UŚ</title>
+    <style>
+:root {
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --accent: #2c5282;
+    --accent-light: #ebf4ff;
+    --border: #d0d7de;
+    --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5;
+    --nav-hover: #e2e8f0;
+    --link: #2c5282;
+    --muted: #636c76;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    min-height: 100vh;
+}
+/* ── Sidebar ── */
+nav.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 100;
+}
+nav.sidebar .logo {
+    padding: 8px 20px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+    text-decoration: none;
+    display: block;
+}
+nav.sidebar .logo:hover { opacity: 0.8; }
+nav.sidebar .section-title {
+    padding: 10px 20px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+}
+nav.sidebar a {
+    display: block;
+    padding: 5px 20px 5px 28px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    line-height: 1.4;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+}
+nav.sidebar a:hover {
+    background: var(--nav-hover);
+    border-left-color: var(--accent);
+}
+nav.sidebar a.active {
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+    font-weight: 600;
+    color: var(--accent);
+}
+/* ── Main ── */
+main {
+    margin-left: 280px;
+    flex: 1;
+    max-width: 860px;
+    padding: 40px 50px 80px;
+}
+/* ── Typography ── */
+h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
+p { margin-bottom: 0.85em; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--link); }
+/* ── Lists ── */
+ul, ol { margin: 0.5em 0 1em 1.5em; }
+li { margin-bottom: 0.3em; }
+li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
+/* ── Code ── */
+code {
+    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
+    font-size: 0.9em;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+pre {
+    background: var(--code-bg);
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1em 0;
+    border: 1px solid var(--border);
+    font-size: 0.88em;
+    line-height: 1.5;
+}
+pre code { background: none; padding: 0; }
+/* ── Tables ── */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0 1.5em;
+    font-size: 0.92em;
+}
+th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+}
+th {
+    background: var(--sidebar-bg);
+    font-weight: 600;
+    font-size: 0.92em;
+}
+tr:nth-child(even) { background: #f8f9fa; }
+/* ── Blockquote (admonitions) ── */
+blockquote {
+    border-left: 4px solid var(--accent);
+    padding: 12px 20px;
+    margin: 1em 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+    color: #374151;
+}
+blockquote p:last-child { margin-bottom: 0; }
+/* ── Subscript / superscript ── */
+sub { font-size: 0.78em; }
+sup { font-size: 0.78em; }
+/* ── "Zobacz też" section links ── */
+.see-also a {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 3px 4px;
+    background: var(--accent-light);
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background 0.15s;
+}
+.see-also a:hover { background: #d0e0f5; }
+/* ── Breadcrumb ── */
+.breadcrumb {
+    font-size: 0.85em;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+.breadcrumb a { color: var(--muted); }
+.breadcrumb a:hover { color: var(--accent); }
+/* ── Footer ── */
+.page-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.82em;
+    color: var(--muted);
+}
+/* ── Mobile ── */
+@media (max-width: 900px) {
+    nav.sidebar { display: none; }
+    main { margin-left: 0; padding: 20px; max-width: 100%; }
+}
+@media (max-width: 900px) {
+    .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 10px; left: 10px;
+        z-index: 200;
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+}
+.mobile-menu-btn { display: none; }
+</style>
+</head>
+<body>
+    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
+    <nav class="sidebar" id="sidebar">
+  <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
+  <div class="section-title">Start</div>
+  <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
+  <div class="section-title">Planowanie badania</div>
+  <a href="I_analiza_mocy.html">Analiza mocy</a>
+  <a href="I_dobor_zmiennych_i_skala.html">Jak dobrać zmienne i skalę pomiaru?</a>
+  <a href="I_planowanie_wielkosci_proby.html">Jak zaplanować wielkość próby?</a>
+  <a href="I_schemat_badawczy.html">Jak zaplanować schemat badawczy?</a>
+  <div class="section-title">Porównywanie grup</div>
+  <a href="II_ANCOVA.html">Kowariancja jako kontrola</a>
+  <a href="II_MANOVA.html">Wieloczynnikowa zmienna zależna</a>
+  <a href="II_dwie_grupy_niezalezne.html">Dwie grupy niezależne</a>
+  <a href="II_dwie_grupy_zalezne.html">Dwie grupy zależne (pomiary powtarzane)</a>
+  <a href="II_jedna_proba.html">Jedna próba</a>
+  <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
+  <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <div class="section-title">Związki i predykcja</div>
+  <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
+  <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
+  <a href="III_regresja.html">Predykcja zmiennej ciągłej</a>
+  <a href="III_regresja_logistyczna.html">Predykcja zmiennej kategorialnej</a>
+  <a href="III_zmienne_kategorialne.html">Dwie zmienne kategorialne</a>
+  <div class="section-title">Struktura danych</div>
+  <a href="IV_CFA.html" class="active">Konfirmacyjna analiza czynnikowa (CFA)</a>
+  <a href="IV_EFA.html">Eksploracyjna analiza czynnikowa (EFA)</a>
+  <a href="IV_SEM.html">Modelowanie równań strukturalnych (SEM)</a>
+  <a href="IV_analiza_skupien.html">Analiza skupień (cluster analysis)</a>
+  <div class="section-title">Psychometria</div>
+  <a href="V_rzetelnosc.html">Rzetelność pomiaru</a>
+  <a href="V_trafnosc.html">Trafność pomiaru</a>
+  <div class="section-title">Kuchnia statystyczna</div>
+  <a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące</a>
+  <a href="VI_hipoteza_vs_zalozenie.html">Hipoteza vs. założenie</a>
+  <a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji</a>
+  <a href="VI_moc_testu.html">Moc testu</a>
+  <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
+  <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_procedura_NHST.html">Procedura NHST</a>
+  <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
+  <a href="VI_skale_Likerta.html">Skale Likerta</a>
+  <a href="VI_standardy_APA7.html">Standardy raportowania APA 7</a>
+  <a href="VI_statystyka_opisowa.html">Statystyka opisowa</a>
+  <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
+  <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
+  <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
+  <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
+  <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
+  <div class="section-title">Metody zaawansowane</div>
+  <a href="VII_analiza_przezycia.html">Analiza przeżycia (survival analysis)</a>
+  <a href="VII_metaanaliza.html">Meta-analiza</a>
+  <a href="VII_modele_mieszane.html">Modele mieszane (mixed-effects models)</a>
+  <div class="section-title">Narzędzia</div>
+  <a href="VIII_GPower.html">G*Power</a>
+  <a href="VIII_JASP.html">JASP</a>
+  <a href="VIII_R_poradnik.html">R</a>
+  <a href="VIII_SPSS.html">SPSS</a>
+  <div class="section-title">Pojęcia fundamentalne</div>
+  <a href="IX_blad_standardowy.html">Błąd standardowy</a>
+  <a href="IX_centrowanie.html">Centrowanie zmiennych</a>
+  <a href="IX_estymacja.html">Estymacja punktowa vs. przedziałowa</a>
+  <a href="IX_niezaleznosc.html">Niezależność</a>
+  <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
+  <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
+  <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+</nav>
+    <main>
+        <div class="breadcrumb">
+            <a href="index.html">Wiki Statystyczna</a> › Struktura danych
+        </div>
+        <h1 id="konfirmacyjna-analiza-czynnikowa-cfa">Konfirmacyjna analiza czynnikowa (CFA)</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Masz model czynnikowy (z literatury, wcześniejszej EFA lub teorii) i chcesz sprawdzić, czy dane potwierdzają tę strukturę. Np. kwestionariusz ma mieć 3 podskale — czy dane faktycznie pasują do modelu 3-czynnikowego?</p><h2 id="cfa-vs.-efa">CFA vs. EFA</h2><ul><li><strong>EFA</strong>: „jaką strukturę mają moje dane?" (eksploracja)</li><li><strong>CFA</strong>: „czy moje dane pasują do tego konkretnego modelu?" (konfirmacja)</li></ul><p>CFA jest bardziej restrykcyjna — z góry określasz, które itemy ładują na które czynniki. Niedopasowanie modelu jest informacyjne.</p><h2 id="algorytm">Algorytm</h2><h3 id="krok-1-specyfikacja-modelu">Krok 1: Specyfikacja modelu</h3><p>Określ:</p><ul><li>Które pozycje ładują na które czynniki (ładunki)</li><li>Czy czynniki korelują ze sobą (zwykle tak)</li><li>Czy są cross-loadingi (zwykle nie w standardowej CFA)</li><li>Czy są skorelowane błędy (zwykle nie, chyba że uzasadnione)</li></ul><h3 id="krok-2-estymacja">Krok 2: Estymacja</h3><p>Metoda ML (<em>Maximum Likelihood</em>) — domyślna. Przy danych nienormalnych: MLR (robust ML) lub WLSMV (dla danych porządkowych/binarnych).</p><h3 id="krok-3-ocena-dopasowania">Krok 3: Ocena dopasowania</h3><p>Wskaźniki dopasowania i progi (konwencjonalne, Hu &amp; Bentler, 1999):</p><table><thead><tr class="header"><th>Wskaźnik</th><th>Dobre dopasowanie</th><th>Akceptowalne</th></tr></thead><tbody><tr class="odd"><td>χ²</td><td><em>p</em> &gt; .05 (rzadko przy dużym <em>n</em>)</td><td>—</td></tr><tr class="even"><td>χ²/<em>df</em></td><td>&lt; 2</td><td>&lt; 3 (liberalnie: &lt; 5)</td></tr><tr class="odd"><td>RMSEA</td><td>≤ .06</td><td>≤ .08</td></tr><tr class="even"><td>CFI</td><td>≥ .95</td><td>≥ .90</td></tr><tr class="odd"><td>TLI</td><td>≥ .95</td><td>≥ .90</td></tr><tr class="even"><td>SRMR</td><td>≤ .08</td><td>≤ .10</td></tr></tbody></table><p><strong>Uwaga:</strong> χ² jest wrażliwy na <em>n</em> — przy dużych próbach (&gt; 200) prawie zawsze istotny. Dlatego ważniejsze są RMSEA, CFI, TLI, SRMR.</p><p>Raportuj <strong>RMSEA z CI</strong> (np. RMSEA = .052, 90% CI [.038, .065]).</p><h3 id="krok-4-ewentualna-modyfikacja">Krok 4: Ewentualna modyfikacja</h3><p><strong>Modification indices</strong> (MI) sugerują, jakie zmiany poprawią dopasowanie. Ale:</p><ul><li>Modyfikacje <strong>muszą mieć uzasadnienie teoretyczne</strong></li><li>Podejście sterowane danymi (<em>data-driven</em>) = dopasowywanie modelu do przypadkowych cech próby</li><li>Jeśli model wymaga wielu modyfikacji → może być po prostu zły</li></ul><p>Typowe uzasadnione modyfikacje: skorelowane błędy między itemami o podobnej treści lub metodzie.</p><h2 id="założenia">Założenia</h2><ol type="1"><li><strong>Model a priori</strong> — musisz mieć model do testowania.</li><li><strong>Ciągłość/normalność</strong> — ML zakłada wielowymiarową normalność. Dla danych porządkowych (np. Likert) → WLSMV lub korelacje polichoryczne.</li><li><strong>Wystarczająca próba</strong> — reguła kciuka: <em>N</em> ≥ 200, lub ≥ 5–10 obserwacji na szacowany parametr.</li><li><strong>Niezależność obserwacji.</strong></li></ol><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><p>„Konfirmacyjna analiza czynnikowa (ML, lavaan w R) wykazała akceptowalne dopasowanie modelu 3-czynnikowego do danych, χ²(167) = 234.5, <em>p</em> &lt; .001, CFI = .96, TLI = .95, RMSEA = .048, 90% CI [.032, .063], SRMR = .051. Standaryzowane ładunki czynnikowe wahały się od .52 do .83 (wszystkie <em>p</em> &lt; .001)."</p><p>Podaj: ładunki w tabeli, korelacje między czynnikami.</p><h2 id="oprogramowanie">Oprogramowanie</h2><ul><li><strong>R</strong>: pakiet <code>lavaan</code> — standard, darmowy, potężny</li><li><strong>AMOS</strong>: dodatek do SPSS — interfejs graficzny (drag &amp; drop)</li><li><strong>Mplus</strong>: płatny, ale najpotężniejszy (WLSMV, modele wielopoziomowe)</li></ul><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>CFA na tych samych danych co EFA.</strong> Struktura znaleziona w EFA jest optymalna dla tych danych — CFA na tych samych danych to tautologia. Podziel próbę lub użyj niezależnej.</p></li><li><p><strong>Modyfikowanie modelu bez uzasadnienia.</strong> Dodawanie skorelowanych błędów, żeby poprawić dopasowanie, bez merytorycznego powodu = podejście sterowane danymi, a nie teorią.</p></li><li><p><strong>Raportowanie tylko χ².</strong> Przy dużych <em>n</em> χ² będzie istotne nawet przy dobrym dopasowaniu. Zawsze raportuj CFI, TLI, RMSEA, SRMR.</p></li><li><p><strong>Ignorowanie ładunków &lt; .40.</strong> Item z ładunkiem .25 na swoim czynniku słabo go mierzy — rozważ usunięcie.</p></li><li><p><strong>Sztywne trzymanie się progów.</strong> CFI = .89 nie oznacza automatycznie „złego" modelu. Progi Hu &amp; Bentlera to konwencje, nie prawa natury.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="IV_EFA.html">EFA — eksploracyjna analiza czynnikowa</a></li><li><a href="IV_SEM.html">SEM — modelowanie równań strukturalnych</a></li><li><a href="V_rzetelnosc.html">Rzetelność pomiaru — alfa Cronbacha i alternatywy</a></li><li><a href="V_trafnosc.html">Trafność pomiaru</a></li></ul><h2 id="literatura">Literatura</h2><p>Kline, R. B. (2015). <em>Principles and practice of structural equation modeling</em> (4th ed.). Guilford Press.</p><p>Hu, L., &amp; Bentler, P. M. (1999). Cutoff criteria for fit indexes in covariance structure analysis. <em>Structural Equation Modeling</em>, <em>6</em>(1), 1–55.</p><hr /><p>[A. Domurat]</p>
+
+        <div class="page-footer">
+            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
+        </div>
+    </main>
+</body>
+</html>
