@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centralne twierdzenie graniczne i prawo wielkich liczb — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Centralne twierdzenie graniczne i prawo wielkich liczb — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html" class="active">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html" class="active">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Pojęcia fundamentalne
-        </div>
-        <h1 id="centralne-twierdzenie-graniczne-i-prawo-wielkich-liczb">Centralne twierdzenie graniczne i prawo wielkich liczb</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Ktoś pisze „przy dużym <em>n</em> rozkład nie ma znaczenia, bo CTG" — i nie wiesz, co to znaczy ani dlaczego miałoby być prawdą. Albo w haśle wiki czytasz „CTG zapewnia normalność rozkładu statystyki testowej" i chcesz wiedzieć, o co chodzi.</p><h2 id="centralne-twierdzenie-graniczne-ctg">Centralne twierdzenie graniczne (CTG)</h2><h3 id="co-mówi">Co mówi</h3><p>Jeśli z populacji o dowolnym rozkładzie (o skończonej wariancji) losujemy wielokrotnie próby o wielkości <em>n</em> i za każdym razem obliczamy średnią, to <strong>rozkład tych średnich</strong> zbliża się do normalnego, gdy <em>n</em> rośnie — niezależnie od rozkładu zmiennej w populacji.</p><p>Innymi słowy: nawet jeśli zmienna X jest skośna, dwumodalna czy zupełnie „nienormalna", średnie z wystarczająco dużych prób będą miały rozkład zbliżony do normalnego.</p><h3 id="dlaczego-jest-ważne">Dlaczego jest ważne</h3><p>CTG jest fundamentem testów parametrycznych. Testy <em>t</em>, ANOVA, regresja — wszystkie zakładają, że statystyka testowa (oparta na średnich) ma znany rozkład teoretyczny. CTG gwarantuje, że przy wystarczająco dużym <em>n</em> ten warunek jest spełniony, nawet gdy zmienna X nie jest normalna.</p><p>Dlatego przy dużym <em>n</em> nie trzeba sprawdzać normalności rozkładu zmiennej — wystarczy, że próba jest wystarczająco duża, by CTG „zadziałało".</p><h3 id="jak-duże-musi-być-n">Jak duże musi być <em>n</em>?</h3><p>Nie ma jednej odpowiedzi — zależy od kształtu rozkładu wyjściowego. Im bardziej rozkład odbiega od normalnego (silna skośność, grube ogony), tym większe <em>n</em> potrzebne. Zwyczajowe przybliżenia: <em>n</em> ≥ 30 dla rozkładów umiarkowanie skośnych; <em>n</em> ≥ 50–100 dla silnie skośnych; dla rozkładów symetrycznych CTG działa już przy <em>n</em> ≈ 10–15.</p><h3 id="czego-ctg-nie-mówi">Czego CTG NIE mówi</h3><p>CTG nie mówi, że zmienna X staje się normalna przy dużym <em>n</em>. Rozkład X w populacji nie zmienia się — to <strong>rozkład średniej z prób</strong> zbliża się do normalnego. To częste nieporozumienie.</p><p>CTG nie mówi też, że przy dużym <em>n</em> wszystkie założenia testów parametrycznych są automatycznie spełnione. Normalność rozkładu statystyki testowej to jedno; niezależność obserwacji, homogeniczność wariancji czy liniowość to osobne kwestie, których CTG nie naprawia.</p><h2 id="prawo-wielkich-liczb-pwl">Prawo wielkich liczb (PWL)</h2><h3 id="co-mówi-1">Co mówi</h3><p>Średnia z próby (<em>M</em>) zbliża się do wartości oczekiwanej populacji (μ), gdy <em>n</em> rośnie. Im większa próba, tym mniejsze prawdopodobieństwo, że <em>M</em> istotnie odbiega od μ.</p><h3 id="czym-różni-się-od-ctg">Czym różni się od CTG</h3><p>PWL mówi o <strong>wartości</strong> średniej z próby — że zbliża się do μ. CTG mówi o <strong>rozkładzie</strong> średnich z prób — że zbliża się do normalnego. PWL odpowiada na pytanie „gdzie będzie średnia?“, CTG odpowiada na pytanie „jak wygląda rozkład tej średniej?”.</p><h3 id="dlaczego-jest-ważne-1">Dlaczego jest ważne</h3><p>PWL uzasadnia, dlaczego duże próby dają bardziej wiarygodne oszacowania parametrów. To intuicyjne — 1000 obserwacji daje lepszy obraz populacji niż 10 — ale PWL formalizuje tę intuicję. Leży też u podstaw rozumienia zgodności (<em>consistency</em>) estymatorów.</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>„Przy dużym <em>n</em> rozkład zmiennej jest normalny."</strong> Nie — CTG mówi o rozkładzie średniej (lub innej statystyki), nie o rozkładzie zmiennej X.</p></li><li><p><strong>Powoływanie się na CTG przy <em>n</em> = 15 i silnie skośnym rozkładzie.</strong> CTG działa asymptotycznie — przy małych próbach i silnie nienormalnych rozkładach przybliżenie normalne może być niewystarczające.</p></li><li><p><strong>Używanie CTG jako wymówki od sprawdzania założeń.</strong> CTG łagodzi wymóg normalności rozkładu statystyki testowej, ale nie naprawia problemów z niezależnością obserwacji, heteroscedastycznością ani outlierami.</p></li><li><p><strong>Mylenie CTG z PWL.</strong> CTG dotyczy kształtu rozkładu (normalność), PWL dotyczy wartości (zbieżność do parametru). Oba działają przy rosnącym <em>n</em>, ale mówią o różnych rzeczach.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa — do czego służą w testowaniu</a></li><li><a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator — rozróżnienie pojęć</a></li><li><a href="VI_normalnosc_rozkladu.html">Normalność rozkładu — kiedy i jak sprawdzać</a></li><li><a href="IX_blad_standardowy.html">Błąd standardowy — czym jest i czym nie jest</a></li></ul><h2 id="literatura">Literatura</h2><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><p>Howell, D. C. (2012). <em>Statistical methods for psychology</em> (8th ed.). Wadsworth.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Pojęcia fundamentalne</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

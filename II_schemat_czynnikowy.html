@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANOVA wieloczynnikowa — co robić? — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>ANOVA wieloczynnikowa — co robić? — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html" class="active">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Porównywanie grup
-        </div>
-        <h1 id="anova-wieloczynnikowa-co-robić">ANOVA wieloczynnikowa — co robić?</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Masz dwa lub więcej czynników (zmiennych niezależnych / grupujących) i chcesz zbadać ich efekty główne oraz interakcje. Np. schemat 2×2 (płeć × terapia), 2×3, 2×2×2, lub mieszany (between × within).</p><h2 id="rodzaje-schematów">Rodzaje schematów</h2><h3 id="between-subjects-międzygrupowy">Between-subjects (międzygrupowy)</h3><p>Każda osoba jest w jednej komórce schematu. Np. 2 (płeć) × 3 (metoda terapii) = 6 grup.</p><p>→ <strong>ANOVA dwuczynnikowa</strong> (lub wieloczynnikowa)</p><h3 id="within-subjects-wewnątrzgrupowy">Within-subjects (wewnątrzgrupowy)</h3><p>Każda osoba przechodzi przez wszystkie kombinacje warunków. Np. 2 (trudność zadania) × 2 (typ bodźca), oba czynniki powtarzane.</p><p>→ <strong>ANOVA z powtarzanymi pomiarami</strong> (dwuczynnikowa within)</p><h3 id="mieszany-mixed-split-plot">Mieszany (mixed / split-plot)</h3><p>Jeden czynnik between, drugi within. Najczęstszy w psychologii: np. 2 (grupa: eksperymentalna vs. kontrolna) × 3 (czas: pre, post, follow-up).</p><p>→ <strong>ANOVA mieszana</strong> (<em>mixed ANOVA</em>)</p><h2 id="algorytm-interpretacji-kluczowa-reguła">Algorytm interpretacji — kluczowa reguła</h2><p><strong>Krok 1: Sprawdź interakcję.</strong> Jeśli interakcja jest <strong>istotna</strong> → efekty główne mogą być mylące. Efekt jednego czynnika zależy od poziomu drugiego.</p><p><strong>Krok 2a: Interakcja istotna →</strong> analiza <strong>efektów prostych</strong> (<em>simple effects</em>) — patrz niżej.</p><p><strong>Krok 2b: Interakcja nieistotna →</strong> interpretuj <strong>efekty główne</strong> niezależnie.</p><h3 id="efekty-proste-co-to-jest-i-jak-je-robić">Efekty proste — co to jest i jak je robić</h3><p>Efekt prosty to efekt jednego czynnika <strong>na wybranym poziomie</strong> drugiego czynnika. Np. w schemacie 2 (płeć) × 3 (terapia) — efekt prosty terapii <em>u kobiet</em> i osobno efekt prosty terapii <em>u mężczyzn</em>.</p><p><strong>Dlaczego efekty proste, a nie efekty główne?</strong> Gdy interakcja jest istotna, efekt główny (uśredniony po poziomach drugiego czynnika) może być mylący — może sugerować brak efektu, podczas gdy efekt istnieje, ale tylko w jednej podgrupie.</p><p><strong>Jak to zrobić:</strong></p><ul><li><strong>SPSS</strong>: UNIANOVA → EMMEANS z opcją COMPARE lub składnia <code>/EMMEANS = TABLES(A*B) COMPARE(A) ADJ(BONFERRONI)</code>.</li><li><strong>JASP</strong>: ANOVA → zaznacz <em>Simple Main Effects</em> i wybierz, który czynnik rozbijasz po którym.</li><li><strong>R</strong>: pakiet <code>emmeans</code> — <code>emmeans(model, pairwise ~ terapia | plec)</code>.</li></ul><p>Po uzyskaniu efektów prostych stosuj <strong>poprawkę na wielokrotne porównania</strong> (np. Bonferroni) w obrębie każdej rodziny testów.</p><h3 id="wizualizacja-interakcji">Wizualizacja interakcji</h3><p>Wykres interakcji: oś X = poziomy czynnika A, osobne linie dla poziomów czynnika B.</p><ul><li><strong>Linie równoległe</strong> = brak interakcji</li><li><strong>Linie nierównoległe</strong> = interakcja (efekt jednego czynnika zależy od drugiego)</li><li><strong>Linie krzyżujące się</strong> = interakcja dyskordancyjna (krzyżowa)</li></ul><h2 id="założenia">Założenia</h2><h3 id="anova-czynnikowa-between-subjects">ANOVA czynnikowa between-subjects</h3><ol type="1"><li><strong>Niezależność obserwacji.</strong></li><li><strong>Skala co najmniej przedziałowa.</strong></li><li><strong>Normalność</strong> w każdej komórce schematu (np. w każdej z 6 grup). Przy dużych <em>n</em> CTG łagodzi.</li><li><strong>Homogeniczność wariancji</strong> — test Levene’a. Najpoważniejsze przy nierównych <em>n</em>.</li></ol><h3 id="anova-mieszana">ANOVA mieszana</h3><p>Założenia jak wyżej, plus:</p><ol start="5" type="1"><li><strong>Sferyczność</strong> — tylko dla czynników within (i interakcji z czynnikami within). Sprawdzenie: test Mauchly’ego. Korekta: G-G lub H-F.</li></ol><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><p>Raportuj: efekty główne obu czynników + interakcję, nawet jeśli nieistotne.</p><p>„Stwierdzono istotny efekt główny metody terapii, <em>F</em>(2, 114) = 6.23, <em>p</em> = .003, η²<sub>p</sub> = .10, istotny efekt główny czasu, <em>F</em>(1.72, 98.04) = 12.45, <em>p</em> &lt; .001, η²<sub>p</sub> = .18 (korekta G-G), oraz istotną interakcję Metoda × Czas, <em>F</em>(3.44, 98.04) = 3.87, <em>p</em> = .008, η²<sub>p</sub> = .06."</p><p>Przy istotnej interakcji: opisz efekty proste.</p><p>„Analiza efektów prostych wykazała, że spadek lęku od pre do post był istotny w grupie CBT, <em>F</em>(2, 57) = 14.23, <em>p</em> &lt; .001, ale nie w grupie kontrolnej, <em>F</em>(2, 57) = 1.12, <em>p</em> = .334."</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Interpretacja efektów głównych przy istotnej interakcji.</strong> Jeśli interakcja jest istotna, efekty główne mogą być artefaktem uśredniania — analizuj efekty proste.</p></li><li><p><strong>„Oba czynniki istotne, więc się wzmacniają".</strong> Interakcja ≠ oba efekty główne istotne. Interakcja oznacza, że efekt jednego czynnika <strong>zmienia się</strong> w zależności od poziomu drugiego.</p></li><li><p><strong>Brak analizy efektów prostych po istotnej interakcji.</strong> Samo raportowanie istotnej interakcji bez pokazania, <em>na czym</em> polega, jest niekompletne.</p></li><li><p><strong>Nierówne <em>n</em> bez korekty.</strong> Przy nierównolicznych komórkach schemat jest niezbalansowany — ANOVA Typ III (domyślna w SPSS i JASP) jest wtedy odpowiedniejsza niż Typ I.</p></li><li><p><strong>Ignorowanie sferyczności w schemacie mieszanym.</strong> Czynnik within nadal wymaga sprawdzenia sferyczności.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne — który test?</a></li><li><a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne — pomiary powtarzane</a></li><li>ANCOVA — kiedy uwzględniać kowarianty</li><li>MANOVA — wiele zmiennych zależnych</li><li><a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji — kiedy naprawdę problem?</a></li></ul><h2 id="literatura">Literatura</h2><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><p>Tabachnick, B. G., &amp; Fidell, L. S. (2013). <em>Using multivariate statistics</em> (6th ed.). Pearson.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Porównywanie grup</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

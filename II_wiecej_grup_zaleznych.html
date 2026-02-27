@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Więcej niż dwie grupy zależne (pomiary powtarzane) — który test? — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Więcej niż dwie grupy zależne (pomiary powtarzane) — który test? — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html" class="active">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html" class="active">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Porównywanie grup
-        </div>
-        <h1 id="więcej-niż-dwie-grupy-zależne-pomiary-powtarzane-który-test">Więcej niż dwie grupy zależne (pomiary powtarzane) — który test?</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Masz trzy lub więcej pomiarów tej samej zmiennej u tych samych osób (np. pre, post, follow-up) lub kilka warunków w schemacie within-subjects. Chcesz sprawdzić, czy zachodzi zmiana.</p><h2 id="kontekst-próby">Kontekst próby</h2><p><strong>(a) Analiza mocy + <em>n</em> osiągnięte:</strong> ANOVA z powtarzanymi pomiarami. Pomiary powtarzane mają większą moc (eliminujesz zmienność międzyosobową).</p><p><strong>(b) Bez analizy mocy:</strong> sprawdź normalność i sferyczność → algorytm poniżej.</p><p><strong>(c) Małe próby:</strong> Friedman. Przy bardzo małych <em>n</em> moc niska, ale ANOVA z powtarzanymi pomiarami jest dość odporna.</p><h2 id="algorytm-decyzyjny">Algorytm decyzyjny</h2><h3 id="zmienna-przedziałowa-normalność-ok-sferyczność-spełniona">1. Zmienna przedziałowa, normalność OK, sferyczność spełniona</h3><p>→ <strong>ANOVA z powtarzanymi pomiarami</strong> (<em>repeated measures ANOVA</em>)</p><p>Post hoc: <strong>porównania parami</strong> z poprawką Bonferroniego lub Holma.</p><h3 id="zmienna-przedziałowa-normalność-ok-brak-sferyczności">2. Zmienna przedziałowa, normalność OK, BRAK sferyczności</h3><p>→ <strong>ANOVA z korektą:</strong></p><ul><li><strong>Greenhouse-Geisser</strong> (G-G): gdy ε &lt; .75 (poważne naruszenie). Bardziej konserwatywna.</li><li><strong>Huynh-Feldt</strong> (H-F): gdy ε ≥ .75 (umiarkowane naruszenie). Mniej konserwatywna.</li></ul><p>Oba podejścia korygują stopnie swobody (zmniejszają <em>df</em>), co daje bardziej liberalny próg <em>p</em>.</p><p>Alternatywnie: <strong>wielopoziomowa ANOVA</strong> (MANOVA podejście) — nie wymaga sferyczności w ogóle.</p><h3 id="zmienna-przedziałowa-brak-normalności-zmienna-porządkowa">3. Zmienna przedziałowa, brak normalności / zmienna porządkowa</h3><p>→ <strong>Test Friedmana</strong> (nieparametryczny odpowiednik ANOVA z powtarzanymi pomiarami)</p><p>Post hoc: <strong>test Wilcoxona</strong> parami z poprawką Bonferroniego.</p><h2 id="sferyczność-czym-jest-i-jak-sprawdzić">Sferyczność — czym jest i jak sprawdzić</h2><p><strong>Sferyczność</strong> to założenie specyficzne dla pomiarów powtarzanych (≥ 3 warunki). Oznacza, że wariancje <strong>różnic</strong> między wszystkimi parami warunków są równe.</p><p>Np. przy 3 pomiarach (A, B, C): Var(A−B) ≈ Var(A−C) ≈ Var(B−C).</p><p>Nie ma odpowiednika w schematach between-subjects (tam odpowiednikiem jest homogeniczność wariancji).</p><p><strong>Test Mauchly’ego</strong>: testuje H<sub>0</sub>: sferyczność spełniona.</p><ul><li><em>p</em> &gt; .05 → brak podstaw do odrzucenia sferyczności → ANOVA bez korekty</li><li><em>p</em> ≤ .05 → sferyczność naruszona → zastosuj korektę G-G lub H-F</li></ul><p>Parametr <strong>ε (epsilon)</strong>: mierzy stopień naruszenia sferyczności (1 = idealna, niższe = gorzej).</p><p><strong>Uwaga:</strong> przy 2 pomiarach sferyczność jest <strong>zawsze</strong> spełniona automatycznie (jest tylko jedna para różnic). Dlatego sferyczność ma znaczenie dopiero od 3 warunków wzwyż.</p><h2 id="założenia">Założenia</h2><h3 id="anova-z-powtarzanymi-pomiarami">ANOVA z powtarzanymi pomiarami</h3><ol type="1"><li><strong>Zależność obserwacji</strong> — te same osoby we wszystkich warunkach.</li><li><strong>Skala co najmniej przedziałowa.</strong></li><li><strong>Normalność</strong> zmiennej w każdym warunku — przy małych <em>n</em>.</li><li><strong>Sferyczność</strong> — wariancje różnic między parami warunków równe. Jeśli niespełnione → korekta G-G/H-F.</li></ol><h3 id="test-friedmana">Test Friedmana</h3><ol type="1"><li><strong>Zależność obserwacji.</strong></li><li><strong>Skala co najmniej porządkowa.</strong></li></ol><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><h3 id="anova-z-powtarzanymi-pomiarami-sferyczność-ok">ANOVA z powtarzanymi pomiarami (sferyczność OK)</h3><p>„Stwierdzono istotny efekt czasu na poziom lęku, <em>F</em>(2, 58) = 8.34, <em>p</em> &lt; .001, η²<sub>p</sub> = .22."</p><h3 id="anova-z-korektą-g-g">ANOVA z korektą G-G</h3><p>„Test Mauchly’ego wykazał naruszenie sferyczności, χ²(2) = 8.12, <em>p</em> = .017, ε = .72. Po korekcie Greenhouse-Geissera efekt czasu pozostał istotny, <em>F</em>(1.44, 41.76) = 7.21, <em>p</em> = .005, η²<sub>p</sub> = .20."</p><p>Uwaga: <em>df</em> po korekcie są niecałkowite (np. 1.44 zamiast 2).</p><h3 id="friedman">Friedman</h3><p>„Test Friedmana wykazał istotne różnice między pomiarami, χ²(2) = 12.45, <em>p</em> = .002."</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Ignorowanie sferyczności.</strong> Niesprawdzenie testu Mauchly’ego i raportowanie ANOVA bez korekty → zawyżony błąd I rodzaju.</p></li><li><p><strong>Stosowanie korekty G-G gdy sferyczność spełniona.</strong> Niepotrzebna korekta zmniejsza moc.</p></li><li><p><strong>Wielokrotne testy <em>t</em> dla prób zależnych zamiast ANOVA.</strong> Porównywanie pre-post, pre-follow-up, post-follow-up trzema testami <em>t</em> → inflacja α. ANOVA + post hoc kontrolują to.</p></li><li><p><strong>Ignorowanie efektu kolejności</strong> w schemacie within-subjects bez counterbalancingu.</p></li><li><p><strong>Nieraportowanie ε</strong> (epsilon) przy korekcie — czytelnik nie wie, jak poważne było naruszenie.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="II_dwie_grupy_zalezne.html">Dwie grupy zależne — który test?</a></li><li><a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne — który test?</a></li><li>Schemat czynnikowy — co robić?</li><li><a href="VI_normalnosc_rozkladu.html">Normalność rozkładu — kiedy naprawdę potrzebna?</a></li><li><a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji — kiedy naprawdę problem?</a></li></ul><h2 id="literatura">Literatura</h2><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><p>Howell, D. C. (2012). <em>Statistical methods for psychology</em> (8th ed.). Wadsworth.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Porównywanie grup</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+awFaSToQXFYirF6rU1dcXR0QptRCCBgODEwwGx4ZKlkbFTmgX45eVxsAHBQKCR0VQhcGFiMIGRMyGgRZPrFZgUJLGwQWChdKUTsGo/ACMgNLBzqx3VQxsvNXEFVEBQMAQxIOAAqi1Q8ySUMZPBkIFSe8ukJfRUIRAQMCBgpFT4Xp9XcCH6rgBhhUIaDpRg8OGRhCR18AXUwGA1RDPAAODSpZFREyqrdCX0ZEChYbFgIKHxVFVyo+DA8QcwAEEzrl6l1EQEwVEQwJDRwWU0gBU2lVG1ceFRIOdbHoSEkSWgURWRQBq/UMAgNBJwYGADIGosci5e5XWhJFER4cCUgVAQYCBw8yA0sccwAYFz3l6VNdS1UYUxYQq9wOT08HEXlJGxs2WEEEOrbuHhBUWRwfFhRFGhxGRwUUNUkAAD8fAFQipOhHXln1wwRZFEgcDwcCBAA0AA5JJB0VHDyrt0FFUFwVEA0QRk8vBwQMEi1JGBkhFRYQL6xetRwSVQoKWRkJDAQAAxMIdxMGADIaAFpp6uoMDFoEUBodXkoEAwETDAokHUYZIbfSFiznpHlfXEIVGAoXSB8erNQLGGtGA1ttSBFKabbuQF9cUU5bGEpILgIOCwAbNkkGBjANQV91+f9fDlwKXxYUXUgAHwaj7AY5AK/wJxFbSHq27kBfXFFOUzgtJzktTx1JETgeHwghDgAaLKjzEkBdWxkSCwIFBkJPNwYMPggZEHMEDgMhpOhIUVxTUB4YCazqTBgOrfg8GhGt1lQMGzblsldcW1sZHQwJDRwWTx0ECDIHBQaW76Xzdajz9qlWTAkcCgwKABur4kBPa0YbV28EX0gmsehdXlUIWBFQQyoKFk8GBwA7ABEQcxkOFyz/ph1DRkQfHR5dSBwcHQYeBZLTSwc8BgwVOav196v2sVAaWRAOCh4WBBMPOKzwrdRUg/LH5fteV11ECQcUQxgAAgai1QQ9R1dGI0pdBGv56UZCXVgXTVEAQU8hDqLrBHcZGargFhhOaerpRkJdWBdNWSUaBgkLCggPeUk7GykNQRY0t/5IXxJbEbb7GgsHTFMCBF85VUQMPkpBGTqmulxZQV0RX1kCBApMLikmNxZJEUkjGxYANLfgU15LWxlTCQwFBg0dBgQIdwMOGidUBRuQXl61EF1SABwLDQlBUEAXV10/W0sAN0lDFTmi9UBJRltdFxwAERUVBQkQQ2koBw48BhgAOOX+V1NLTAkZFxpUQARdWVUJZEkCDW5WGxk8oPRcUR9GAgkcBxIGDarlBhY2RAUGIRkAGDuqX6n0tRsfGFQQDgoeFgQTDzis8K3UWRIEMAAYXFldWBFRR1JGTzYCDgwPOQhLGSEOBBAvrPv3sl1BEV9ZDQcdAQ4LBw6S8q/uczsqWHW2/FdCS1UKHRam86vrTxQZBJLrBQA8GgBIeq2pDAxCCJL160NUHBgdCAcGaSglJgU1QQ51tfVFRFNEChIXGgUGTB8IBAg2GwoEOkhOByG39VxXDBZYTxwOVh0JHwIIFTINSwQ2FRIBJ6DpEnF8eSYyRUwNAlJGW0YRaVUbVwMbEgB1rfVRChIKAwcLDAYIUh8IG6LkHgUIPR0AVCWk6FNdWwpfAA0RBwELUUcTQScGGxsyAwqw0OXYXV5UUwIBFg0BCgsARwUUNUkjBj8ZAFpp6uoMDFoFUBodXkoVAQYCBw82RBsbKREFDjykX7BfRVddHRYRBQ4AAQis+pPuRgY4WQMGNK63QVZXRAkQAw0HqvcMDktfZUdLMz4dBBo7pLpCQkhTFAkQAq3tAxgGRUE5BhkEMhgPG5BeXrUQfX1cUzsxKSRMHAEMEy4KEQc8sfoXPPm1WgMMCgBNm+X6T1AcExsOOQ5VKB07NzV1v7pZX0BTGwe95lJTQxwTGw45DlVVfARfSCCppA5cWwhMAA0RBwELUSAbBDIHAwYmBwRZEqDzQUNXRExcChcaAAIIWUlJEEQsQGlUBhAs5VSHEBRaBEhZTV9aTEcXBhY2rNcHNlQPFSew6UhVXF8VWldDKg4eCx0ABD1JAAY9BwQGIqTuS0dcV15PVg8BUVADDlddJB0ZBj0TXzwgvPRaHXRTHBcNX0ccGB0IBwZpSUMhfjJITnWi/ksQ/INQkfDGSEFbWkdBFDoAChs4GxYVO6C6XFFAQwMJHA0BCkVBRyQPPgwBSTgbDwcwt+1TREtBHhJXX0cDBVFbRhQ7V1cZbTsDFXW19VZVWPPrEBACSAQDHR4OFD2t7kkgAA4EO6z/EkNFWRIcHRpIRxYCCQAEPRoRCDmw5FRpoPcMVFQKXxYUXUFDTAwISQU2Aw5JMRUTEC+s/1gQXl8SFgsCBAEVTxcbouQOS1U2GV8Eaer/Xw4cCl8DR18YUS0DEwwTOQgfECQaCBFv5aZBREBZHhRHFAEKAAAXBhs+BgYGJBVBNRuKzHMMHUUEARYND1FMRyooLxg/KkkjGwURPwABUVlXH1CR+fdIAQUKRx4YOggMCHMHBxEnvPlIXl3z6xAQQx9PAwik2g0yR1dGI0pdHGbl81YNEEwdGhwNBg5BHxUTBDMTAgiW9g4DNOj4QFFZGx4cCw4JAwIAovICPkQRBDoRDxo06OpdQkjy9RcSDB8OTlFUR0ENBAIMPRoAVCW34FdUSF8RtvsMHw5ATwUbADxJBQYhGQAYO6pfqVNbFl9TAw4BCgIBBkkROBsRrdYQChsipKYdWAEITANHge79TFMUHRM4BwxXBxESAHWD6FtVVlsRHRhfRxwYHQgHBmlJQwc6EREVJ6T3V0RATxMJFxpIAAgfCB4IMg0FADhUIDoak9sSShJGHwQNAhoVDQEeBAh3GQQEOhUTFTissw4fQghMA0czBxwYTw8GAm1JVxonBg4aMvvuV0NGFicaFQAHFwMBBlVOJB0ZBj0TX1QlpOhTXVsWClMJDBgdDRgMreR3KwQHNRETBjqr81dXXRhMXAldVAdeTw4NXHUaDQwhDQIOO6pfqfS1GxMJAA5FBQkcE0QIegMKAn4HEQY0sv5IWfaxUk0qBQ0dFQwdBw6S8q/uc5bh4HWm4EtdElwVAA1DAU8GDgxJEicbCh43Dgiw0vm1WgIMCgBNRRAcHQMBAFcyMQwZEDAODxuQXl61DB1FBAEWDQ9RTBsISRs2rOkGlsgEGjygukFAV1UJFRAAEgEJTwMFAHcZBAQ6FRO35rK6Ql9FQhEBAwIGFg8HR0GD3sxLWnMDAAYgq/FbGRwWPwkXAgsVDUNHrN0ySRwIIR0AGjav/xIMQUICHBcEVh2v3KLVDz4KV0YgABMbO6KkEl1b8ukXAxpIGB8VHhoVPAAGAHMEAAY0qPMSR1NEBR0SoNsYTByj7EElqtgePRFPSHq1pA5ADHgAXVkTGhUVT1RJETgEAgghFQIcde3bHhBwGlAwUFlIOQ0dTyiD3/spQHOW6Px1k/tAGHPU+OE6SkiN5edHPwAlQSmL2+YiXXv5tUIODkZOPRAGSAINTwgNETgeAgw3GggfNOXtEkNRXhUeGBcJDARPBQwVIAwOB34HFBY/oPlGQxIeBBIUQwcLHAAQAAQzBwICOhEMVD+g6UYQWlkdHB4GBgYPFQkGpMyt7EkkFRMdNKv5WFkbGExcCV1UH1JTFB0TOAcMVwcREgB1iPtHU1paCZH5+g0IA1NIGhUlBgUObU5BADC27kdaVxY4TwoWClFcU0gaFDVXUUkgEgQGLKbgXF/3rbT0WRAYCqntCQAOOQhFVXwEX0ggqaQOXFsITBYUXRhTQwoKV0FxDh9Sc1pRQXUnHKAQUEQRGFkTBwsfGwYeQTMGSwY3BhsBNqD0W1ESRRYWCxoLFQIAovICPkmJ78FUIDoak9sSUldMUBgWEQ0EGBZbRg0+V1cFOkpdETj76g4fV1tOU5vqzE9CX1JJg9H7Sxo1ERMNNr/0XfWp8vdTFwIaGh8VCAcAd4vt+3MOAAchqulHWhJdHwEcCByr9U8gRCZ3BR4LczxMMmnq9lsODhkFH0dfGFE8DhUIDDIdGUlvBxUGOqv9DP6HFlgWCRABAwMBTlVOJB0ZBj0TX051qPNXQkhPUAANDBgGCarjSQ82Gx4aKREPHTTl6VRVQE8TCRcMrfQPBkdBUHdUSwA3EQAYO6S2El5b88wAAwZIUkwICBsbMgNCR29bEUpptaQOQ0ZEHx0eXT0YDQgGU114Gh8bPBoGSnW16EhJEgRQAxYOAQ4eDgQBQSQPDhsqFxsaOgAB9rcSXBUADUNUHBgdCAcGaRMKHiAOBEh6tu5AX1xRTlMKEw2q7gEOBg82SQocJxsMFSG8+UheW1NQWxMGGxtMGx4FCjhJAQw3GgBUJaToUxBA9cO2xQ0BDEVBRy0NNh0ODjxUEhIwt+NRSlxZtei95EgCDU8dBwA0Ew4HOhFBEDq181dCXRYfF1lQSBgNHRIHCpTaHEkkDhYNkHm0Dh9CCEwbS0MBC1FNHQik1Qau1TYaCBV3+8BT9bBZtc8cDQEOUEAPW19rAVhJOhBcVjSr9URRH0xdAxYUHA4eFQYHGDoARhk8GQgVJ6T3WxIMdz48LyJIFUwfCB4VNhsRCD0NDB11tfVfWVNEER4QX0cHX1FbBg13HRIZNklDRXf7pl5ZDAoDBwsMBghSNQYFBJLVBQaW76Xzdar4QVVAQREQEwpUQB8bFQYPMFdLi9PgQQAw5elTXVcWHwAWARFPGwpHHhItEBgdOB0CHHWy+0BFXF0REBFNVEAABllVDT5XVxonBg4aMvvJWVFeV1AQFkMGDgYCCQAEPUkbGykRBQ48pF+wX0VXXk9WEBwdAwEAV114BQJXbxgISmm27kBfXFFOPRYRBQ4AAQis+pPuV0YgABMbO6KkEkpfXxUdFwYCTxtPDAik6w0SBHMDAAYgq/FHENC25FMJERIWTAIGrOMuCgNJbxEMSjv5tVddDBhMXBUKVlMABllVEiMbBAc0SjISMLfjUUpcWbXoveRUQB8bFQYPMFdLi9PgQQM0t/NTXlFcFVMLoNuq0AEOCkE6AK/wNw4YVCWk6FNdWxYHEgsWBgSv3BBJE5TaHAc2WkE+MAABXlkSWBkWChMNqu4BDgYPMkmJ78FUChsnoPFGURJxXTRWK0UpQlNIBQhpVUQGP0pdHGbl81YNEEIVAA1ODh0FCgMEADkISVcHERIAdYPoW1VWWxEdGF9HB19RWwYNdx0SGTZJQ0V3+6ZeWQwKAwcLDAYIUjUGBQSS1QUGlu+l83Wq+EFVQEEREBMKRlNDHBMbDjkOVVV8GAhKaanzDAxBQgIcFwRWPAcOCwhBNAZLBzIeDBo8oPASQF1ECrf8BwMAGw5JVU4kHRkGPRNfSHqp8wwMHVkcTUULWk8FC1pLEzYZBBsnGxYVO6z/H1FCV11EW106DhwAFR0OIAgFADZUSTUFhLoFGQ4ZGEFHXwBcTAYDVEM2BwQfMlkbWSWq7UZRQEwRHQAOAUIcAAoAACUIBgB+BwcRJ7z5SF5d8+u3/k4HBE5RJicuAShLE3MEDgMhpOhIUVxPHRpZEwcCBQ4VCAw+SUMaNRETDTa/9F31qfL3UzYoQVNDB1RXXSdXienNJxUDPKDoVkpdWB9TEBAcABgBHkkEMQwAHXMXGxUmsLpcURJGHwkQDAVPAKv+AhR7SVcMPkonSHqg9wwYABpQRkFKSFJMV0laVXtJVww+ShFIeqD3DBAUWgRIWU1YX11DR6fWldtXGiYWXwRp6ulHUgwWTVNXUVpBTlNIGV9rAVhJOhBcVjSr9URRH0xdGBYRDQQYq+JEBnoOSVcSOi4iFOXgEltdRBUYDaftTytCIFVOP1pVVSNKg/TLkf9BRBJ7EQYaCwQWju/+DAY4SRwQOBUbFZBHulxRQEMDCRwNAQpMHAEMEy4KEQc8sfoXPOm6/bfwhFhBUENVT1RBVltNd1UOBG0EXVswqKQSDRIYQEJOT0ih2U9aSU9gW0VJAxtBHzq3/1lTW1NQNAsGDQEEABIaBHouDgAgBwQGNOX/VFVZQlAQAwIbGkwfCBMOJB0KrNFUCAchqu5cSR4WTBYUXS5TQwoKV0lmR19df1RVRXvyrBsQDxZHXUtSRE9QCgpXEWtGDgRtVFxUe/WqBxwS+Mexy18bGg5RF1VOJBwJV3NJQVpn9bQQDB1GTk8JXT0YDQgGU0FrDAZXNxJdWzCopBJAXRYbHAsGAwwFCkcapdJJBQA2FwCx1671RVlGU1BbFxNGT11BU11BLQgGADIHFVRn7LQOH0IITBtKQwELUU0BGwgyDQYIPVZfMies/1ZdU1hMXBFQVlMcUYXp/wMMGB1zMhMdMKH3U15TFgcKEgISDqntRwASIwYfBzZUE7fmACZcWVFTUB4Qp/ELFhZHGQ46AAobMhkIWHUKHfCCGgRZU0RDWV1CW1JFQWsMBlcjSE4ROPu6DxAcBkBBV0FUQBxRWwFTdwAPVHEXG7DMtu5XHVDz8rfgBxFNUiwdrfgkHQ5JMbHjsMyh4w4fWgROTxYPSBsVHwJUQ2ZLVVU/HV9IJfumQURAWR4URyoPAQMdCB4AOQAOSSASBAYspuBcX/etExpXX0ccGB0IBwZpSSUANgcRBjSy/khVXF8VUw0GGxsZTyoIFDQBBxCx9PgRMqq6WxBAVwAcCxcHGA0BDgxBFickPxJUAxEv5fFdQlddBApZge79TBUGHhiS1QQHKlQDsdcBH1YQexYCHB0ZCQUZQVtGEWlVRAU6Sl0YPPumQg4ORQQBFg0PUT8bCBoOIAgFADZUChsnoPFGSRJxXTRZBAwWTBwBDBMuChEHPLH6sNLl6UJV97QeGhYNCUFQQBQdEzgHDFdzOggRJaruQEpXVB4SWQgHHQkEEwhBLQQFADYeEg405fddUxwKXwNHX0cDBVFbBQhpVRtXbwcVBjqr/QxnW1McHBIRBxsCCkcdBCQdEklvEQxKIfm1V10MFhQfGEMYHa/cBUkbNgUOrO8aGBc95eBTXVtXAwdZIiYgOi5JVU4kHRkGPRNfVAWq6PGDRVgJBBgNAQpMHxUMTCcGGB1/VBEGMOj8XVxeWQdeDBNETxwAFB1MMQYHBTwDTAEl5e5ASldbEVMNBhsbDQIOSV0yBFUdb1sEGWvleLSiEl8eFRUCCwUNT6nYT3coJSYFNUFfdbX1QUQSXh8QWQgHARgdCAUUPa3uSScbT0h6taQOH15fTk8VClZTHFFbGhUlBgUObT0GGjq39UVRXF8VUxwFDQQYGkcCDjsMAQc8sfoXPPm1QURAWR4UR0MfTx8MDwwMNgoCDHMDCAA9rPQfQ0dUGhYaFxtPDgodSQI4HAUdNgYDFTmk9FFZXFEFXUVMGFFQQAsAX2sFAldvBF9IJrHoXV5VCD4aHBEJHwMdEwYWNgcCDHO61Eh6tu5AX1xRTlNRBhgcBQMIB0h3GRkTKlQKGyeg8VFZVxaS8+1DCxUVGwIFDz4CSwc6EUEDPKC2ElpTXVADFhQJqtABAkkDLqzpBnMaAAYgtuBXXltTXk9WE1ZTQwMOV114BgdXbxxTVDyhpxBKXVQREANOHAqp00VXOzgLCgopVBURkHmmHVgACEwGFV1UAwVRWwhBPxsOD25WKD0Koe1bVW1RAgYJGjcVDQMCEw8yRwMdPhhDShGy81cQVUQFAwBDEg4ACqLVDzJJienHVAoAlnboSxBGUwMHRl9HDlJTSAUIaVUHAG1IAFQ9t/9UDRB/OSwOCg0MCQU4DhMiGTQHOhEbFTmg4FxJUV5eGw0OBE1SOA6t+DQMAUk9HaTIdaHtW1USUQIGCRpIAQUKHQgNMqzXBzZUg/TB5fFG84FECVMNBhsbU1NICF9rRgcAbUgNHWuW+VpVX1cEUxoZEQECBgwGFi5JienHVAIbdbf1UFn2sU9PVg8BUVADDlddNkkDGzYSXFYDjMVcX0BbER8XDBsMMx0IEwo7CA8cfRwVGTnnpHxfQFsRHxcMrfSo6EcbDi0CrusyEBRUt0UOEltbUxQKWQ0JHx4OEA2lzkkbBicGGxE3q/sNDB1XTk9WDwFRUAMOV102SQMbNhJcVgOMxVpfX1kXFhcKCxUCABQKPiAIGQAyGgIePOvyRl1eFE47Fg4HCAkBDgobOQau8pfzQQM0t/NTXlFcGVOb4/xPBwYCDRh3BwoZIRUWEJFcukJCXVQcFhRcVEANUVtGDT5XV0YmGF9IPfe6W1QPFBwaDQYaDhgaFQhDaSUCHTYGAAAgt/sOH1oETk8JXS4GCQMDRUEWR0dJHh0NESbpungeHhZWEhQTU08qBgIFBXtJMUdzXFNEZPezHBAOUx1NPQobDAMZAhsIOQ5LGicVFR0msfNRQxJDAxoXBEg9UEACBF95STgINBFPSHq1pA5ADH4fBBwPBENMK0lJInlJQ1tjRVNde+WmV10MZQQSDQobGwUMBgVBOgwfATwQElQzqugSQEFPExsWDwcIFVNIDAxpSUNRJxxBETHrsxwQZVcUAA4MGhsEQVtGEWlVAxtzW19IJfvBcx4Sch8eDBEJGzFTSBlfXQ==
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

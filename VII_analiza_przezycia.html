@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analiza przeżycia (survival analysis) — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Analiza przeżycia (survival analysis) — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,26 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Metody zaawansowane
-        </div>
-        <h1 id="analiza-przeżycia-survival-analysis">Analiza przeżycia (survival analysis)</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Analizujesz <strong>czas do zdarzenia</strong> — np. czas do rezygnacji z terapii, czas do nawrotu choroby, czas do pierwszego zatrudnienia po studiach, czas reakcji z cenzurowaniem. Kluczowe: nie wszystkie osoby doświadczyły zdarzenia do końca badania (<strong>cenzurowanie</strong> — i to jest powód, dla którego nie wystarczy zwykła regresja).</p><h2 id="czym-różni-się-od-zwykłej-analizy">Czym różni się od zwykłej analizy</h2><p>W klasycznej regresji: jeśli ktoś nie doświadczył zdarzenia, nie wiesz, co zrobić z jego danymi. Usunąć? Dać maksymalny czas? Oba rozwiązania są błędne. Analiza przeżycia <strong>uwzględnia obserwacje cenzurowane</strong> — wiemy, że osoba „przeżyła" przynajmniej do czasu <em>t</em>, ale nie wiemy, co stało się potem.</p><p><strong>Typy cenzurowania:</strong></p><ul><li><strong>Prawostronne</strong> (right censoring): najczęstsze — osoba nie doświadczyła zdarzenia do końca badania lub wypadła z badania.</li><li><strong>Lewostronne</strong> (left censoring): zdarzenie nastąpiło przed początkiem obserwacji.</li><li><strong>Interwałowe</strong> (interval censoring): wiemy, że zdarzenie nastąpiło między dwoma pomiarami.</li></ul><h2 id="podstawowe-metody">Podstawowe metody</h2><h3 id="krzywa-kaplana-meiera-km">1. Krzywa Kaplana-Meiera (KM)</h3><ul><li><strong>Nieparametryczna</strong> estymacja funkcji przeżycia <em>S</em>(<em>t</em>) — prawdopodobieństwo, że zdarzenie NIE nastąpiło do czasu <em>t</em>.</li><li>Wizualizacja: schodkowy wykres z oznaczeniem obserwacji cenzurowanych (+).</li><li>Porównanie dwóch grup: <strong>test log-rank</strong> (H₀: krzywe przeżycia nie różnią się).</li></ul><h3 id="model-proporcjonalnych-hazardów-coxa-cox-ph">2. Model proporcjonalnych hazardów Coxa (Cox PH)</h3><ul><li><strong>Semiparametryczny</strong> — modeluje wpływ predyktorów na <strong>hazard</strong> (ryzyko chwilowe zdarzenia).</li><li>Hazard Ratio (HR): kluczowa miara efektu.<ul><li>HR = 1: brak efektu</li><li>HR &gt; 1: wyższe ryzyko zdarzenia (np. szybszy nawrót)</li><li>HR &lt; 1: niższe ryzyko (efekt ochronny)</li></ul></li><li>Pozwala uwzględnić wiele predyktorów jednocześnie (jak regresja).</li></ul><h3 id="modele-parametryczne">3. Modele parametryczne</h3><ul><li>Zakładają konkretny rozkład czasu przeżycia (Weibull, exponential, log-normal).</li><li>Rzadsze w psychologii, częstsze w medycynie i inżynierii.</li></ul><h2 id="algorytm-decyzyjny">Algorytm decyzyjny</h2><ol type="1"><li><strong>Czy masz cenzurowane obserwacje?</strong> Jeśli tak <a href="VII_analiza_przezycia.html">→ analiza przeżycia. Jeśli nie (wszyscy doświadczyli zdarzenia) → rozważ zwykłą regresję na czas.</a></li><li><strong>Opis przeżycia bez predyktorów?</strong> → Krzywa Kaplana-Meiera.</li><li><strong>Porównanie dwóch/kilku grup?</strong> → Test log-rank + krzywa KM.</li><li><strong>Wpływ wielu predyktorów na czas do zdarzenia?</strong> → Regresja Coxa.</li><li><strong>Czy założenie proporcjonalności hazardów jest spełnione?</strong> → Jeśli nie: stratyfikacja, zmienne zależne od czasu, lub modele parametryczne.</li></ol><h2 id="założenia">Założenia</h2><h3 id="model-coxa">Model Coxa</h3><ol type="1"><li><strong>Proporcjonalność hazardów</strong> — HR jest stały w czasie. Sprawdzenie: testy reszt Schoenfelda, wykresy log(−log(<em>S</em>(<em>t</em>))). Jeśli naruszone → interakcja predyktor × czas lub stratyfikacja.</li><li><strong>Liniowość</strong> — liniowy związek między predyktorem a log(hazard). Dla zmiennych ciągłych: sprawdź Martingale residuals.</li><li><strong>Niezależność obserwacji.</strong></li><li><strong>Nieistotność cenzurowania</strong> — cenzurowanie nie jest związane z ryzykiem zdarzenia (non-informative censoring).</li></ol><h2 id="oprogramowanie">Oprogramowanie</h2><table><thead><tr class="header"><th>Program</th><th>Funkcja</th><th>Uwagi</th></tr></thead><tbody><tr class="odd"><td><strong>R</strong></td><td><code>survival::survfit()</code>, <code>survival::coxph()</code></td><td>Standard; <code>survminer</code> do wykresów</td></tr><tr class="even"><td><strong>SPSS</strong></td><td>Analyze <a href="VII_analiza_przezycia.html">→ Survival</a></td><td>KM, Cox; mniej elastyczne niż R</td></tr><tr class="odd"><td><strong>JASP</strong></td><td>Brak modułu</td><td>Nie obsługuje analizy przeżycia</td></tr></tbody></table><h3 id="przykład-w-r">Przykład w R</h3><pre class="r"><code>library(survival)
-library(survminer)
-
-# Krzywa KM
-km &lt;- survfit(Surv(czas, zdarzenie) ~ grupa, data = dane)
-ggsurvplot(km, pval = TRUE)
-
-# Model Coxa
-cox &lt;- coxph(Surv(czas, zdarzenie) ~ grupa + wiek + plec, data = dane)
-summary(cox)</code></pre><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><h3 id="kaplan-meier-log-rank">Kaplan-Meier + log-rank</h3><p>„Mediana czasu do rezygnacji z terapii wyniosła 12 tygodni (95% CI [9, 18]) w grupie CBT i 7 tygodni (95% CI [5, 10]) w grupie kontrolnej. Krzywe przeżycia różniły się istotnie, χ²(1) = 8.45, <em>p</em> = .004."</p><h3 id="regresja-coxa">Regresja Coxa</h3><p>„Model proporcjonalnych hazardów Coxa wykazał, że uczestnicy grupy CBT mieli o 45% niższe ryzyko rezygnacji z terapii niż grupa kontrolna (HR = 0.55, 95% CI [0.36, 0.84], <em>p</em> = .006), po kontroli wieku i płci. Założenie proporcjonalności hazardów zweryfikowano testem reszt Schoenfelda (globalny test: <em>p</em> = .312)."</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Ignorowanie cenzurowania i traktowanie czasu jako zwykłej DV.</strong> Usunięcie osób cenzurowanych lub danie im maksymalnego czasu — oba podejścia prowadzą do błędnych wniosków.</p></li><li><p><strong>Niesprawdzanie proporcjonalności hazardów w modelu Coxa.</strong> Jeśli HR zmienia się w czasie, model daje uśredniony HR, który nie odpowiada rzeczywistości w żadnym punkcie.</p></li><li><p><strong>Mylenie HR z ryzykiem względnym (RR).</strong> HR dotyczy chwilowego ryzyka, RR — skumulowanego prawdopodobieństwa. Nie są zamienne.</p></li><li><p><strong>Zbyt mała próba dla modelu Coxa.</strong> Reguła kciuka: ≥ 10 zdarzeń na predyktor (EPV — events per variable). Przy 30 zdarzeniach i 5 predyktorach → model niestabilny.</p></li><li><p><strong>Nieraportowanie mediany przeżycia i krzywych KM.</strong> Sam HR nie daje pełnego obrazu — pokaż krzywe.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="III_regresja.html">Regresja liniowa — predykcja zmiennej ciągłej</a></li><li><a href="III_regresja_logistyczna.html">Regresja logistyczna — predykcja zmiennej kategorialnej</a></li><li><a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące — co z nimi robić?</a></li></ul><h2 id="literatura">Literatura</h2><p>Kleinbaum, D. G., &amp; Klein, M. (2012). <em>Survival analysis: A self-learning text</em> (3rd ed.). Springer.</p><p>Clark, T. G., Bradburn, M. J., Love, S. B., &amp; Altman, D. G. (2003). Survival analysis part I: Basic concepts and first analyses. <em>British Journal of Cancer, 89</em>(2), 232–238.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Metody zaawansowane</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

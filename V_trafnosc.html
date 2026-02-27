@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trafność pomiaru — jak wykazywać? — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Trafność pomiaru — jak wykazywać? — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Psychometria
-        </div>
-        <h1 id="trafność-pomiaru-jak-wykazywać">Trafność pomiaru — jak wykazywać?</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Chcesz udokumentować, że Twoje narzędzie mierzy to, co ma mierzyć. Albo w pracy magisterskiej musisz opisać trafność zastosowanego kwestionariusza.</p><h2 id="rodzaje-trafności">Rodzaje trafności</h2><h3 id="trafność-treściowa-content-validity">Trafność treściowa (content validity)</h3><p>Czy pozycje narzędzia <strong>reprezentują</strong> badany konstrukt? Czy pokrywają wszystkie jego aspekty?</p><ul><li>Ocena ekspercka (sędziowie kompetentni oceniają, czy item pasuje do definicji konstruktu)</li><li><strong>CVI</strong> (<em>Content Validity Index</em>): proporcja sędziów, którzy uznali item za trafny</li><li>Nie da się „policzyć" jednym testem — to proces jakościowy</li></ul><h3 id="trafność-kryterialna-criterion-validity">Trafność kryterialna (criterion validity)</h3><p>Czy wyniki narzędzia są powiązane z zewnętrznym kryterium?</p><ul><li><strong>Równoczesna</strong> (<em>concurrent</em>): korelacja z innym narzędziem mierzącym to samo (administrowanym w tym samym czasie). Np. nowy test lęku koreluje <em>r</em> = .75 z STAI.</li><li><strong>Prognostyczna</strong> (<em>predictive</em>): czy wynik przewiduje przyszłe kryterium? Np. wynik testu motywacji przewiduje średnią ocen rok później.</li></ul><h3 id="trafność-teoretyczna-construct-validity">Trafność teoretyczna (construct validity)</h3><p>Najszerszy i najważniejszy rodzaj — czy narzędzie mierzy konstrukt, który ma mierzyć?</p><ul><li><strong>Trafność zbieżna</strong> (<em>convergent</em>): <strong>wysokie</strong> korelacje z miarami podobnych konstruktów. Np. test empatii koreluje wysoko z innym testem empatii.</li><li><strong>Trafność różnicowa</strong> (<em>discriminant/divergent</em>): <strong>niskie</strong> korelacje z miarami odmiennych konstruktów. Np. test empatii koreluje nisko z testem inteligencji.</li><li><strong>Trafność czynnikowa</strong>: CFA potwierdza zakładaną strukturę czynnikową — to dowód, że narzędzie ma strukturę zgodną z teorią.</li></ul><h3 id="dowody-z-macierzy-korelacji">Dowody z macierzy korelacji</h3><p>Macierz korelacji narzędzia z innymi miarami powinna pokazywać:</p><ul><li>Wyższe korelacje z miarami konstruktów <strong>zbliżonych</strong> (convergent)</li><li>Niższe korelacje z miarami konstruktów <strong>odległych</strong> (discriminant)</li></ul><h3 id="mtmm-campbell-fiske-1959">MTMM (Campbell &amp; Fiske, 1959)</h3><p>Macierz wielu cech i wielu metod (<em>Multi-Trait Multi-Method matrix</em>) — klasyczna metoda łączna oceny trafności zbieżnej i różnicowej. W praktyce rzadko stosowana w pełni (wymaga wielu narzędzi i wielu metod), ale idea jest fundamentalna.</p><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><p>„Trafność zbieżną potwierdzono na podstawie istotnej korelacji z kwestionariuszem STAI (<em>r</em> = .72, <em>p</em> &lt; .001). Trafność różnicową wsparło niskie powiązanie z testem inteligencji Ravena (<em>r</em> = .08, <em>p</em> = .412). Trafność czynnikową zweryfikowano za pomocą CFA — model 3-czynnikowy wykazał akceptowalne dopasowanie (CFI = .95, RMSEA = .052)."</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Utożsamianie rzetelności z trafnością.</strong> Narzędzie może być rzetelne (spójne), ale mierzyć nie to, co powinno. Rzetelność jest warunkiem koniecznym, ale niewystarczającym dla trafności.</p></li><li><p><strong>Brak dowodów na trafność różnicową.</strong> Wysoka korelacja z „wszystkim" nie świadczy o trafności — narzędzie może mierzyć ogólny afekt zamiast specyficznego konstruktu.</p></li><li><p><strong>Powoływanie się wyłącznie na oryginalną walidację.</strong> Trafność może różnić się w zależności od populacji, kultury, kontekstu.</p></li><li><p><strong>Ignorowanie trafności treściowej.</strong> Statystyki nie zastąpią merytorycznej oceny, czy itemy pokrywają konstrukt.</p></li><li><p><strong>Mylenie trafności fasadowej (face validity) z trafnością treściową.</strong> Face validity = „wygląda, jakby mierzyła to, co trzeba" (opinia laika). To nie jest dowód naukowy.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="V_rzetelnosc.html">Rzetelność pomiaru — alfa Cronbacha i alternatywy</a></li><li><a href="IV_CFA.html">CFA — konfirmacyjna analiza czynnikowa</a></li><li><a href="III_korelacja.html">Dwie zmienne ciągłe — jaka korelacja?</a></li></ul><h2 id="literatura">Literatura</h2><p>APA. (2020). <em>Publication manual of the American Psychological Association</em> (7th ed.). American Psychological Association.</p><p>Kline, R. B. (2015). <em>Principles and practice of structural equation modeling</em> (4th ed.). Guilford Press.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Psychometria</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

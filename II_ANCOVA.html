@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kowariancja jako kontrola — ANCOVA — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Kowariancja jako kontrola — ANCOVA — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Porównywanie grup
-        </div>
-        <h1 id="kowariancja-jako-kontrola-ancova">Kowariancja jako kontrola — ANCOVA</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Chcesz porównać grupy, <strong>kontrolując statystycznie</strong> wpływ zmiennej zakłócającej (kowarianta). Np. porównujesz wyniki po treningu między grupami, kontrolując poziom wyjściowy. Albo porównujesz efekty terapii, kontrolując wiek czy nasilenie objawów przed interwencją.</p><h2 id="czym-jest-ancova">Czym jest ANCOVA</h2><p><strong>ANCOVA</strong> (<em>Analysis of Covariance</em>) = ANOVA + regresja. Łączy porównywanie grup (czynnik kategoryczny) z kontrolą zmiennej ciągłej (kowarianta). „Oczyszcza" różnice między grupami z wpływu kowarianta.</p><h2 id="kiedy-stosować">Kiedy stosować</h2><ul><li>Masz zmienną zakłócającą (confounder), która może wpływać na zmienną zależną i na przynależność do grup</li><li>Chcesz zwiększyć moc testu — usunięcie zmienności wyjaśnionej przez kowarianta zmniejsza wariancję resztową</li><li>Masz pomiar pre-test i chcesz porównać grupy na post-teście, kontrolując różnice wyjściowe</li></ul><h2 id="kiedy-nie-stosować">Kiedy NIE stosować</h2><ul><li>Kowarianta jest <strong>następstwem</strong> manipulacji eksperymentalnej (nie przyczyną) — wtedy kontrolowanie go zniekształca wynik</li><li>Grupy różnią się drastycznie na kowariancie — ekstrapolacja poza zakres danych jest ryzykowna</li><li>Kowarianta jest współliniowa z czynnikiem — ANCOVA daje niestabilne wyniki</li></ul><h2 id="założenia">Założenia</h2><ol type="1"><li><strong>Niezależność obserwacji.</strong></li><li><strong>Skala co najmniej przedziałowa</strong> dla zmiennej zależnej i kowarianta.</li><li><strong>Normalność reszt.</strong></li><li><strong>Homogeniczność wariancji</strong> (test Levene’a).</li><li><strong>Liniowy związek</strong> między kowariancją a zmienną zależną — sprawdź scatterplotem.</li><li><strong>Homogeniczność nachyleń regresji</strong> (<em>homogeneity of regression slopes</em>) — <strong>kluczowe i specyficzne dla ANCOVA!</strong> Związek między kowariancją a zmienną zależną musi być taki sam we wszystkich grupach (równoległe linie regresji). Sprawdzenie: testuj interakcję czynnik × kowarianta. Jeśli istotna → nachylenia nierówne → ANCOVA jest problematyczna.</li><li><strong>Kowarianta mierzona bez błędu</strong> (lub z małym błędem) — błąd pomiaru kowarianta osłabia korektę. W praktyce trudne do spełnienia w psychologii (kwestionariusze mają rzetelność &lt; 1).</li></ol><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><p>„Po kontroli poziomu lęku wyjściowego (kowarianta) stwierdzono istotny efekt metody terapii na lęk po interwencji, <em>F</em>(2, 86) = 5.67, <em>p</em> = .005, η²<sub>p</sub> = .12. Kowarianta (lęk wyjściowy) była istotnym predyktorem, <em>F</em>(1, 86) = 23.45, <em>p</em> &lt; .001, η²<sub>p</sub> = .21."</p><p>Podaj też, czy założenie o homogeniczności nachyleń regresji było spełnione.</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Stosowanie ANCOVA z kowariancją, na którą wpływa manipulacja.</strong> Jeśli grupy różnią się na kowariancie <em>z powodu</em> interwencji — kontrolowanie go usunie część efektu, który chcesz zbadać.</p></li><li><p><strong>Ignorowanie homogeniczności nachyleń regresji.</strong> To kluczowe założenie, a wielu badaczy go nie sprawdza. Jeśli nachylenia różnią się między grupami, ANCOVA daje błędne wyniki.</p></li><li><p><strong>ANCOVA jako „naprawa" nierównowagi grup.</strong> Jeśli grupy drastycznie się różnią na kowariancie (np. w badaniu nieeksperymentalnym), ANCOVA ma ograniczoną skuteczność i wymaga ostrożnej interpretacji.</p></li><li><p><strong>Zbyt wiele kowariancji.</strong> Każdy dodatkowy kowarianta zmniejsza <em>df</em> reszt i może destabilizować model. Reguła kciuka: ≤ 1 kowarianta na 10 osób w najmniejszej grupie.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li>Schemat czynnikowy — co robić?</li><li><a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne — który test?</a></li><li><a href="III_regresja.html">Regresja liniowa — predykcja zmiennej ciągłej</a></li><li><a href="I_schemat_badawczy.html">Jak zaplanować schemat badawczy?</a></li></ul><h2 id="literatura">Literatura</h2><p>Tabachnick, B. G., &amp; Fidell, L. S. (2013). <em>Using multivariate statistics</em> (6th ed.). Pearson.</p><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Porównywanie grup</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

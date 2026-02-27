@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Standaryzacja zmiennej — wynik *z* i jego zastosowania — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Standaryzacja zmiennej — wynik *z* i jego zastosowania — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html" class="active">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Pojęcia fundamentalne
-        </div>
-        <h1 id="standaryzacja-zmiennej-wynik-z-i-jego-zastosowania">Standaryzacja zmiennej — wynik <em>z</em> i jego zastosowania</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Chcesz porównać wyniki z różnych skal (np. IQ i wynik w CRT), pozbyć się jednostek pomiaru i rzędu wielkości, albo chcesz zrozumieć, jak działają testy statystyczne oparte na standaryzacji.</p><h2 id="czym-jest-standaryzacja">Czym jest standaryzacja</h2><p>Standaryzacja zmiennej to przekształcenie, które „odejmuje" poziom (średnią) i „dzieli" przez rozrzut (odchylenie standardowe):</p><p><em>z</em> = (<em>x</em> − <em>M</em>) / <em>SD</em></p><p>Po standaryzacji zmienna ma średnią 0 i odchylenie standardowe 1 — niezależnie od tego, w jakich jednostkach była mierzona i jaki miała zakres.</p><h2 id="po-co-to-robimy">Po co to robimy</h2><p><strong>Obiektywne spojrzenie na wynik.</strong> Wynik surowy (np. 120 punktów IQ, 5 trafień w CRT) jest trudny do interpretacji bez kontekstu. Wynik <em>z</em> mówi, o ile odchyleń standardowych wynik osoby odbiega od średniej grupy. <em>z</em> = 1.5 oznacza „półtora odchylenia standardowego powyżej średniej" — niezależnie od skali.</p><p><strong>Pozbycie się jednostki i rzędu wielkości.</strong> Czas reakcji mierzony w milisekundach i trafność mierzona w procentach mają różne jednostki i zakresy. Po standaryzacji obie zmienne są na tej samej skali (bezjednostkowej) i można je sensownie porównywać lub łączyć.</p><p><strong>Podstawa konstrukcji testów statystycznych.</strong> Wiele testów opiera się na standaryzacji: statystyka <em>t</em> to w istocie standaryzowana różnica między średnimi (różnica podzielona przez jej błąd standardowy). Statystyka <em>z</em> w teście jednej próby to (<em>M</em> − μ<sub>0</sub>) / SE. Współczynniki β w regresji to standaryzowane współczynniki <em>b</em>.</p><h2 id="interpretacja-wyniku-z">Interpretacja wyniku <em>z</em></h2><p>Jeśli rozkład zmiennej jest zbliżony do normalnego, wynik <em>z</em> pozwala bezpośrednio oszacować pozycję w grupie:</p><ul><li><em>z</em> = 0 → wynik przeciętny (na poziomie średniej)</li><li><em>z</em> = ±1 → ok. 68% obserwacji leży bliżej średniej</li><li><em>z</em> = ±2 → ok. 95% obserwacji leży bliżej średniej</li><li><em>z</em> = ±3 → ok. 99.7% obserwacji leży bliżej średniej</li><li>|<em>z</em>| &gt; 3 → wynik ekstremalny (potencjalny outlier)</li></ul><h2 id="standaryzacja-a-skale-znormalizowane">Standaryzacja a skale znormalizowane</h2><p>W psychologii często używa się skal będących liniowymi przekształceniami wyniku <em>z</em>: IQ = 100 + 15<em>z</em>; steny = 5.5 + 2<em>z</em>; T-scores = 50 + 10<em>z</em>. Każda z tych skal ma arbitralnie wybraną średnią i odchylenie standardowe, ale informacja statystyczna jest identyczna — bo to tylko inne „opakowanie" tego samego wyniku <em>z</em>.</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Interpretowanie wyniku <em>z</em> bez odniesienia do grupy.</strong> Wynik <em>z</em> mówi o pozycji względem konkretnej grupy (tej, z której wzięto <em>M</em> i <em>SD</em>). Zmiana grupy odniesienia zmienia wartość <em>z</em>.</p></li><li><p><strong>Zakładanie normalności na podstawie standaryzacji.</strong> Standaryzacja nie zmienia kształtu rozkładu — skośny rozkład po standaryzacji nadal jest skośny (tylko z M = 0 i SD = 1). Reguła 68-95-99.7 obowiązuje tylko wtedy, gdy rozkład jest rzeczywiście normalny.</p></li><li><p><strong>Mylenie współczynników <em>b</em> i β w regresji.</strong> <em>b</em> (niestandaryzowany) = zmiana Y na 1 jednostkę X w oryginalnych jednostkach. β (standaryzowany) = zmiana Y na 1 <em>SD</em> zmiany X. Porównywanie siły predyktorów wymaga β; interpretacja merytoryczna wymaga <em>b</em>.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator — rozróżnienie pojęć</a></li><li><a href="VI_wielkosc_efektu.html">Wielkość efektu — po co i jak?</a></li><li><a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące — co z nimi robić?</a></li><li><a href="VI_statystyka_opisowa.html">Statystyka opisowa — co podać i jak?</a></li><li><a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa — do czego służą w testowaniu</a></li></ul><h2 id="literatura">Literatura</h2><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><p>Howell, D. C. (2012). <em>Statistical methods for psychology</em> (8th ed.). Wadsworth.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Pojęcia fundamentalne</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

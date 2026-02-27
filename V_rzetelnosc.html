@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rzetelność pomiaru — alfa Cronbacha i alternatywy — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Rzetelność pomiaru — alfa Cronbacha i alternatywy — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Psychometria
-        </div>
-        <h1 id="rzetelność-pomiaru-alfa-cronbacha-i-alternatywy">Rzetelność pomiaru — alfa Cronbacha i alternatywy</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Chcesz ocenić spójność wewnętrzną swojego narzędzia pomiarowego (kwestionariusza, skali) lub stabilność pomiaru w czasie. Promotor mówi „podaj alfę Cronbacha" — ale czy to naprawdę najlepsza miara?</p><h2 id="alfa-cronbacha-α">Alfa Cronbacha (α)</h2><p>Najpopularniejsza miara spójności wewnętrznej. Szacuje, na ile itemy mierzą ten sam konstrukt.</p><p><strong>Ograniczenia:</strong></p><ul><li>Zakłada <strong>tau-równoważność</strong> pozycji (równe ładunki czynnikowe) — rzadko spełnione w praktyce</li><li>Gdy ładunki nierówne: α <strong>zaniża</strong> rzetelność</li><li><strong>Wrażliwa na liczbę pozycji</strong>: więcej itemów → wyższa α, nawet przy słabych itemach (skala z 40 kiepskich itemów może mieć α = .80)</li><li>Zakłada jednoczynnikowość — dla skali wielowymiarowej α jest bezsensu (liczy się rzetelność podskal)</li></ul><h2 id="omega-mcdonalda-ω-zalecana">Omega McDonalda (ω) — ZALECANA</h2><p>Nie wymaga tau-równoważności, oparta na modelu czynnikowym:</p><ul><li><strong>ω<sub>total</sub></strong>: ogólna rzetelność (analogiczna do α, ale dokładniejsza)</li><li><strong>ω<sub>hierarchical</sub></strong>: rzetelność czynnika ogólnego (ile wariancji wspólnej wyjaśnia jeden ogólny czynnik, po wyłączeniu czynników specyficznych)</li></ul><p>W R: <code>psych::omega()</code> lub <code>semTools::reliability()</code>.</p><p>Coraz więcej czasopism wymaga ω oprócz (lub zamiast) α.</p><h2 id="rzetelność-test-retest">Rzetelność test-retest</h2><p>Korelacja wyników z dwóch pomiarów w czasie (np. po 2 tygodniach).</p><p>Używaj <strong>ICC</strong> (<em>Intraclass Correlation Coefficient</em>) zamiast <em>r</em> Pearsona:</p><ul><li>ICC uwzględnia nie tylko korelację, ale i zgodność bezwzględną (czy wartości się zmieniają)</li><li>ICC(3,1) — agreement, single measures — najczęściej stosowane</li><li>ICC &gt; .75 = dobra stabilność</li></ul><h2 id="split-half-połówkowa">Split-half (połówkowa)</h2><p>Podział na dwie połówki → korelacja → korekta Spearmana-Browna.</p><p>Wynik zależy od sposobu podziału. Alfa Cronbacha to średnia ze wszystkich możliwych podziałów.</p><h2 id="progi-dobrej-rzetelności">Progi „dobrej" rzetelności</h2><table><thead><tr class="header"><th>Kontekst</th><th>α / ω</th></tr></thead><tbody><tr class="odd"><td>Badania grupowe</td><td>≥ .70</td></tr><tr class="even"><td>Badania wymagające dokładności</td><td>≥ .80</td></tr><tr class="odd"><td>Decyzje indywidualne (kliniczne)</td><td>≥ .90</td></tr></tbody></table><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><p>„Spójność wewnętrzna skali była dobra (α = .84, ω = .86). Rzetelność test-retest po 2 tygodniach: ICC(3,1) = .79, 95% CI [.68, .87]."</p><p>APA 7 zaleca podawanie rzetelności <strong>na swojej próbie</strong>, nie tylko powoływanie się na oryginalną walidację.</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Podawanie α bez sprawdzenia jednoczynnikowości.</strong> Alfa ma sens tylko dla jednoczynnikowej skali. Przy wielowymiarowej → osobne α dla podskal + ω<sub>hierarchical</sub> dla ogólnego czynnika.</p></li><li><p><strong>„Alfa jest wysoka, więc skala jest dobra."</strong> Alfa &gt; .90 przy 40 itemach to nic nadzwyczajnego — dodanie itemów mechanicznie podnosi α.</p></li><li><p><strong>Powoływanie się na rzetelność z oryginalnej walidacji.</strong> Rzetelność jest właściwością wyników, nie narzędzia. Podaj α/ω na swoich danych.</p></li><li><p><strong>Usuwanie itemów, żeby podnieść α.</strong> „Alfa po usunięciu itemu" jest informacją diagnostyczną, ale usuwanie itemów powinno mieć uzasadnienie merytoryczne.</p></li><li><p><strong>ICC zamiast r do test-retest.</strong> Pearson <em>r</em> nie uwzględnia zmiany poziomu — może być wysoki, nawet gdy wyniki systematycznie rosną.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="IV_EFA.html">EFA — eksploracyjna analiza czynnikowa</a></li><li><a href="IV_CFA.html">CFA — konfirmacyjna analiza czynnikowa</a></li><li><a href="V_trafnosc.html">Trafność pomiaru</a></li><li><a href="VI_skale_Likerta.html">Skale Likerta — porządkowe czy przedziałowe?</a></li></ul><h2 id="literatura">Literatura</h2><p>McNeish, D. (2018). Thanks coefficient alpha, we’ll take it from here. <em>Psychological Methods</em>, <em>23</em>(3), 412–433.</p><p>APA. (2020). <em>Publication manual of the American Psychological Association</em> (7th ed.). American Psychological Association.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Psychometria</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

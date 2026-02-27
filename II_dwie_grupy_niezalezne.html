@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dwie grupy niezależne — który test zastosować? — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Dwie grupy niezależne — który test zastosować? — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Porównywanie grup
-        </div>
-        <h1 id="dwie-grupy-niezależne-który-test-zastosować">Dwie grupy niezależne — który test zastosować?</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Chcesz sprawdzić równość wartości oczekiwanych w dwóch populacjach niezależnych. Masz dwie grupy osób (np. eksperymentalną i kontrolną) i jedną zmienną zależną mierzoną na skali co najmniej porządkowej.</p><p>Może to być na przykład porównanie nasilenia lęku między grupą, która przeszła terapię CBT, a grupą kontrolną — albo porównanie wyników testu między studentami dwóch kierunków.</p><h2 id="kontekst-próby">Kontekst próby</h2><p>Zanim przejdziesz do algorytmu decyzyjnego, określ, w jakiej sytuacji się znajdujesz:</p><p><strong>(a) Wykonano analizę mocy i osiągnięto wymagane próby</strong></p><p>Jeśli przed badaniem policzyłeś wymaganą liczebność (np. w G*Power) i obie grupy osiągnęły zakładane <em>n</em>, to zwykle masz próby wystarczająco duże, by centralne twierdzenie graniczne (CTG) działało. W takiej sytuacji ścieżka jest najczęściej parametryczna: test <em>t</em> Studenta lub <em>t</em> Welcha (stosownie do homogeniczności wariancji). Przejdź do algorytmu, punkt 1.</p><p><strong>(b) Badanie prowadzone bez analizy mocy</strong></p><p>Nie kalkulowałeś wcześniej wymaganego <em>n</em>? Musisz sprawdzić, jakie masz liczebności i rozkłady. Przejdź do pełnego algorytmu decyzyjnego poniżej i postępuj krok po kroku.</p><p><strong>(c) Małe próby, bo większych nie da się zrekrutować</strong></p><p>Próby kliniczne, populacje specjalne, pacjenci z rzadkimi diagnozami — czasem po prostu nie da się zebrać dużych grup. W takiej sytuacji:</p><ul><li>realistycznie oceń moc (przy <em>n</em> = 10 w grupie moc na wykrycie średniego efektu wynosi ok. 18% — to bardzo mało);</li><li>rozważ test <em>U</em> Manna-Whitneya lub dokładny test permutacyjny;</li><li>raportuj ograniczenia związane z niską mocą w dyskusji;</li><li>nie próbuj na siłę „naprawiać" danych transformacjami, żeby uzyskać <em>p</em> &lt; .05.</li></ul><p>→ <em>Patrz też:</em> Jak zaplanować wielkość próby? · Moc testu — co to jest i dlaczego ma znaczenie</p><h2 id="dygresja-mit-o-proporcji-n1-n2">Dygresja: mit o proporcji n<sub>1</sub> : n<sub>2</sub></h2><p>W polskiej praktyce badawczej — głównie na podstawie kilku popularnych blogów statystycznych, a nie uznanych prac z zakresu statystyki — panuje przekonanie, że należy rezygnować z testu <em>t</em> Studenta na rzecz <em>U</em> Manna-Whitneya, jeśli stosunek liczebności porównywanych dwóch grup przekracza wartość 1.5.</p><p>Z perspektywy konstrukcji testu <em>t</em> Studenta wymóg ten jest <strong>niepotrzebny i nieuzasadniony</strong>, szczególnie przy dużych próbach.</p><p>Właściwe jest natomiast myślenie w innym kierunku. Załóżmy, że mamy pewien „budżet", który pozwala przeprowadzić badanie na próbie co najwyżej <em>N</em> = <em>n</em><sub>1</sub> + <em>n</em><sub>2</sub> osób. Z tej perspektywy <strong>największą moc uzyskuje się wtedy, gdy grupy są mniej więcej równoliczne</strong>. Zwiększanie liczebności tylko jednej z grup niewiele zwiększa moc testu <em>t</em> — jest to po prostu marnowanie zasobów.</p><h2 id="algorytm-decyzyjny">Algorytm decyzyjny</h2><p>Warto mieć na uwadze historyczny kontekst: W. Gosset opracował rozkłady <em>t</em> (opublikowane pod pseudonimem „Student"), by poradzić sobie z <strong>małymi próbami</strong> — wcześniej stosowano statystykę <em>z</em>, co przy małych <em>n</em> zbyt często prowadziło do nieprawidłowych wniosków.</p><p>Mamy następujące sytuacje:</p><h3 id="zmienna-zależna-x-jest-przedziałowa-lub-ilorazowa">1. Zmienna zależna X jest przedziałowa (lub ilorazowa)</h3><h4 id="a.-duże-próby-obie-n-30-wariancje-homogeniczne">1a. Duże próby (obie <em>n</em> ≥ 30), wariancje homogeniczne</h4><p>→ <strong>test <em>t</em> Studenta</strong> (dla prób niezależnych, wersja klasyczna)</p><p>Wprawdzie formalnie przy dużych próbach wykonuje się test <em>z</em> na mocy centralnego twierdzenia granicznego Lindeberga-Lévy’ego, ale zwyczajowo w praktyce stosujemy test <em>t</em> Studenta — im więcej stopni swobody (<em>df</em> ≥ 58), tym bardziej rozkład <em>t</em> przypomina rozkład normalny. Rozkłady zmiennej X mogą być dowolne, ponieważ przy dużych próbach „działa" CTG.</p><h4 id="b.-duże-próby-obie-n-30-wariancje-heterogeniczne">1b. Duże próby (obie <em>n</em> ≥ 30), wariancje heterogeniczne</h4><p>→ <strong>test <em>t</em> Welcha</strong></p><p>Przy różnych wariancjach zmniejsza się efektywna liczba stopni swobody, co uwzględnia korekta Welcha-Satterthwaite’a. Nieco inaczej liczy się też statystykę empiryczną. Rozkłady zmiennej X mogą być dowolne (CTG wciąż działa). Założenie o normalności rozkładów nie jest potrzebne.</p><h4 id="c.-małe-próby-co-najmniej-jedna-n-30-rozkłady-normalne-w-obu-populacjach">1c. Małe próby (co najmniej jedna <em>n</em> &lt; 30), rozkłady normalne w obu populacjach</h4><p>→ <strong>test <em>t</em> Studenta lub <em>t</em> Welcha</strong> (stosownie do homogeniczności wariancji)</p><p>Konieczne jest spełnienie założenia o normalności rozkładów (CTG nie ma zastosowania). Żeby tę normalność wykazać, musimy mieć rozsądnie duże próby — test Shapiro-Wilka ma akceptowalną moc od około <em>n</em> = 20 wzwyż (choć rachunkowo jest możliwy już od <em>n</em> = 3; por. Domański, 1972, tab. 11, s. 196). Próby powinny być mniej więcej równoliczne, w okolicy 20–30 osób.</p><h4 id="d.-co-najmniej-jedna-próba-mała-n-30-i-brak-normalności">1d. Co najmniej jedna próba mała (<em>n</em> &lt; 30) i brak normalności</h4><p>→ <strong>test <em>U</em> Manna-Whitneya</strong></p><p>Jeśli w co najmniej jednej z populacji nie jesteśmy w stanie wykazać normalności — nie da się wykonać testu Shapiro-Wilka lub w jakiś inny sposób nie jesteśmy w stanie uzasadnić, że średnie z takich prób mają rozkład normalny — stosujemy test nieparametryczny.</p><p>Dotyczy to również sytuacji, gdy próby są naprawdę małe (<em>n</em> &lt; 20) i niezbalansowane (np. jedna mała, druga duża).</p><h3 id="zmienna-zależna-x-jest-porządkowa">2. Zmienna zależna X jest porządkowa</h3><p>→ <strong>test <em>U</em> Manna-Whitneya</strong></p><p>W praktyce zaleca się, by w każdej grupie było nie mniej niż 5–10 osób (chodzi o moc testu <em>U</em>, która przy tych liczebnościach i tak jest słaba).</p><h2 id="założenia">Założenia</h2><h3 id="test-t-studenta-wersja-klasyczna">Test <em>t</em> Studenta (wersja klasyczna)</h3><ol type="1"><li><strong>Niezależność obserwacji</strong> — osoby w jednej grupie nie wpływają na wyniki osób w drugiej grupie ani na siebie nawzajem.</li><li><strong>Skala co najmniej przedziałowa</strong> — zmienna zależna mierzona na poziomie przedziałowym lub ilorazowym.</li><li><strong>Normalność rozkładów</strong> w obu populacjach — wymagana przy małych próbach; przy dużych (<em>n</em> ≥ 30 w obu grupach) CTG pozwala je złagodzić. Sprawdzenie: test Shapiro-Wilka, wykres Q-Q.</li><li><strong>Homogeniczność wariancji</strong> (homoscedastyczność) — wariancje w obu populacjach powinny być równe. Sprawdzenie: test Levene’a. Jeśli niespełnione → przejdź na test <em>t</em> Welcha.</li></ol><h3 id="test-t-welcha">Test <em>t</em> Welcha</h3><p>Założenia 1–3 jak wyżej. <strong>Nie wymaga homogeniczności wariancji</strong> — właśnie po to istnieje. Stosuje korektę Welcha-Satterthwaite’a na stopnie swobody.</p><p>Uwaga praktyczna: wiele programów (R, JASP, SPSS) domyślnie wykonuje test <em>t</em> Welcha. Niektórzy autorzy (np. Delacre et al., 2017) zalecają <strong>zawsze</strong> stosować Welcha, ponieważ przy równych wariancjach jego wynik jest praktycznie identyczny z klasycznym testem <em>t</em>.</p><h3 id="test-u-manna-whitneya">Test <em>U</em> Manna-Whitneya</h3><ol type="1"><li><strong>Niezależność obserwacji</strong> — jak wyżej.</li><li><strong>Skala co najmniej porządkowa</strong> — zmienna mierzona na poziomie porządkowym, przedziałowym lub ilorazowym (dane rangowane).</li><li><strong>Podobny kształt rozkładów</strong> w obu grupach — jeśli rozkłady mają ten sam kształt, test <em>U</em> porównuje mediany. Jeśli kształty są różne, test porównuje stochastyczną dominację (tzn. prawdopodobieństwo, że losowa obserwacja z jednej grupy jest większa niż z drugiej). To ważny niuans, o którym często się zapomina.</li></ol><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><h3 id="test-t-studenta-t-welcha">Test <em>t</em> Studenta / <em>t</em> Welcha</h3><p><em>t</em>(df) = [wartość], <em>p</em> = [wartość], <em>d</em> = [wartość Cohena]</p><p>Przykład: „Grupa eksperymentalna (<em>M</em> = 4.52, <em>SD</em> = 1.13) uzyskała istotnie wyższe wyniki niż grupa kontrolna (<em>M</em> = 3.78, <em>SD</em> = 1.21), <em>t</em>(58) = 2.34, <em>p</em> = .023, <em>d</em> = 0.61."</p><p>Jeśli Welch: podaj niecałkowite <em>df</em>, np. <em>t</em>(52.34) = 2.41, <em>p</em> = .019, <em>d</em> = 0.63.</p><h3 id="test-u-manna-whitneya-1">Test <em>U</em> Manna-Whitneya</h3><p><em>U</em> = [wartość], <em>p</em> = [wartość], <em>r</em> = [wielkość efektu]</p><p>Przykład: „Różnica między grupami była istotna statystycznie, <em>U</em> = 312, <em>p</em> = .008, <em>r</em> = .38."</p><p>Wielkość efektu <em>r</em> dla testu <em>U</em> oblicza się jako <em>r</em> = <em>Z</em> / √<em>N</em>, gdzie <em>Z</em> to standaryzowana wartość statystyki <em>U</em>, a <em>N</em> to łączna liczebność obu grup.</p><p>W obu przypadkach:</p><ul><li><em>p</em> podajemy bez zera wiodącego (bo <em>p</em> nie przekracza 1): .023, nie 0.023</li><li>statystyki (<em>t</em>, <em>U</em>, <em>d</em>, <em>r</em>) zaokrąglamy do dwóch miejsc po przecinku</li><li>przy <em>p</em> &lt; .001 piszemy <em>p</em> &lt; .001 (nie podajemy dokładnej wartości)</li></ul><p>→ <em>Patrz też:</em> Standardy raportowania APA 7</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Stosowanie testu <em>U</em> zamiast <em>t</em> ze względu na nierówne liczebności grup.</strong> Nierówne <em>n</em> nie jest powodem do rezygnacji z testu parametrycznego (→ patrz dygresja o proporcji n<sub>1</sub> : n<sub>2</sub> wyżej).</p></li><li><p><strong>Testowanie normalności przy dużych próbach i raportowanie wyniku Shapiro-Wilka jako argumentu za testem nieparametrycznym.</strong> Przy dużych próbach CTG zapewnia normalność rozkładu statystyki testowej — test normalności zmiennej X jest wtedy niepotrzebny (a jeśli go wykonasz, przy dużych <em>n</em> odrzuci normalność nawet przy nieistotnych odchyleniach).</p></li><li><p><strong>Ignorowanie homogeniczności wariancji.</strong> Przy małych i nierównolicznych próbach różnice wariancji mogą poważnie zaburzać wynik testu <em>t</em> Studenta. Rozwiązanie: stosuj <em>t</em> Welcha.</p></li><li><p><strong>Raportowanie samego <em>p</em> bez wielkości efektu.</strong> Istotność statystyczna nie mówi o wielkości różnicy między grupami. Zawsze podawaj <em>d</em> Cohena lub inną odpowiednią miarę.</p></li><li><p><strong>Interpretacja „<em>p</em> = .06 — tendencja do istotności".</strong> Nie ma czegoś takiego. Wynik jest istotny lub nie jest (przy przyjętym alfa). Jeśli <em>p</em> jest bliskie, ale powyżej alfa, raportuj to rzetelnie i rozważ moc testu.</p></li><li><p><strong>Mylenie testu <em>U</em> z testem „na mediany".</strong> Test <em>U</em> Manna-Whitneya porównuje mediany <strong>tylko wtedy</strong>, gdy rozkłady w obu grupach mają ten sam kształt. W ogólnym przypadku testuje stochastyczną dominację.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="II_jedna_proba.html">Jedna próba — porównanie z wartością referencyjną</a></li><li><a href="II_dwie_grupy_zalezne.html">Dwie grupy zależne — który test?</a></li><li><a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne — który test?</a></li><li><a href="VI_normalnosc_rozkladu.html">Normalność rozkładu — kiedy naprawdę potrzebna?</a></li><li><a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji</a></li><li><a href="VI_wielkosc_efektu.html">Wielkość efektu — po co i jak?</a></li><li><a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statystyki nie jest czarno-biały)</a></li><li><a href="VI_moc_testu.html">Moc testu — co to jest i dlaczego ma znaczenie</a></li><li><a href="VI_wynik_nieistotny.html">Wynik nieistotny — co to znaczy i co pisać?</a></li></ul><h2 id="literatura">Literatura</h2><p>Delacre, M., Lakens, D., &amp; Leys, C. (2017). Why psychologists should by default use Welch’s <em>t</em>-test instead of Student’s <em>t</em>-test. <em>International Review of Social Psychology</em>, <em>30</em>(1), 92–101. https://doi.org/10.5334/irsp.82</p><p>Domański, Cz. (1972). <em>Statystyczne testy nieparametryczne</em>. Warszawa: PWE.</p><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Porównywanie grup</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

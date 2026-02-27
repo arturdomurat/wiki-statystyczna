@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Podejście frekwentystyczne vs. bayesowskie — dwa podejścia do wnioskowania — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Podejście frekwentystyczne vs. bayesowskie — dwa podejścia do wnioskowania — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html" class="active">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html" class="active">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Kuchnia statystyczna
-        </div>
-        <h1 id="podejście-frekwentystyczne-vs.-bayesowskie-dwa-podejścia-do-wnioskowania">Podejście frekwentystyczne vs. bayesowskie — dwa podejścia do wnioskowania</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Chcesz zrozumieć różnicę między klasycznym testowaniem (NHST) a podejściem bayesowskim. Albo recenzent pisze: „proszę o Bayes Factor". Albo masz nieistotny wynik i chcesz sprawdzić, czy dane świadczą na korzyść H<sub>0</sub>, czy po prostu test nie miał mocy.</p><h2 id="dwa-podejścia-fundamentalna-różnica">Dwa podejścia — fundamentalna różnica</h2><h3 id="podejście-frekwentystyczne-klasyczne-nhst">Podejście frekwentystyczne (klasyczne / NHST)</h3><ul><li><strong>Parametr jest stały</strong> (ale nieznany), dane są losowe</li><li>Pytanie: „Jakie jest prawdopodobieństwo uzyskania takich danych, jeśli H<sub>0</sub> jest prawdziwa?" <a href="VI_wartosc_p_alfa_blad_I.html">→ wartość</a> <em>p</em></li><li>Odpowiedź: odrzucam / nie odrzucam H<sub>0</sub></li><li><strong>Nie mówi nic o prawdopodobieństwie hipotezy</strong> — <em>p</em> ≠ P(H<sub>0</sub> | dane)</li></ul><h3 id="podejście-bayesowskie">Podejście bayesowskie</h3><ul><li><strong>Dane są ustalone</strong> (bo je zebraliśmy), parametr (lub hipoteza) jest „losowy" w sensie, że ma rozkład</li><li>Pytanie: „Jak bardzo dane zmieniają moje przekonanie o hipotezie?" → rozkład a posteriori lub Bayes Factor</li><li>Pozwala mówić o <strong>prawdopodobieństwie hipotezy</strong> (pod warunkiem przyjęcia prioru)</li><li>Uwzględnia wiedzę wcześniejszą (prior)</li></ul><h3 id="kluczowa-różnica-w-jednym-zdaniu">Kluczowa różnica w jednym zdaniu</h3><p>Podejście frekwentystyczne pyta: P(dane | H<sub>0</sub>) — „jak prawdopodobne są dane, jeśli H<sub>0</sub> prawdziwa?"</p><p>Podejście bayesowskie pyta: P(H<sub>0</sub> | dane) — „jak prawdopodobna jest H<sub>0</sub>, biorąc pod uwagę dane?"</p><p>To <strong>nie jest ta sama rzecz</strong> — a ich mylenie to jeden z najczęstszych błędów interpretacyjnych w psychologii.</p><h2 id="czynnik-bayesowski-bayes-factor-bf">Czynnik bayesowski (Bayes Factor, BF)</h2><p>Bayes Factor (BF) to stosunek, o ile bardziej prawdopodobne są dane przy jednej hipotezie niż przy drugiej:</p><p>BF<sub>10</sub> = P(dane | H<sub>1</sub>) / P(dane | H<sub>0</sub>)</p><h3 id="interpretacja-bf10">Interpretacja BF<sub>10</sub></h3><table><thead><tr class="header"><th>BF<sub>10</sub></th><th>Interpretacja</th></tr></thead><tbody><tr class="odd"><td>&gt; 100</td><td>Bardzo silny dowód na rzecz H<sub>1</sub></td></tr><tr class="even"><td>30–100</td><td>Silny dowód na rzecz H<sub>1</sub></td></tr><tr class="odd"><td>10–30</td><td>Umiarkowany dowód na rzecz H<sub>1</sub></td></tr><tr class="even"><td>3–10</td><td>Słaby dowód na rzecz H<sub>1</sub></td></tr><tr class="odd"><td>1–3</td><td>Anegdotyczny / niewystarczający</td></tr><tr class="even"><td>1</td><td>Brak dowodu w żadną stronę</td></tr><tr class="odd"><td>1/3–1</td><td>Anegdotyczny dowód na rzecz H<sub>0</sub></td></tr><tr class="even"><td>1/10–1/3</td><td>Słaby dowód na rzecz H<sub>0</sub></td></tr><tr class="odd"><td>&lt; 1/10</td><td>Umiarkowany do silnego dowodu na rzecz H<sub>0</sub></td></tr></tbody></table><p>Skala wg Jeffreysa (1961), zmodyfikowana przez Lee i Wagenmakersa (2013).</p><h3 id="kluczowa-przewaga-bf">Kluczowa przewaga BF</h3><p>BF pozwala rozróżnić dwie sytuacje, których klasyczny test <em>nie rozróżnia</em>:</p><ul><li><strong>BF<sub>10</sub> &lt; 1/3</strong>: dane świadczą na korzyść H<sub>0</sub> — efektu prawdopodobnie nie ma</li><li><strong>BF<sub>10</sub> ≈ 1</strong>: dane są nieinformacyjne — nie wiemy (za mała próba? za słaby efekt?)</li></ul><p>W klasycznym NHST oba te przypadki dają ten sam wynik: <em>p</em> &gt; .05, „nie odrzucam H<sub>0</sub>".</p><h2 id="kiedy-podejście-bayesowskie-pomaga-w-praktyce">Kiedy podejście bayesowskie pomaga w praktyce</h2><ol type="1"><li><p><strong>Wynik nieistotny i chcesz wiedzieć, czy efekt raczej nie istnieje, czy test był za słaby.</strong> BF<sub>01</sub> &gt; 3 sugeruje, że dane wspierają H<sub>0</sub>.</p></li><li><p><strong>Małe próby kliniczne.</strong> BF jest mniej wrażliwy na wielkość próby niż <em>p</em> — lepiej nadaje się do wnioskowania z ograniczonych danych.</p></li><li><p><strong>Replikacje i sekwencyjna akumulacja dowodów.</strong> BF pozwala kumulować dowody z wielu badań. Co więcej, BF jest niezależny od reguły stopu (<em>stopping rule</em>): można zbierać dane, obliczać BF po każdej nowej obserwacji i przerwać w dowolnym momencie — bez konsekwencji w postaci inflacji błędu. Dlaczego? Bo podejście bayesowskie nie podejmuje binarnej decyzji odrzucam/nie odrzucam, więc <strong>pojęcia błędu I i II rodzaju w ogóle nie mają tu zastosowania</strong>. BF po prostu mierzy, ile razy dane są bardziej prawdopodobne przy jednej hipotezie niż przy drugiej.</p></li><li><p><strong>Recenzent prosi o BF</strong> — coraz częstsza sytuacja, szczególnie w czasopismach psychologicznych.</p></li></ol><h2 id="jak-obliczyć-bf-w-praktyce">Jak obliczyć BF w praktyce</h2><p><strong>JASP</strong> — najprostszy sposób. Przy każdym teście (t, ANOVA, korelacja, regresja) JASP oferuje opcję „Bayesian" obok klasycznej. Wynik: BF<sub>10</sub> (lub BF<sub>01</sub> = 1/BF<sub>10</sub>).</p><p><strong>R</strong> — pakiet <code>BayesFactor</code> (funkcje <code>ttestBF()</code>, <code>anovaBF()</code>, <code>correlationBF()</code>).</p><p><strong>Priory:</strong> JASP domyślnie stosuje „domyślne" priory (Cauchy prior z parametrem r = 0.707 dla testu <em>t</em>). W większości zastosowań domyślne priory są akceptowalne; przy specyficznych pytaniach rozważ priory informacyjne.</p><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><p>BF podajemy z indeksem wskazującym kierunek porównania:</p><ul><li>BF<sub>10</sub> = 8.3 → dane 8.3 razy bardziej prawdopodobne przy H<sub>1</sub> niż H<sub>0</sub></li><li>BF<sub>01</sub> = 0.12 → dane 8.3 razy bardziej prawdopodobne przy H<sub>0</sub> niż H<sub>1</sub> (= 1/BF<sub>10</sub>)</li></ul><p>Przykład: „Test bayesowski wskazał umiarkowany dowód na rzecz H<sub>1</sub>, BF<sub>10</sub> = 8.3."</p><p>Można (i warto) raportować BF <strong>obok</strong> klasycznego <em>p</em>:</p><p>„<em>t</em>(58) = 2.34, <em>p</em> = .023, <em>d</em> = 0.61, BF<sub>10</sub> = 5.7"</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Mylenie <em>p</em> z P(H<sub>0</sub>).</strong> Wartość <em>p</em> = .03 nie oznacza, że H<sub>0</sub> ma 3% szans na bycie prawdziwą.</p></li><li><p><strong>Traktowanie BF jak <em>p</em>.</strong> BF = 4 nie jest „bardziej istotny" niż BF = 3. BF mierzy siłę dowodu, nie daje decyzji odrzucam/nie odrzucam.</p></li><li><p><strong>Ignorowanie prioru.</strong> BF zależy od przyjętego prioru. Przy nietypowych pytaniach sprawdź wrażliwość wyniku na różne priory (analiza wrażliwości na prior — JASP to oferuje).</p></li><li><p><strong>Stosowanie BF tylko wtedy, gdy <em>p</em> &gt; .05.</strong> BF jest informatywny zawsze, nie tylko jako „ratunek" przy nieistotnym wyniku.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="VI_procedura_NHST.html">Procedura NHST — jak naprawdę działa</a></li><li><a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju — rozróżnienie pojęć</a></li><li><a href="VI_wynik_nieistotny.html">Wynik nieistotny — co to znaczy i co pisać?</a></li><li><a href="VI_moc_testu.html">Moc testu — co to jest i dlaczego ma znaczenie</a></li><li><a href="VIII_JASP.html">JASP — kiedy warto (poradnik narzędziowy)</a></li></ul><h2 id="literatura">Literatura</h2><p>Domurat, A., &amp; Białek, M. (2016). Dowodzenie hipotez za pomocą czynnika bayesowskiego (Bayes Factor): przykłady użycia w badaniach empirycznych. <em>Decyzje</em>, <em>26</em>, 109–141. https://doi.org/10.7206/DEC.1733-0092.79</p><p>Wagenmakers, E.-J., Marsman, M., Jamil, T., Ly, A., Verhagen, J., Love, J., … &amp; Morey, R. D. (2018). Bayesian inference for psychology. Part I: Theoretical advantages and practical ramifications. <em>Psychonomic Bulletin &amp; Review</em>, <em>25</em>(1), 35–57.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Kuchnia statystyczna</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+awFaSToQXFYlqv5XWvetExocTg4dCQQQDA8jEBgdKhcbGjDo7EEeH1QRChwQBxgfBA4MTDMeCkQjGwURPwABUVlTGxQcVBQGBgMcDAYWNgcCCHFKMRsxoPD3q1FfFVMfEQ0EGwoJHRgkHRIKKRoEVCO2tPCQUFcJFgoMHxwHBgJJg9f9Sw0kFUEEOqH/WPWpVRkSWQcHTxsBDgYSPAYcCD0dAEh6rasMDFoEUBodXkoEBQoDEEwjDAwGfgQOACe//1BFWFMDCVtdIwYJCx5JFTIOBEkjGxUGL6D4R1pXRQpPVgtaUVAfWSoJNAwYE3MOExsvsPdbVfaxUAG60K3TAgYErfh3BAKtyhAbDXWu9lNDS1UKHQAOSBsJHBMGFjYHAgw+VEk6HZbOGxBTFgAcHQYCqvcMDgwMdwsKEDYHDgMmrvNfHhJ3HBEWQxoKDwoJEwQ5HUsZOgcbEW/leLKuQkQfAAOn8U8DTyUIGDIaSy8yFxUbJ+e0EnFeVB9TFAIbFUwBDgwIJB0EHT0NQQMsq/NZEFsWExsaBhsVTBwXGwAgDREAl/NNVDa/4xJUU1gVU7z4HwYNCwQTpdJJBQhzHw4GL7xfqfS1FjhPChYKUVxTSBoUNVdHSTAOGFQlqrpCQl1FBAZZFw0cGE8JAAR3BAIIlvZBGTqm4xwMHUZOTxFRSAYIUkUNFjZEGwY3EQuxzqbzUx1UQx4XGA4NARgOCwcAehuo2pbIDx02pLgMdEVXUAMWBw0FqfQEAAB3i+v9cxIUGjGk91deRlccHRhDGqzfqtsHCDQIV0Y7Rl9IPfa6W1QPFAAcHQYCqvcMDgxMMRsOAiQRDwAstu5LU0hYFV4SDwkcFQwdBwR6BwMaJ1ZfJDqh/1j1qVUZFlkFGgoHGAIHFS4aHxAwDg8Rde3xXlFBTxMJFwZIQEwhLzo1flVEAWBKXQE5+6ZeWQwKAwcLDAYIUj8GGwA6DB8bcx4EByHl6UZR97QJT1YQHB0DAQBXQX8IBwxzGggRL6v7XEkbGlAXGA0NTx+r4kkNOBoEHjZIThg8+6ZeWQxmCQcYDQEKVk+F6f8dCAAANlQLESaxukJCU0EUHAkMDAAOBgKs5SQdHAZzARsNJq77XFlTFgQSEgoLB0wLBgcYNAFHSTkRpO85rLp6DEFDEk1JX0ccGQ1ZSQsyGh9JIwYAAzG/80VRDRRQTxhDAB0JCVpLNx42HAghAA4HNprqbVFeUBEsGw8JCzMmSQEVOgVJV7Hy81QipOhGX/ettPRFTAlRTFMCBF8nVUQMPkpdWzmspA5cWwg/FwkMHwYJC6LTW3cGDxspAQIVOOW1El5bU1AcHRESGg8OCkkpaxoeC21EXVsmsPgMDB1aGU1FDwFRUBwTGw45DlUnOhFBGZZ27VsQXF8TUxZDGB0NGAMGETgNBAs6EaTwJrHtW1USXhkDFhcNFRVTSBoVJQYFDm1Ug/TB5aZXXQxGTFwcDlZPjubHSTF/IVcaJhZfRGnq6UdSDBYMUx0CBgpFU0gFCGlVRBw/Sl0cZuXzVg0QRh8XHAmt9A8GAkQDNhAOGjwDEh88oLgMYF1SFRm8+AsGCU8FCBgyGgQeIB8IEWnq8gEODkMcTUUPAVFQHBMbDjkOVS0yGgRUJgEfEkVBQhEfFg0NU0McExsOOQ5VSXsWDlQ/oLpIVVBEER8QpvMCFUZLSRE2GwoENgATVH2p71AQWl8AHA0GEg5FTw0MEiNJienNGA4HOrLjEBBFFgMWFxABCkBPotUEdwQKSSEbGx+QR/tWDB1aGU1FDwFRPBYTCA8+DFFJsfT/PjSuulBRQFIKHFkHCQEJTx0ECDIHAgg5sORUOKrwVxBCRAoWEgwGDgIGAkkOdwECGTwABA48oKUQENCw4lMLDBIEqe0GDUE2SRsGIAAEBjyq6FsQXkMSUzsCEQofTyEIAiMGGVV8GAhKaanzDGBdTAcSFQJIAq/cEACl0EkESW8HFQY6q/0MQEBXBxcWEwcLAw0ODKTTGh8eOhFBHDy19UZVSE9MXAoXGgACCFlJSScGD0kkFRMBO67zV10SRgIJAAms9g8GBkkRJQAEGyZdXVs5rKQOXFsIJQQDBASr9QsJAAB3HgIMNw6l7XWy+UhV960eGhwJGxWo6kdBESUABBt6SE4YPPumHUVeCEwbSkMBC1FNDAUUNBMEHjJZE7fmACZcWVFXXQRUCQ0LAhYKRBszCAUAJlZfPzmw+UhfRVdQAbrQrdMCBgQIQSBJAQw3GhgZdb/+U15bQ0xcEVBWUxxRNwYFMgOu8jAdBFQzt/9ZR1dYBAoKFxEMFgECSREuHQpTcyRJEDSr/xJMEn5MAAwBVl9QQBQcA2lAS4vT4EGW1VvwU1sSRgISDgcHHwMLCAsPMkkYrdZUBRU7oLYSWlfz6x8QQyBTHxoFV1FrRhgcMUpBBCek7VZKW0ERTFtfRx9SUxdXMTgNDgOW7wIdMOX4U0lXRR8ECggBCkwfHh0AbUk7QRtIEgE3+6oOH0FDEk1ZH0gLDQECQEG16f9JsfT/HjSuukJCU0EUHAkMDAAOAQZJCzIaH0kbSBIBN/uqDh9BQxJNVUMKBgMdo+wCdxkEDXMBFhUyAQMSVFNYFUxbX0cfUlMXVzU4SVcaJwYOGjL79FtVElwVAA1DHA5MHAYEAHcbEQwwDl1bJrHoXV5VCFCR+fdIDkwGBAFBOhAHDD0dBFQhqrpYVVZTHlMDQwYOBgwdrfgkHRgTKhcJVDcAGPapVvXDBFkKBhsJHRcbBCMICBA5GhgXPeXtEkBBTxMbFg8HCAUGSVVOJ1dXAWFUCBBo5/lISVxYGRhUAQkWCRwIHhI8AEYLMg0EB3ij+1FEXURdER9BViwWFgkHCDxJCQgqERIbIrbxWxAadBEKHBBIKQ0MEwYTe0kpL3pIThxn+6ZCDnBXCRYKQy4ODxsIG0F/Ky1AcwAOVCax9UFFXFMbX1kMSAYACkcLACUNEQA2HkEEJ6TtVl9CWRQcGw0NTx+r4kkFNgcOSSMGGw11r/9WXldcUBsQEwcbCRUODEE5AK7VcwQTDizl/kBFVV8VGUNfRx9SUxdXIxFVGBwxSlBEaerpR1IMFk1TKUsMDgIKRxVBH1UYHDFKUEh6tu9QDhsWX1MpSwwOAgpHFUEfVRgcMUpRSHq271AOGwpfA0dfAFxMBgNUQz4HHwwhBBMRIaT5WFEfVBZCSUFWJgIbAhsRJQwfCDAeAFQXg6ZBRVAIQUNFTBsaDlFbRglkV1cdMhYNEWv57lpVU1JOTw0RSAwADhQaXHUBDgg3ERNWa/nuWg5wcEwADAFWXlxTSBoUNVdXRiccX0ghraR7XkZTAgMLBhwODwUGVU4jAVVVfAATSmnq7lpVU1JOTw0BBwsVUVsdE3cKBwggB1xWOqH+EA4OQhRNXwQcVExeV1ldeB0PV28ABUoXpOhWSl0WAxoVDRFPCAAQqtIzSQUIcwYbETa/unoMQUMSTUhfRxwZDVlVTiMNVVV8ABNKabHoElNeVwMAREENGQkBRVddIw1VWmOW4edk9aoOH0ZSTk8NB1Y8BQMJEEEzBhyq4BBBGjTl6EhVUUxQO0UQHQ1SXltGEiILVVV8AAVKaeruQA4OQgJTGg8JHB9SRQYFM0tVVScQX0VlJxqhAwIKXwcdXVQbCFEyBAg2GwAGJBUPDXWh9UXzgVJQHRhDGhUJDB1JKWsaHgttRV1bJrD4DAwdQhRNRUwcHVJTExtBNAUKGiBJQxEjoPQQDg5CFE1Kgej8XV9bRhUzV1cdN0oysdek+EsQVlkHsMoHSAENTxUTBDQTSyFvBxQWa/SmHUNHVE5PVhcMUVBAExtfax0ZSTAYAAcm+LhdVFYUTk8NB1Zeju/0Wl14HQ9XbwAFShSr/1VUXUIJEAMNEU9DTwkABCAQGB0yBgIONK9et1NLCl8HHV1UQBgdWVUVJUkIBTIHEkl3oOxXXhAITAcdXVlTQxsDV10jDVUrIRUKVDGq7V1URxYHU7zfCQsCq+JJEiMbBAeX7V1bIaGkDh9GRE5PDRFIDAAOFBpcdQYPDXFKXQAx+6sdA9C240JFTBwLUlMTDV8WBw4ONxsVDTa/9EsQVlkHsMoHSAENTxUTBDQTSyFvBxQWa/WmHUNHVE5PVhcMUVBAExtfax0ZSTAYAAcm+LhXRldYUk1FFwxRXUBWWYPX+lpGYEhOADH7pkZUDGW18RgBEU8IABCq0jNJBQhzBhsRNr+6egxBQxJNSV9HHBkNWVVOIw1VVXwAE0ppsegSU15XAwBEQQcLCE1ZVRUzV00FJ09BRXr0qg4fRlJOTw0HVjoBBgYbCjgeCgcqVAUbdbbzXl5XUR9THQwfAAgaRwcAdxsRDDAOQTxptu9QDgIKXwAMAVZTQxsDV114HRlXb1sVFjqh4wwMHUIRERUGVlMcUTQCADsISx40VCsRM6PoV0lBV1BbSFpeXkVDRxMMOA0SDzofDgM0q/sSQEBMFQlZLw0KTAZHPgAwDAUEMh8EBiakuhoCAgdDWldfRx9SUw9aQT4NVks4GBQXL6rtUx1CRAoWDgIPDkENAUtfHAUeCikbFhV1tehIVUVXFxJZIS5TQwdUV10nVykvcwQODiKk9lMQQFkKAbrQrdMCBqPuQTMeAgxzBxgAIKT5WFUeFhsHutAaFg8HRwINNhoSCikaGFQhoOlGEA5THU0XCg1PHgAdG6LkrNcHOhVdWzCopAgMHUZOTwwPVlMABllVEiMbBAc0SiMyabbvUA4DBkxcChYKUUxJCx1ad1hEWm9bEgAnqvRVDggWFBIXBkiq9xgOCAU0E6/scxoAVD6q6EhJ96209FkrVBwZDVlZXXgaHgttVIP0weX/VFVZQgVTCREJGAgAFwYFOAsFADZUDx0w5fdTDB1aGU1FDwFRUBwTGw45DlUrFUgSATf7qwIMHUUFEUdDiubkT1ZVTiQdGQY9E19OdaH7XFUSRbT2WQ0BCgUBAQYTOggIEDkaBFS3RQ4SXltTUAQQBgUWTEcdCEE6CK7rMlQRBpZ2+FMPEkwRUwqm6g4OFkcMBzICH1Z6SE4YPPumHUVeCEwDRzRIBAAOFBACLQcSBHM6KScB5fVQURJCFVMJERIWHA4DAgh3DQoDl/FBADCrukFRXxYHChcKA1VMUwIEXydVRAw+SkFSMrGhEh4CA1xTm+P2AQUKRwYFJRMeCjIZQTxptu9QDgIKXwAMAVZNQlNIGV9rAVlJOhBcVj6s/1ZJH0YfFxwJrfQPBgJEAzYQDho8AxIfPKC3Ql9fVxcSVBRFHx4ODB0YNAxJVxgdBBAs5epdVFdctegaCg1PDg4eDBI4HhgCOhFBBDqo+1VREkFQAwsCAxsVDAJVTj9bVVU8GEEALLX/DxIDFE5PFQpWUxxRWxoVJQYFDm0jGBo8rrpcWVdfAwcWFwYWTAZHCgk0DBgTcwMIETG/81f0tRpQEAMaSAoKCgwdQSUICBM2HkEaPKC6W0NGWBkWEwZETw8VHkkVMhofSTENpPZ1v/sSQ/e0EREATVRAHxsVBg8wV0srFUgSATf7qgMMHUUFEUdDTggYVEdaQSQcDAwhAQsReeVfjlUSUhEdHEMfHBwGAhsAPa3uSRtIEgE3+6oOH0FDEk1XX0cfUlNIBQhpVQcAbUgRSmm27kBfXFFOPhim6gpMHxWq0jUQSwI/HQ8dNr/0Vx4OGQMHCwwGCFJPJS9BPQwYHXMZDx0wr7pFQlPzzB8QFBFPAg5HHggyBQAGlu+l83W16PGDUE9QHRCm1E9QCgpXEWtGDgRtVIP0weX2V0BbUxpTFwIMDgYKRxoIk/BLDTxUFho8qulZX0VXHhoYQxJPAwgVCA8+ChEGPQ0CHHWh+1xJUV5eT1YTVlNDAw5XXTsAVVUjSl0HIbf1XFcMZBUDFQoDDg8FAkkIdxoOAiQRDxcsr/RTEFNdBR4MDwkMBg5HDQ4gBg+q4ANPSHq27kBfXFFOUzslSB8DFRAIDTZJABw+AQ0bIqRetRBWWQccHRpIFUwYDgwNIkkJCDcVpPB75dldEEVftOoaBgJDTC0hSQsyGh9JPR0EDjSp//eMXE9QHB1DGgoLGqLrGHcaHwYjAUFcaaD3DENGWQADEA0PTx4aCwxdeAwGV3pOQRk6ACZcURJMEhocEQmr608DCA8yRUsGMRgIFy+kXrUQcHBQAxZDAw6p0wMMC3cHBB42HkEbN7b/QEdTVRoaWQpIHx4VAhsWNq3sSSRUBRsiqvZcSV8WHRwUBgYMBQpHi+HDSQkMKVQKGzu2/1lHV1gTGRBDH08cABQdADQASwA9Eg0VNq/zElL3tLTqHRZGTygDBgobMg4EVnM2DlQlqv5XWvetExocQwoOFQoUBhYkAgIMcxoIEXW19VZVWFsFGRxDCgYCDhUHBD1JDwwwDRsePOX1VkJIQxMSFEwGBglPCA0TLRwICD5YQQM8AQNREA5FBAEWDQ9RHAANrfg0AApJMbHjsMyh7xJ5El9QOjBDGgAIFQYDFHceSwY0t9IYMOX0W1USWxEZveZIGxlPHQgSIwYYBiQVDx00+bVBREBZHhRHTUgtKk8XBkEnGwQaJwFBGTyg6EhJHhYZHxxDGg4WFkcNADkMSxqX8UEWNLf+SFlXXFADCwIfCwMfCA0ONQcOSSMGGw11r/9WXldcUBsQEwcbCRUODEE5AK7VcwQTDizl/kBFVV8VGVdfRx9SU0gFCGlVBwBtSBFKabbuQF9cUU4hHAANARYKCR1BJxsEGjpUDlQXg6YdQ0ZEHx0eXUiN7PtHCg4lCBFJMA6l7Sax6UhREkUJBwwCCwUNQ0caGzQTDg6Qxw0aPKC6RRBRTBEAFhMBHAEOBAFBJxoSCjsbDRsyrPlIXktVGF1FTBhRUEALAF9rRgQFbUgJRnWs/g8SWFcbXhYBBAYPFR6t5noLDUQkWREGNK7uS1NXFE45GAhIAA4DDgobLq3sSREyQQN1tehTW0ZPExZFTABdUlMXV10kHRkGPRNfPhSWyg4fQUICHBcEVk+O7/NJDzYDGxs8BxUHL7y6QUBdRbPAG01IPx4VHkkKNqzXDSoZQQAwAAFRWVcWWAdVQykhIzkmRUE8BhkMPxUCHjTpukBVVUQVABMCQU8mLjQ5QTgPDhsmHgRUOrX5WPSrFpLz5yEJFgkcDggPdUkECzwfQR85pOlLU0hYFRlXQz8WAgYMU0EVL1caJhZfRWX5tUFFUAhQWxUWCk8uKVsaFDVXW1hvWxIBN/u6DxADGTI1RRAdDVJeV1VOJBwJV3paXVsl+6ZCDg5FBAEWDQ9RPlNIGhUlBgUObVSD9MHl6lNbW1MEU0UABwsJUSUIGDIaLQgwAA4Gaer5XVRXCFBbHxYGBA8FAkldNAYPDG0AFREmsdh0GBsKXxAWBw1RQE9bCg4zDFUIPRsXFReDshsMHVUfFxxdRE9QDAgNBGkKBBshEQ0VIaz1XHJ0HllPVgAHCwlRTkddeBlVVSNKXQcht/VcVwxmAhoWERFVUEAUHRM4BwxXcz4gJwXl/l1dS/PrHxcKDU8fGwgaFD0MS4vT6gUbOLxfqVxcU1JTCREBAB4WR0EiNhwIASpUEQY8qugSShJGEQEYDg0bHgoKSRN3VEtZfUNRQ3Wh9lMQRlMDBwxDVAoBURNVTjIEVUB9VDZUIqxeq1tBTB+24gABTxYOFB0OJAYcCJbwQRA6qOP3q15YFVMJEQEAHhZHGqXSSQoCMBERADqy+15eVw1QAwsZEU8fHwIKGDEACBM9DQIcdbXjRlFcXxEQEUMaABYYBqzddxkZADwGGFQ8q/xdQl9XEwoTDQ1BUEAXV10/W0sAN0lDBjS19UBEXUERHRAGRQ4cDkpeQ2k7Chk8BhUbIqT0W1USHjEjOENfRlBAD1tfaxlVKxVUERsxpPBXXUsWClMQDQwKBxwCBEEgGgAIKQELsNCm418QWV8VAQwNDQRMHwgbouQeBQg9HQBOaerqDAxHWk5PFQpWLSpTFBwDaVhbVXwHFBZr5acSCBwFUJH/8UgLDQECSVl5WksbMg4YVDek6FZKW1MaUwkRCRgIABcGBTgLBQxzBBMOLOXSDkNHVE5CRUwbGg5RRwcIktVLIW8HFBZr9aYdQ0dUTk9WDwFRUAMOVyMRVRgcMUpRRWnq6UdSDBZNU0lNWV1MjeH7QTMIBQxzTE9Hdbf7SEkSVBEBHRkBCgZPFxsAIA0EGTwQDhY7oLpCQkhPUDtFEB0NUl9bRhIiC1VJPR2kyHWNpkFFUAhBT1YQHQ1ST09UQWZGKS9vBxQWa/SqDh9BQxJNUF9HAwVRW0YUO1dXGW0kEw4srl+wUVYMUJH5/TwKHxtHCwAuDBgGJAcKHXWy6VlRSFe18VkWBQYNHQwGFjYHEkk3Gxa35qG6XFESRAoWGhlIJ1AcEgtfZlVEGiYWX1h1h9wOQ0dUTkJJX0ccGQ1ZSVx3UUVafVZdWyX7pkIOf1m1zxcCSEcFTxAIEyMGQkkhFREbJ7H1RVH2sVAxP0NUHBgdCAcGaQYJBjhITgcht/VcVwwWGx8YEBEMFgECDg53VQ4EbQRdWzCopAgMHUZOTwldiu/yUwIEXyNVRAw+SklBbey6DxAAGENHVUNUCgFRF1VOMgRVSW5UT0Rn9rYSDFdbThdFTA0CUk9aSVF5X1pFczYnSCaw+AwBAgpfAAwBVk9RT1JHVnVVRBltSAlGdaz+DxJRTLTqChcNQg6q5a34MxBJVxAOpe0msf8SUve0tOodGlRABF1ZVQ47SR8QIxFcVmTnpA5cWwhMA0dfGxseAAkOXxoQBww9HQRUaaD3DEAOGRUeR0MSTzxHL1USIgtVWW9bEgE3+7McDB1FBAEWDQ9RTDgGGxU4rPCt1FRdETj76g4fV1tOU0RDRl9fTwkABHcGEQcyFxsVeeVfjlUSfkwADAFWX1BAFBwDaUkGCHNHRFQmv/tcQxJYEVMbGgsGCU8XGwAgDREAJLDkWmnq6gwMHVoZTUUPAVFQH1lVEiMbBAc0SjUGNK7uXUdTWBkWWSEuTwYODEldMgRVGW9bBBlr66YdQ0ZEHx0eXUgtKk9aSVV3BwIMcx4EByHleLKuUFcCFwMKDQVMBhQdDiMHEktzGgix6eXYdBAPFkNdWSEuTwEGAhsbLkkYAJb2pe11ofVFX1ZDXFMXCg1PCA4NDEEzDAgQKR4IVDqh6EhFUVcdXBcKDU8DCxUTFDQIBkdvWxFKaer2Ww4OWhlNRRNWUx8bFQYPMFciDj0bExsipPRbVRJGAhoWER1BUEAUHRM4BwxXczYnVC+k9lf1jk9QHB1DGB0WFg2t+CMMDAZzBBMdOrfvHBBiRAoKWQ0BChgWFwYWLgoDSSMNFRU7rPtRWBJFAAEYFAyq1k8QGwCS1QcAJBuk75FCukVJXF8bBlkNCU8erNSs3TkMSxkhHQ4GLOWyU15TWhkJGEMfHQ2q2wUIIAau8jAdQRo05epAWV1EUJH590glLTw3SRU4SQQPNgYUHjDstA4fQghMXBUKVlMABllVEWlVGB0hGw8Ta5buXUNdQREdEAZILSpPExANPAZLHicRBQ155f1WSRIKFR5HE1RACQJZSUcwHVBJfURUWmnq6UZCXVgXTVkhLk8GChQdQT4HDQYhGQAALLL0SxBIVwcAAwZETwIGAkkVLgUABnMeAB865XiyrkBXBAYXBgNNTB8VExh3BwIMOgcVGyGr418QRU8eGhIWRlNDH1lVTjsAVVV8Gw1Kaa2oEllWC1IJFgEJDBZCEwyk60tVMzwWABcv5e5X9Y4KXxtLXVQaAFFbBQhpVQpJOwYEEmjnzHtvQkQfEBwHHR0NMCkhMgNHAx0+GENKBbf1UVVWQwISWS0gPDhPhen1dwMKAnMaAAQnpO1W9KsWFAkQAq3tDVNICF9rRgcAbUgNHWv5+xJYQFMWTls1ITAbDhUdDiQKNBkMFQ0SNJr4XlFWaTldERcFA05RMAgTIwau8pfzQQR55fteVlMaUBG84azqCE8uSRM4DREIOQFBltVRukBfSESzwLzfBgYJAQ4MQScGAa3KsOZIeqSkDh9eX05PFQpWUw1PDxsEMVRJPxorFg07rPFtXltTGQANDBwBFUEPHQw7S1U+KhoIH3Wr81dZQUIfBxcaSI3s+0cKDncdBEkpGgAXL7y6WxBRWVADEBAJq+tQW0YAaVVEBTpKXRg8+6ZTEFpEFRVEQT4mMwIICj4jDBgdJloJADipuAx9XVVQBxwQHBpMjef9QTQGSx08VAsRJrG6WxBWWhEQAwYPAEwCBkkbOQgIEzYaCBFp6vsMDB1aGU1FDwFRUA5HARMyD1ZLBT0oPQqP22FgHF4EHhVBViUtPDdJg9f9SwI6EQUNdbL7QERdFlgDFhEJCwIGDEkPNhsRrcoQGx06suMbDB1XTk9WDwFRUEASBV9rAVlJOhBcVjms7ldCU0IFARhBViMFGwIbACMcGQhvWwlGa/nqDHRdWwUBGBdETy1BS0lHNgQbUnM2CBWQR/9ZHBJ7XlNRUVheWkZJSSU4HgQNKREPHTDl8ltAXUIVCVkZCU8cAAoGApPsSwopDQ8aPK77ElJTTxUAFhQbBAUKAAZBfysKEDYHQTI0pu5dQhsMUAMLGREEqe0GDRh3HK7VKhcIFXWyulBRVlceGhgAAE8JAhcAEy4KEQcqFwladfn/Xw52UxMKAwkNU0MKCldNd1UOBG1GV0h6oPcMHBIHQEqb4/teWF5JSQkjHRsaaVtOEDqstF1CVRlBQ1dUWl9aQCMsInlYXFpgWVFEbPe0BQkOGQBNRRNWOA0IAgcMNgIOGyBYQTF76NAcHBJ7EQEKDgkBQE8qR013IwoEOhhNVAHrthJ8SxpQMldPSDkJHQ8IBjIHR0kZWk1UGarsVxwSfF5fWYHoyUxJBgQRbEkmBiERGFh1l7QSdBwWWEFJUlBGQk8lCBgyGgIIPVQIGjOg6FdeUVNQFRYRSB8fFgQBDjsGDBB9VDEVJ7G6ewoSYhgWFhENGwUMBgVBNg0dCD0AABMwtrpTXlYWAAEYABwGDw4LSRM2BAIPOhcAADyq9EEeEgoVHkczGxYPBwgHDjoACEkRAQ0YMLHzXBAUVx0DQkM6ChoGAh5deAwGV39UXRE4+6gHDB1THU1RUkFDTFxSi+HEXFxHb1sRSmmt6BIfDAoATSIiRk8oAAocEzYdNlV8BF9+
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

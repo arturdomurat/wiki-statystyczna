@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rozkłady prawdopodobieństwa — do czego służą w testowaniu — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Rozkłady prawdopodobieństwa — do czego służą w testowaniu — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html" class="active">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Pojęcia fundamentalne
-        </div>
-        <h1 id="rozkłady-prawdopodobieństwa-do-czego-służą-w-testowaniu">Rozkłady prawdopodobieństwa — do czego służą w testowaniu</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Widzisz, że test <em>t</em> „porównuje statystykę z rozkładem <em>t</em> Studenta“, ANOVA „korzysta z rozkładu F”, a test χ² „porównuje z rozkładem chi-kwadrat" — i nie wiesz, co to znaczy. Albo zastanawiasz się, dlaczego rozkład normalny jest wszędzie.</p><h2 id="po-co-rozkłady-teoretyczne">Po co rozkłady teoretyczne</h2><p>Logika testów statystycznych polega na pytaniu: „czy wynik, który uzyskałem, jest zaskakujący, jeśli H<sub>0</sub> jest prawdziwa?" Żeby odpowiedzieć, potrzebujemy <strong>rozkładu odniesienia</strong> — rozkładu, który mówi, jakich wartości statystyki testowej spodziewalibyśmy się, gdyby H<sub>0</sub> była prawdziwa i gdybyśmy wielokrotnie powtórzyli badanie.</p><p>Ten rozkład odniesienia to właśnie <strong>rozkład teoretyczny</strong>. Wartość <em>p</em> to odsetek wartości w tym rozkładzie, które są co najmniej tak skrajne jak nasza statystyka empiryczna.</p><h2 id="rozkład-normalny-gaussa">Rozkład normalny (Gaussa)</h2><p><strong>Czym jest.</strong> Symetryczny rozkład dzwonowaty, opisywany przez dwa parametry: μ (średnia) i σ (odchylenie standardowe). Po standaryzacji → rozkład normalny standardowy N(0, 1).</p><p><strong>Reguła 68-95-99.7.</strong> Jeśli zmienna ma rozkład normalny, to w przybliżeniu: 68% obserwacji leży w przedziale μ ± 1σ, 95% w przedziale μ ± 2σ (dokładniej: ±1.96σ), 99.7% w przedziale μ ± 3σ.</p><p><strong>Gdzie się pojawia.</strong> Rozkład normalny jest „matką" pozostałych rozkładów testowych — rozkłady <em>t</em>, F i χ² można z niego wyprowadzić. Centralne twierdzenie graniczne sprawia, że rozkład średnich z prób dąży do normalnego niezależnie od rozkładu wyjściowego, co uzasadnia stosowanie testów parametrycznych przy dużych próbach.</p><p><strong>Dlaczego jest ważny w psychologii.</strong> Wiele zmiennych psychologicznych ma rozkłady zbliżone do normalnego (IQ, wyniki standaryzowanych testów). Nawet gdy zmienna nie jest normalna, statystyki testowe oparte na średnich (np. <em>t</em>, <em>F</em>) mają rozkłady zbliżone do normalnego przy wystarczającym <em>n</em> (CTG).</p><h2 id="rozkład-t-studenta">Rozkład <em>t</em> Studenta</h2><p><strong>Czym jest.</strong> Symetryczny rozkład dzwonowaty, podobny do normalnego, ale z grubszymi ogonami. Kształt zależy od stopni swobody (<em>df</em>): im mniejsze <em>df</em>, tym grubsze ogony (większa niepewność); im większe <em>df</em>, tym bliższy rozkładowi normalnemu.</p><p><strong>Gdzie się pojawia.</strong> Testy <em>t</em> (jednej próby, niezależnych, zależnych) — statystyka <em>t</em> porównywana jest z rozkładem <em>t</em> o odpowiednich <em>df</em>. Również testy istotności dla współczynników regresji (<em>b</em> / SE<sub>b</sub>) i korelacji.</p><p><strong>Dlaczego nie rozkład normalny?</strong> Bo przy małych próbach szacujemy σ z danych (nie znamy go), co wprowadza dodatkową niepewność. Rozkład <em>t</em> uwzględnia tę niepewność przez grubsze ogony.</p><h2 id="rozkład-f-fishera-snedecora">Rozkład F (Fishera-Snedecora)</h2><p><strong>Czym jest.</strong> Rozkład <strong>stosunku dwóch wariancji</strong>. Przyjmuje tylko wartości ≥ 0 (bo wariancja nie może być ujemna). Kształt zależy od dwóch parametrów: <em>df</em><sub>1</sub> (licznik) i <em>df</em><sub>2</sub> (mianownik).</p><p><strong>Gdzie się pojawia.</strong> ANOVA (jednoczynnikowa, wieloczynnikowa, mieszana), test istotności modelu regresji, test Levene’a (homogeniczność wariancji), MANOVA (pośrednio — przez transformacje).</p><p><strong>Logika.</strong> Statystyka <em>F</em> = wariancja między grupami / wariancja wewnątrz grup. Jeśli H<sub>0</sub> prawdziwa (grupy się nie różnią), obie wariancje szacują to samo i <em>F</em> ≈ 1. Im większa różnica między grupami, tym <em>F</em> rośnie.</p><h2 id="rozkład-chi-kwadrat-χ²">Rozkład chi-kwadrat (χ²)</h2><p><strong>Czym jest.</strong> Rozkład <strong>sumy kwadratów</strong> niezależnych zmiennych o rozkładzie N(0, 1). Przyjmuje tylko wartości ≥ 0. Kształt zależy od jednego parametru: <em>df</em>. Przy małych <em>df</em> jest silnie prawoskośny; przy dużych <em>df</em> zbliża się do normalnego.</p><p><strong>Gdzie się pojawia.</strong> Test χ² niezależności (tabele krzyżowe), test χ² dobroci dopasowania, testy dopasowania modelu w CFA/SEM, test Bartletta (sferyczność w EFA).</p><p><strong>Logika.</strong> Statystyka χ² mierzy, jak daleko obserwowane częstości odbiegają od oczekiwanych. Im większe χ², tym gorsze dopasowanie danych do H<sub>0</sub>.</p><h2 id="rozkład-dwumianowy-binomialny">Rozkład dwumianowy (binomialny)</h2><p><strong>Czym jest.</strong> Rozkład dyskretny opisujący liczbę sukcesów w <em>n</em> niezależnych próbach, z których każda ma stałe prawdopodobieństwo sukcesu <em>p</em>. Np. liczba orłów w 20 rzutach monetą, liczba poprawnych odpowiedzi w teście wielokrotnego wyboru przy losowym zgadywaniu.</p><p><strong>Gdzie się pojawia.</strong> Test dwumianowy (binomial test) — najczęściej przy małych próbach, gdy zmienna ma dwie kategorie. Leży u podstaw testu χ² (przy dużym <em>n</em> rozkład dwumianowy zbliża się do normalnego, a statystyki oparte na proporcjach → χ²).</p><p><strong>Czym różni się od normalnego.</strong> Rozkład dwumianowy jest dyskretny (wartości: 0, 1, 2, …, <em>n</em>), asymetryczny przy <em>p</em> ≠ 0.5, i opisuje zliczenia. Rozkład normalny jest ciągły i symetryczny. Przy dużym <em>n</em> i <em>p</em> bliskim 0.5 rozkład dwumianowy jest zbliżony do normalnego.</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Mylenie rozkładu zmiennej z rozkładem statystyki testowej.</strong> Test <em>t</em> nie wymaga, by zmienna X miała rozkład normalny — wymaga, by <strong>statystyka <em>t</em></strong> miała rozkład <em>t</em> Studenta (co przy dużym <em>n</em> zapewnia CTG).</p></li><li><p><strong>Ignorowanie <em>df</em>.</strong> Rozkłady <em>t</em>, F i χ² zmieniają kształt w zależności od <em>df</em>. Wartość krytyczna <em>t</em> przy <em>df</em> = 5 jest inna niż przy <em>df</em> = 50.</p></li><li><p>**Traktowanie wartości p jako „odsetka błędu“.** Wartość <em>p</em> to odsetek wartości w rozkładzie teoretycznym co najmniej tak skrajnych jak nasza statystyka — pod warunkiem prawdziwości H<sub>0</sub>. To nie to samo co „prawdopodobieństwo, że się mylę”.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="VI_procedura_NHST.html">Procedura NHST — jak naprawdę działa</a></li><li><a href="IX_stopnie_swobody.html">Stopnie swobody — czym są i skąd się biorą</a></li><li>Standaryzacja zmiennej — wynik <em>z</em> i jego zastosowania</li><li><a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wielkich liczb</a></li></ul><h2 id="literatura">Literatura</h2><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><p>Howell, D. C. (2012). <em>Statistical methods for psychology</em> (8th ed.). Wadsworth.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Pojęcia fundamentalne</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predykcja zmiennej ciągłej — regresja liniowa — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Predykcja zmiennej ciągłej — regresja liniowa — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Związki i predykcja
-        </div>
-        <h1 id="predykcja-zmiennej-ciągłej-regresja-liniowa">Predykcja zmiennej ciągłej — regresja liniowa</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Chcesz przewidzieć wartość zmiennej zależnej (ciągłej) na podstawie jednego lub kilku predyktorów. Np. czy refleksyjność poznawcza i potrzeba poznania przewidują wyniki w teście racjonalnego myślenia?</p><h2 id="rodzaje-regresji-liniowej">Rodzaje regresji liniowej</h2><p><strong>Prosta:</strong> jeden predyktor → Y = b<sub>0</sub> + b<sub>1</sub>X + e</p><p><strong>Wieloraka:</strong> wiele predyktorów → Y = b<sub>0</sub> + b<sub>1</sub>X<sub>1</sub> + b<sub>2</sub>X<sub>2</sub> + … + e</p><h2 id="metody-wprowadzania-predyktorów">Metody wprowadzania predyktorów</h2><ul><li><strong>Enter</strong> (wszystkie naraz): preferowana, gdy masz hipotezy — wprowadzasz wszystkie predyktory jednocześnie.</li><li><strong>Hierarchiczna</strong> (bloki): gdy chcesz testować przyrost <em>R</em>² po dodaniu bloku predyktorów. Np. blok 1 = zmienne demograficzne, blok 2 = zmienne psychologiczne → Δ<em>R</em>² mówi, ile dodają zmienne psychologiczne ponad demografię.</li><li><strong>Stepwise</strong> (krokowa): <strong>OSTROŻNIE</strong> — metoda eksploracyjna, kapitalizacja na przypadku, wyniki zależne od próby. Nie zalecana w badaniach konfirmacyjnych.</li></ul><h2 id="założenia">Założenia</h2><ol type="1"><li><p><strong>Liniowość</strong> — związek między predyktorem a Y jest liniowy. Sprawdzenie: wykres reszt vs. wartości przewidywane (reszty losowo rozrzucone = OK; wzorzec krzywoliniowy = problem).</p></li><li><p><strong>Niezależność obserwacji</strong> — obserwacje nie mogą być ze sobą powiązane (np. zagnieżdżone w klasach, powtarzane w czasie). To kwestia schematu badawczego, nie testu statystycznego. Jeśli dane mają naturalny porządek czasowy (trend, szereg czasowy), dodatkowo sprawdź brak autokorelacji reszt testem Durbina-Watsona (<em>d</em> ≈ 2 = OK) — ale w typowej regresji na danych przekrojowych D-W jest zbędny (patrz: Częste błędy).</p></li><li><p><strong>Homoscedastyczność</strong> — stały rozrzut reszt dla wszystkich wartości przewidywanych. Sprawdzenie: wykres reszt vs. fitted (lejek = heteroscedastyczność). Rozwiązanie: estymatory HC (→ <em>patrz:</em> Homogeniczność wariancji).</p></li><li><p><strong>Normalność reszt</strong> — nie zmiennych! Sprawdzenie: histogram reszt, Q-Q plot. Ważne przy małych <em>n</em>; przy dużych CTG łagodzi.</p></li><li><p><strong>Brak współliniowości</strong> — predyktory nie powinny być zbyt silnie skorelowane. Sprawdzenie: VIF (Variance Inflation Factor) — VIF &lt; 5 OK, VIF &gt; 10 problem. Tolerance = 1/VIF &gt; 0.1.</p></li><li><p><strong>Brak wpływowych obserwacji</strong> — odległość Cooka &gt; 4/<em>n</em> → obserwacja wpływowa.</p></li></ol><h2 id="przyczynowość-a-predykcja">Przyczynowość a predykcja</h2><p>Regresja — jak żadna inna analiza statystyczna — <strong>nie dowodzi związku przyczynowo-skutkowego</strong>. Choć model ma kierunek (predyktory „wyjaśniają" zmienną zależną), jest to kierunek wyjaśniania zmienności, nie kierunek przyczynowy. To, że X przewiduje Y, nie oznacza, że X powoduje Y — związek może być odwrotny lub wynikać ze zmiennej trzeciej. Wnioskowanie przyczynowe wymaga odpowiedniego schematu badawczego (eksperyment, quasi-eksperyment), nie samej metody statystycznej.</p><h2 id="interpretacja">Interpretacja</h2><ul><li><strong><em>R</em>²</strong> — proporcja wariancji Y wyjaśnionej przez model. Np. <em>R</em>² = .34 → model wyjaśnia 34% zmienności Y.</li><li><strong>Skorygowane <em>R</em>²</strong> — koryguje za liczbę predyktorów (zapobiega inflacji <em>R</em>² przy wielu predyktorach). Raportuj oba.</li><li><strong><em>b</em></strong> (niestandardyzowane) — zmiana Y przy wzroście X o 1 jednostkę (w oryginalnych jednostkach).</li><li><strong>β</strong> (standaryzowane) — pozwala porównywać siłę predyktorów w jednym modelu (w jednostkach odchyleń standardowych).</li><li><strong>Δ<em>R</em>²</strong> — przyrost wariancji wyjaśnionej po dodaniu bloku (w regresji hierarchicznej).</li></ul><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><h3 id="model-ogólny">Model ogólny</h3><p>„Model regresji był istotny, <em>R</em>² = .34, <em>F</em>(3, 96) = 16.45, <em>p</em> &lt; .001. Model wyjaśniał 34% wariancji wyników testu racjonalnego myślenia."</p><h3 id="pojedyncze-predyktory">Pojedyncze predyktory</h3><table><thead><tr class="header"><th>Predyktor</th><th><em>b</em></th><th><em>SE</em></th><th>β</th><th><em>t</em></th><th><em>p</em></th></tr></thead><tbody><tr class="odd"><td>Stała</td><td>12.34</td><td>2.11</td><td></td><td>5.85</td><td>&lt; .001</td></tr><tr class="even"><td>CRT</td><td>0.89</td><td>0.23</td><td>.35</td><td>3.87</td><td>&lt; .001</td></tr><tr class="odd"><td>NFC</td><td>0.45</td><td>0.19</td><td>.22</td><td>2.37</td><td>.020</td></tr></tbody></table><h3 id="regresja-hierarchiczna">Regresja hierarchiczna</h3><p>„W kroku 1 (zmienne demograficzne) <em>R</em>² = .08, <em>F</em>(2, 97) = 4.23, <em>p</em> = .017. W kroku 2 (dodanie CRT i NFC) <em>R</em>² = .34, Δ<em>R</em>² = .26, Δ<em>F</em>(2, 95) = 18.72, <em>p</em> &lt; .001."</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Sprawdzanie normalności zmiennych zamiast reszt.</strong> W regresji zakładamy normalność RESZT, nie zmiennych wejściowych.</p></li><li><p><strong>Stosowanie regresji stepwise jako jedynej metody.</strong> Stepwise wykorzystuje przypadkowe zależności w danych — wyniki mogą się nie replikować. Lepiej stosować enter lub hierarchiczną.</p></li><li><p><strong>Interpretowanie <em>R</em>² jako „procent przyczynowości".</strong> <em>R</em>² to proporcja wyjaśnionej wariancji, nie dowód na przyczynowość.</p></li><li><p><strong>Ignorowanie współliniowości.</strong> Wysoka korelacja między predyktorami destabilizuje współczynniki <em>b</em> i <em>β</em> — mogą zmieniać znak (supresja).</p></li><li><p><strong>Raportowanie tylko β bez <em>b</em>.</strong> β pozwala porównywać predyktory, ale <em>b</em> daje interpretację w jednostkach zmiennej — potrzebne są oba.</p></li><li><p><strong>Dodawanie zbyt wielu predyktorów.</strong> Reguła kciuka: ≥ 10–15 obserwacji na predyktor (Green, 1991). Przy 50 osobach nie wstawiaj 10 predyktorów.</p></li><li><p><strong>Rutynowe sprawdzanie testu Durbina-Watsona w regresji na danych przekrojowych.</strong> D-W bada autokorelację reszt, czyli zależność między resztami sąsiadującymi w szeregu. Ma to sens tylko gdy dane mają naturalny porządek (szereg czasowy, trend, czas jako predyktor). W typowym badaniu psychologicznym na danych przekrojowych kolejność obserwacji jest przypadkowa — D-W daje wtedy wynik zależny od arbitralnego porządku wierszy, nie od żadnej rzeczywistej zależności. Ten błąd wynika z niedokładnego omawiania założeń regresji w wielu podręcznikach.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="III_korelacja.html">Dwie zmienne ciągłe — jaka korelacja?</a></li><li>Regresja logistyczna — predykcja zmiennej dychotomicznej</li><li><a href="III_mediacja_moderacja.html">Mediacja i moderacja — testowanie mechanizmów</a></li><li><a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji — kiedy naprawdę problem?</a></li><li><a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące — co z nimi robić?</a></li></ul><h2 id="literatura">Literatura</h2><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><p>Tabachnick, B. G., &amp; Fidell, L. S. (2013). <em>Using multivariate statistics</em> (6th ed.). Pearson.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Związki i predykcja</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

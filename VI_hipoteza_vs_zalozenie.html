@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hipoteza vs. założenie — rozróżnienie pojęć — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Hipoteza vs. założenie — rozróżnienie pojęć — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Kuchnia statystyczna
-        </div>
-        <h1 id="hipoteza-vs.-założenie-rozróżnienie-pojęć">Hipoteza vs. założenie — rozróżnienie pojęć</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Piszesz pracę i nie jesteś pewien, czy to, co robisz, to „testowanie hipotezy" czy „sprawdzanie założenia“. Albo w tekście pojawiło się zdanie: „W swojej hipotezie badawczej założyłam, że…” — i coś Ci tu nie gra.</p><h2 id="hipoteza">Hipoteza</h2><p>Hipoteza to przypuszczenie — twierdzenie dotyczące związku lub różnicy między zmiennymi, które <strong>podlega testowaniu</strong> statystycznemu. Hipotezę się <em>testuje</em> — po to właśnie prowadzi się badanie.</p><p>Przykład: w teście <em>t</em> Studenta dla prób niezależnych stawiamy hipotezę zerową H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub> (wartości oczekiwane w dwóch populacjach są równe).</p><p>W procedurze NHST wyróżniamy:</p><ul><li><strong>Hipotezę zerową (H<sub>0</sub>)</strong> — zwykle stwierdzenie o braku efektu, różnicy lub związku. To hipotezę zerową formalnie testujemy.</li><li><strong>Hipotezę alternatywną (H<sub>1</sub> lub H<sub>a</sub>)</strong> — stwierdzenie o istnieniu efektu. To na jej rzecz odrzucamy H<sub>0</sub>, jeśli dane dostarczą wystarczających dowodów.</li></ul><p>Hipotezy statystyczne (H<sub>0</sub>, H<sub>1</sub>) to nie to samo co hipotezy badawcze — te ostatnie dotyczą zmiennych psychologicznych (np. „osoby z grupy eksperymentalnej będą miały wyższy poziom empatii"), a hipotezy statystyczne są ich formalizacją w języku parametrów populacji.</p><h2 id="założenie">Założenie</h2><p>Założenie to warunek, który <strong>przyjmuje się</strong> (i już). Założenia w statystyce to warunki niezbędne do tego, by przeprowadzane testy dawały wiarygodne interpretacje.</p><p>Przykłady założeń:</p><ul><li>normalność rozkładu cechy w populacji</li><li>homogeniczność wariancji w porównywanych grupach</li><li>niezależność obserwacji</li><li>liniowość związku (w regresji)</li><li>sferyczność (w ANOVA z powtarzanymi pomiarami)</li></ul><p>Przed przeprowadzeniem testu <strong>należy potwierdzić spełnienie założeń</strong> testami pomocniczymi (np. Shapiro-Wilk, Levene) lub zadbać o ich spełnienie w trakcie projektowania badania (np. równoliczność prób, losowy przydział do grup).</p><h2 id="dlaczego-to-rozróżnienie-ma-znaczenie">Dlaczego to rozróżnienie ma znaczenie</h2><p>Z gruntu błędne są wypowiedzi w rodzaju: „W swojej hipotezie badawczej <strong>założyłam</strong>, że osoby z grupy X będą miały wyższe wyniki." Jeśli <em>założyłaś</em> — to po co prowadzić badanie?</p><p>Analogia z matematyki: można <em>założyć</em>, że proste równoległe się przecinają, i na tym założeniu zbudować alternatywną geometrię (Łobaczewski to zrobił). Założenie nie wymaga dowodu — tworzy ramy, w których pracujesz.</p><p>Hipoteza natomiast wymaga konfrontacji z danymi. Cała procedura badawcza istnieje po to, żeby ją zweryfikować.</p><table><colgroup><col style="width: 12%" /><col style="width: 41%" /><col style="width: 45%" /></colgroup><thead><tr class="header"><th></th><th>Hipoteza</th><th>Założenie</th></tr></thead><tbody><tr class="odd"><td>Co to jest?</td><td>Przypuszczenie o efekcie/różnicy/związku</td><td>Warunek konieczny do poprawnego wnioskowania</td></tr><tr class="even"><td>Co z tym robimy?</td><td><strong>Testujemy</strong> — zbieramy dane i sprawdzamy</td><td><strong>Przyjmujemy</strong> — i potwierdzamy testami pomocniczymi</td></tr><tr class="odd"><td>Przykład</td><td>H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub></td><td>Rozkład normalny w populacji</td></tr><tr class="even"><td>Co jeśli nie spełnione?</td><td>Odrzucamy lub nie odrzucamy (decyzja)</td><td>Szukamy alternatywnej metody</td></tr></tbody></table><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p>**„W hipotezie założyłam…“** — mieszanie dwóch pojęć w jednym zdaniu. Poprawnie: „Postawiłam hipotezę, że…” lub „Założyłam normalność rozkładu i…"</p></li><li><p><strong>Testowanie założeń <em>po</em> teście głównym.</strong> Najpierw sprawdzamy założenia (normalność, homogeniczność), potem wybieramy metodę. Nie odwrotnie.</p></li><li><p><strong>Traktowanie założeń jako hipotez.</strong> „Hipoteza 1: Rozkład zmiennej X jest normalny" — to nie jest hipoteza badawcza. To jest warunek techniczny testu.</p></li><li><p><strong>Ignorowanie założeń w ogóle.</strong> Wielu studentów od razu wrzuca dane do testu <em>t</em>, nie sprawdzając, czy założenia są spełnione. To jak budowanie domu bez sprawdzenia gruntu.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="VI_procedura_NHST.html">Procedura NHST — jak naprawdę działa</a></li><li><a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju — rozróżnienie pojęć</a></li><li><a href="VI_normalnosc_rozkladu.html">Normalność rozkładu — kiedy naprawdę potrzebna?</a></li><li><a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji</a></li><li><a href="VI_zalozenia_niespelnione.html">Założenia niespełnione — co robić?</a></li></ul><h2 id="literatura">Literatura</h2><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><p>APA. (2020). <em>Publication manual of the American Psychological Association</em> (7th ed.). American Psychological Association.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Kuchnia statystyczna</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

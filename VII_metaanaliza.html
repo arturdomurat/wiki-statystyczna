@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta-analiza — podstawy — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Meta-analiza — podstawy — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,23 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Metody zaawansowane
-        </div>
-        <h1 id="meta-analiza-podstawy">Meta-analiza — podstawy</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Chcesz <strong>zsyntetyzować wyniki wielu badań</strong> dotyczących tego samego pytania badawczego. Np. „Jaki jest średni efekt terapii CBT na depresję na podstawie 30 badań?" Meta-analiza daje pojedynczy, ważony estymator wielkości efektu i ocenia heterogeniczność wyników.</p><h2 id="czym-jest-meta-analiza">Czym jest meta-analiza</h2><p>Meta-analiza to <strong>ilościowa synteza</strong> wyników z niezależnych badań. Różni się od przeglądu narracyjnego tym, że oblicza zagregowaną wielkość efektu z przedziałem ufności i testuje, czy wyniki badań są spójne.</p><p><strong>Etapy:</strong></p><ol type="1"><li>Sformułowanie pytania badawczego</li><li>Systematyczne przeszukanie literatury (PRISMA)</li><li>Kodowanie badań (wielkość efektu, <em>n</em>, moderatory)</li><li>Obliczenie zagregowanego efektu</li><li>Ocena heterogeniczności</li><li>Analiza moderatorów (jeśli heterogeniczność)</li><li>Ocena publication bias</li><li>Raportowanie</li></ol><h2 id="kluczowe-pojęcia">Kluczowe pojęcia</h2><h3 id="wielkości-efektu-w-meta-analizie">Wielkości efektu w meta-analizie</h3><table><colgroup><col style="width: 39%" /><col style="width: 39%" /><col style="width: 21%" /></colgroup><thead><tr class="header"><th>Typ badania</th><th>Typowa miara</th><th>Uwagi</th></tr></thead><tbody><tr class="odd"><td>Porównanie grup (ciągła DV)</td><td><strong>d Cohena</strong> lub <strong>g Hedgesa</strong></td><td>g koryguje za małe próby</td></tr><tr class="even"><td>Korelacja</td><td><strong><em>r</em></strong> Pearsona (lub transformata Fishera <em>z</em><sub>r</sub>)</td><td><em>z</em><sub>r</sub> stabilizuje wariancję</td></tr><tr class="odd"><td>Zmienne dychotomiczne</td><td><strong>OR</strong> (iloraz szans) lub <strong>RR</strong> (ryzyko względne)</td><td>OR częstsze, log(OR) w obliczeniach</td></tr></tbody></table><h3 id="modele">Modele</h3><ul><li><strong>Model efektów stałych</strong> (fixed-effect): zakłada, że wszystkie badania szacują TEN SAM efekt populacyjny. Różnice wynikają tylko z błędu próbkowania. Rzadko realistyczny w psychologii.</li><li><strong>Model efektów losowych</strong> (random-effects): zakłada, że efekty RÓŻNIĄ SIĘ między badaniami (każde bada nieco inną populację/kontekst). <strong>Standard w psychologii.</strong></li></ul><h3 id="heterogeniczność">Heterogeniczność</h3><p>Czy efekty są spójne między badaniami?</p><ul><li><strong>Q Cochrana</strong>: test istotności heterogeniczności (H₀: wszystkie efekty są równe). Mała moc przy niewielu badaniach.</li><li><strong>I²</strong>: procent zmienności między badaniami wynikający z prawdziwych różnic (nie z błędu próbkowania). I² = 0% brak, ~25% niska, ~50% umiarkowana, ~75% wysoka.</li><li><strong>τ²</strong> (tau²): estymata wariancji efektów między badaniami. Daje skalę heterogeniczności w jednostkach efektu.</li></ul><h3 id="analiza-moderatorów">Analiza moderatorów</h3><p>Gdy I² jest wysokie — co wyjaśnia różnice? Analogicznie do regresji, ale na poziomie badań:</p><ul><li><strong>Moderatory kategorialne:</strong> analiza podgrup (np. typ terapii, kraj)</li><li><strong>Moderatory ciągłe:</strong> meta-regresja (np. rok publikacji, wiek uczestników)</li></ul><h3 id="publication-bias">Publication bias</h3><p>Badania z istotnymi wynikami są chętniej publikowane → zagregowany efekt może być zawyżony.</p><ul><li><strong>Funnel plot:</strong> wykres wielkości efektu vs. SE. Asymetria sugeruje bias.</li><li><strong>Test Eggera:</strong> formalny test asymetrii funnel plotu.</li><li><strong>Trim-and-fill:</strong> estymacja skorygowanego efektu po „uzupełnieniu" brakujących badań.</li><li><strong>p-curve / p-uniform:</strong> nowoczesne metody oceny, czy zbiór istotnych wyników odzwierciedla prawdziwe efekty.</li></ul><h2 id="oprogramowanie">Oprogramowanie</h2><table><thead><tr class="header"><th>Program</th><th>Pakiet/funkcja</th><th>Uwagi</th></tr></thead><tbody><tr class="odd"><td><strong>R</strong></td><td><code>metafor::rma()</code></td><td>Złoty standard, bardzo elastyczny</td></tr><tr class="even"><td><strong>R</strong></td><td><code>meta::metagen()</code></td><td>Prostszy interfejs</td></tr><tr class="odd"><td><strong>JASP</strong></td><td>Moduł Meta-Analysis</td><td>GUI, basic meta-analysis</td></tr><tr class="even"><td><strong>CMA</strong></td><td>Comprehensive Meta-Analysis</td><td>Komercyjny, GUI</td></tr></tbody></table><h3 id="przykład-w-r">Przykład w R</h3><pre class="r"><code>library(metafor)
-
-# Meta-analiza efektów losowych (d Cohena)
-res &lt;- rma(yi = d, vi = var_d, data = dane_meta, method = &quot;REML&quot;)
-summary(res)
-forest(res)      # forest plot
-funnel(res)      # funnel plot</code></pre><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><p>„Meta-analiza objęła <em>k</em> = 24 badania (<em>N</em> = 3,456). Zastosowano model efektów losowych (REML). Średnia ważona wielkość efektu terapii CBT na objawy depresji wyniosła <em>g</em> = 0.58, 95% CI [0.42, 0.74], <em>p</em> &lt; .001. Stwierdzono istotną heterogeniczność, <em>Q</em>(23) = 78.4, <em>p</em> &lt; .001, <em>I</em>² = 71%. Meta-regresja wykazała, że liczba sesji była istotnym moderatorem, <em>b</em> = 0.04, <em>SE</em> = 0.01, <em>p</em> = .003 — więcej sesji wiązało się z większym efektem. Analiza funnel plotu i test Eggera (<em>z</em> = 1.12, <em>p</em> = .263) nie wskazywały na istotny publication bias."</p><p>Zawsze raportuj: <em>k</em>, <em>N</em>, model (fixed/random), zagregowany efekt z CI, testy heterogeniczności (Q, I², τ²), forest plot, funnel plot, analizę moderatorów (jeśli uzasadniona).</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Stosowanie modelu efektów stałych bez uzasadnienia.</strong> W psychologii badania prawie zawsze różnią się populacją, metodą, kontekstem → model efektów losowych jest domyślny.</p></li><li><p><strong>Ignorowanie heterogeniczności.</strong> Raportowanie średniego efektu bez oceny I² i analizy moderatorów — jest bezużyteczne, gdy I² = 80%.</p></li><li><p><strong>Mieszanie wielkości efektów.</strong> Łączenie <em>d</em>, <em>r</em>, OR w jednej meta-analizie bez konwersji na wspólną miarę.</p></li><li><p><strong>Brak oceny publication bias.</strong> Każda meta-analiza powinna zawierać funnel plot i test Eggera (lub alternatywę).</p></li><li><p><strong>Traktowanie meta-analizy jak „prostej średniej".</strong> Meta-analiza to WAŻONA średnia — badania z większą próbą mają większą wagę. I wymaga systematycznego przeszukania literatury.</p></li><li><p><strong>Zbyt mało badań na meta-regresję.</strong> Reguła kciuka: ≥ 10 badań na moderator. Przy <em>k</em> = 8 i 3 moderatorach → overfitting.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="VI_wielkosc_efektu.html">Wielkość efektu — po co i jak?</a></li><li><a href="VI_wynik_nieistotny.html">Wynik nieistotny — co to znaczy?</a></li><li><a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a></li></ul><h2 id="literatura">Literatura</h2><p>Borenstein, M., Hedges, L. V., Higgins, J. P. T., &amp; Rothstein, H. R. (2009). <em>Introduction to meta-analysis</em>. Wiley.</p><p>Viechtbauer, W. (2010). Conducting meta-analyses in R with the metafor package. <em>Journal of Statistical Software, 36</em>(3), 1–48.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Metody zaawansowane</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>

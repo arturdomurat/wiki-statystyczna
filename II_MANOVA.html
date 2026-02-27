@@ -1,210 +1,87 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wieloczynnikowa zmienna zależna — MANOVA — Wiki Statystyczna UŚ</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Wieloczynnikowa zmienna zależna — MANOVA — Wiki Statystyczna UŚ</title>
+<style>
 :root {
-    --bg: #fafafa;
-    --text: #1a1a1a;
-    --accent: #2c5282;
-    --accent-light: #ebf4ff;
-    --border: #d0d7de;
-    --sidebar-bg: #f0f3f6;
-    --code-bg: #f5f5f5;
-    --nav-hover: #e2e8f0;
-    --link: #2c5282;
-    --muted: #636c76;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    min-height: 100vh;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
 }
-/* ── Sidebar ── */
 nav.sidebar {
-    width: 280px;
-    min-width: 280px;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--border);
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 100;
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
 }
 nav.sidebar .logo {
-    padding: 8px 20px 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
-    text-decoration: none;
-    display: block;
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
 }
 nav.sidebar .logo:hover { opacity: 0.8; }
 nav.sidebar .section-title {
-    padding: 10px 20px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
 }
 nav.sidebar a {
-    display: block;
-    padding: 5px 20px 5px 28px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 13.5px;
-    line-height: 1.4;
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
 }
-nav.sidebar a:hover {
-    background: var(--nav-hover);
-    border-left-color: var(--accent);
-}
-nav.sidebar a.active {
-    background: var(--accent-light);
-    border-left-color: var(--accent);
-    font-weight: 600;
-    color: var(--accent);
-}
-/* ── Main ── */
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
 main {
-    margin-left: 280px;
-    flex: 1;
-    max-width: 860px;
-    padding: 40px 50px 80px;
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
 }
-/* ── Typography ── */
 h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
-h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); color: var(--text); }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
 h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
 p { margin-bottom: 0.85em; }
-strong { font-weight: 600; }
-em { font-style: italic; }
-a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
-a:hover { border-bottom-color: var(--link); }
-/* ── Lists ── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
 ul, ol { margin: 0.5em 0 1em 1.5em; }
 li { margin-bottom: 0.3em; }
-li > ul, li > ol { margin-top: 0.2em; margin-bottom: 0.2em; }
-/* ── Code ── */
-code {
-    font-family: 'Consolas', 'Fira Code', 'SF Mono', monospace;
-    font-size: 0.9em;
-    background: var(--code-bg);
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-pre {
-    background: var(--code-bg);
-    padding: 16px 20px;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1em 0;
-    border: 1px solid var(--border);
-    font-size: 0.88em;
-    line-height: 1.5;
-}
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
 pre code { background: none; padding: 0; }
-/* ── Tables ── */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1em 0 1.5em;
-    font-size: 0.92em;
-}
-th, td {
-    text-align: left;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-}
-th {
-    background: var(--sidebar-bg);
-    font-weight: 600;
-    font-size: 0.92em;
-}
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
 tr:nth-child(even) { background: #f8f9fa; }
-/* ── Blockquote (admonitions) ── */
-blockquote {
-    border-left: 4px solid var(--accent);
-    padding: 12px 20px;
-    margin: 1em 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-    color: #374151;
-}
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
 blockquote p:last-child { margin-bottom: 0; }
-/* ── Subscript / superscript ── */
-sub { font-size: 0.78em; }
-sup { font-size: 0.78em; }
-/* ── "Zobacz też" section links ── */
-.see-also a {
-    display: inline-block;
-    padding: 4px 12px;
-    margin: 3px 4px;
-    background: var(--accent-light);
-    border-radius: 4px;
-    font-size: 0.9em;
-    transition: background 0.15s;
-}
-.see-also a:hover { background: #d0e0f5; }
-/* ── Breadcrumb ── */
-.breadcrumb {
-    font-size: 0.85em;
-    color: var(--muted);
-    margin-bottom: 16px;
-}
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
 .breadcrumb a { color: var(--muted); }
-.breadcrumb a:hover { color: var(--accent); }
-/* ── Footer ── */
-.page-footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 0.82em;
-    color: var(--muted);
-}
-/* ── Mobile ── */
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
 @media (max-width: 900px) {
-    nav.sidebar { display: none; }
-    main { margin-left: 0; padding: 20px; max-width: 100%; }
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
 }
-@media (max-width: 900px) {
-    .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 10px; left: 10px;
-        z-index: 200;
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-    }
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
 }
-.mobile-menu-btn { display: none; }
 </style>
 </head>
-<body>
-    <button class="mobile-menu-btn" onclick="document.getElementById('sidebar').style.display=document.getElementById('sidebar').style.display==='block'?'none':'block'">☰ Menu</button>
-    <nav class="sidebar" id="sidebar">
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
   <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
   <div class="section-title">Start</div>
   <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
@@ -221,7 +98,7 @@ sup { font-size: 0.78em; }
   <a href="II_jedna_proba.html">Jedna próba</a>
   <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
   <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
-  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiary pow...</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
   <div class="section-title">Związki i predykcja</div>
   <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
   <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
@@ -243,7 +120,7 @@ sup { font-size: 0.78em; }
   <a href="VI_moc_testu.html">Moc testu</a>
   <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
   <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
-  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayesowskie</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
   <a href="VI_procedura_NHST.html">Procedura NHST</a>
   <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
   <a href="VI_skale_Likerta.html">Skale Likerta</a>
@@ -252,7 +129,7 @@ sup { font-size: 0.78em; }
   <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
   <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
   <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
-  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat statys...</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
   <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
   <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
   <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
@@ -273,17 +150,41 @@ sup { font-size: 0.78em; }
   <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
   <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
   <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
-  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i prawo wi...</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
 </nav>
-    <main>
-        <div class="breadcrumb">
-            <a href="index.html">Wiki Statystyczna</a> › Porównywanie grup
-        </div>
-        <h1 id="wieloczynnikowa-zmienna-zależna-manova">Wieloczynnikowa zmienna zależna — MANOVA</h1><h2 id="kiedy-tego-potrzebujesz">Kiedy tego potrzebujesz</h2><p>Masz <strong>kilka zmiennych zależnych</strong> mierzonych na tych samych osobach i chcesz porównać grupy jednocześnie na wszystkich zmiennych. Np. kwestionariusz mierzy 3 podskale emocji i chcesz sprawdzić, czy grupa eksperymentalna różni się od kontrolnej na profilu emocjonalnym jako całości.</p><h2 id="kiedy-manova-zamiast-wielu-osobnych-anov">Kiedy MANOVA zamiast wielu osobnych ANOV</h2><ul><li>Zmienne zależne są <strong>skorelowane</strong> (tworzą pewną strukturę) — MANOVA uwzględnia te korelacje</li><li>Chcesz <strong>kontrolować błąd I rodzaju</strong> — wiele osobnych ANOV = inflacja α</li><li>Chcesz wykryć <strong>różnice wielowymiarowe</strong>, które mogą być niewidoczne w osobnych testach (np. grupy różnią się kombinacją zmiennych, ale nie pojedynczymi zmiennymi)</li></ul><h2 id="algorytm">Algorytm</h2><h3 id="krok-1-sprawdź-założenia-patrz-niżej">Krok 1: Sprawdź założenia (patrz niżej)</h3><h3 id="krok-2-wykonaj-manova-test-wielowymiarowy">Krok 2: Wykonaj MANOVA (test wielowymiarowy)</h3><p>Cztery dostępne statystyki testowe (od najodporniejszego):</p><ol type="1"><li><strong>Pillai’s Trace</strong> — <strong>najodporniejszy</strong> na naruszenia założeń. Zalecany jako domyślny.</li><li><strong>Wilks’ Lambda</strong> — najpopularniejszy w literaturze, ale mniej odporny niż Pillai.</li><li><strong>Hotelling’s Trace</strong> — przy dużych próbach i dobrze spełnionych założeniach.</li><li><strong>Roy’s Largest Root</strong> — <strong>najmniej odporny</strong>, ale najsilniejszy, gdy różnice między grupami koncentrują się na jednym wymiarze.</li></ol><h3 id="krok-3-jeśli-manova-istotna-anova-dla-każdej-zmiennej-zależnej-osobno">Krok 3: Jeśli MANOVA istotna → ANOVA dla każdej zmiennej zależnej osobno</h3><p>Z poprawką na porównania wielokrotne (Bonferroni: α’ = .05 / liczba zmiennych zależnych).</p><h3 id="krok-4-ewentualnie-analiza-dyskryminacyjna">Krok 4: Ewentualnie → analiza dyskryminacyjna</h3><p>Pokazuje, jakie kombinacje zmiennych zależnych najlepiej rozróżniają grupy.</p><h2 id="założenia">Założenia</h2><ol type="1"><li><strong>Niezależność obserwacji.</strong></li><li><strong>Skala co najmniej przedziałowa</strong> dla każdej zmiennej zależnej.</li><li><strong>Wielowymiarowa normalność</strong> — test Mardii (skośność i kurtoza wielowymiarowa). Przy dużych <em>n</em> MANOVA jest dość odporna.</li><li><strong>Homogeniczność macierzy kowariancji</strong> — test Boxa M. <strong>Uwaga:</strong> Box M jest <strong>bardzo wrażliwy</strong> na naruszenia normalności — istotny wynik może wynikać z braku normalności, nie z heterogeniczności. Przy równych <em>n</em> MANOVA jest odporna na naruszenie tego założenia.</li><li><strong>Brak współliniowości</strong> między zmiennymi zależnymi — jeśli zmienne są zbyt mocno skorelowane (<em>r</em> &gt; .90), MANOVA jest niestabilna. Zbyt słabo skorelowane zmienne → osobne ANOVY mogą być lepsze.</li></ol><h2 id="raportowanie-apa-7">Raportowanie (APA 7)</h2><p>„MANOVA wykazała istotny efekt grupy na profil emocjonalny, Pillai’s Trace = 0.23, <em>F</em>(6, 172) = 3.78, <em>p</em> = .001, η²<sub>p</sub> = .12. Kolejne jednoczynnikowe ANOVY (z korektą Bonferroniego, α = .017) wykazały istotne różnice między grupami w nasileniu lęku, <em>F</em>(2, 87) = 5.34, <em>p</em> = .007, η²<sub>p</sub> = .11, ale nie w nasileniu gniewu, <em>F</em>(2, 87) = 1.23, <em>p</em> = .298, ani smutku, <em>F</em>(2, 87) = 2.01, <em>p</em> = .141."</p><h2 id="częste-błędy">Częste błędy</h2><ol type="1"><li><p><strong>Stosowanie MANOVA na nieskorelowanych zmiennych.</strong> Jeśli zmienne zależne są nieskorelowane, osobne ANOVY z poprawką Bonferroniego mogą być prostsze i mieć większą moc.</p></li><li><p><strong>Ignorowanie testu Boxa M.</strong> Przy nierównych <em>n</em> heterogeniczność macierzy kowariancji jest poważnym problemem.</p></li><li><p><strong>Raportowanie tylko Wilks’ Λ bez sprawdzania robustności.</strong> Przy naruszeniach założeń Pillai’s Trace jest bezpieczniejszy.</p></li><li><p><strong>Brak follow-up ANOV po istotnej MANOVA.</strong> Sama MANOVA mówi „jest różnica", ale nie mówi na których zmiennych.</p></li><li><p><strong>Zbyt wiele zmiennych zależnych przy małym <em>n</em>.</strong> Reguła kciuka: <em>n</em> w najmniejszej grupie powinno być większe niż liczba zmiennych zależnych.</p></li></ol><h2 id="zobacz-też">Zobacz też</h2><ul><li><a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne — który test?</a></li><li>Schemat czynnikowy — co robić?</li><li>ANCOVA — kiedy uwzględniać kowarianty</li><li><a href="VI_normalnosc_rozkladu.html">Normalność rozkładu — kiedy naprawdę potrzebna?</a></li></ul><h2 id="literatura">Literatura</h2><p>Tabachnick, B. G., &amp; Fidell, L. S. (2013). <em>Using multivariate statistics</em> (6th ed.). Pearson.</p><p>Field, A., Miles, J., &amp; Field, Z. (2012). <em>Discovering statistics using R</em>. Sage.</p><hr /><p>[A. Domurat]</p>
-
-        <div class="page-footer">
-            Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski
-        </div>
-    </main>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Porównywanie grup</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
 </body>
 </html>
