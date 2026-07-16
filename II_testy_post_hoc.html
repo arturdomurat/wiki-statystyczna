@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Testy post hoc — który wybrać? — Wiki Statystyczna UŚ</title>
+<style>
+:root {
+    --bg: #fafafa; --text: #1a1a1a; --accent: #2c5282;
+    --accent-light: #ebf4ff; --border: #d0d7de; --sidebar-bg: #f0f3f6;
+    --code-bg: #f5f5f5; --nav-hover: #e2e8f0; --link: #2c5282; --muted: #636c76;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px; line-height: 1.7; color: var(--text);
+    background: var(--bg); display: flex; min-height: 100vh;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
+}
+nav.sidebar {
+    width: 280px; min-width: 280px; background: var(--sidebar-bg);
+    border-right: 1px solid var(--border); padding: 20px 0;
+    position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100;
+}
+nav.sidebar .logo {
+    padding: 8px 20px 20px; font-size: 17px; font-weight: 700;
+    color: var(--accent); border-bottom: 1px solid var(--border);
+    margin-bottom: 12px; text-decoration: none; display: block;
+}
+nav.sidebar .logo:hover { opacity: 0.8; }
+nav.sidebar .section-title {
+    padding: 10px 20px 4px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted);
+}
+nav.sidebar a {
+    display: block; padding: 5px 20px 5px 28px; color: var(--text);
+    text-decoration: none; font-size: 13.5px; line-height: 1.4;
+    border-left: 3px solid transparent; transition: all 0.15s;
+}
+nav.sidebar a:hover { background: var(--nav-hover); border-left-color: var(--accent); }
+nav.sidebar a.active { background: var(--accent-light); border-left-color: var(--accent); font-weight: 600; color: var(--accent); }
+main {
+    margin-left: 280px; flex: 1; max-width: 860px; padding: 40px 50px 80px;
+}
+h1 { font-size: 1.9em; margin-bottom: 0.6em; color: var(--accent); line-height: 1.25; }
+h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
+h3 { font-size: 1.1em; margin: 1.3em 0 0.4em; color: #374151; }
+p { margin-bottom: 0.85em; }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.subtitle { font-size: 1.1em; color: var(--muted); margin-bottom: 2em; }
+.callout { background: var(--accent-light); padding: 20px 24px; border-radius: 8px; margin-bottom: 2.5em; border-left: 4px solid var(--accent); }
+ul, ol { margin: 0.5em 0 1em 1.5em; }
+li { margin-bottom: 0.3em; }
+code { font-family: 'Consolas', 'Fira Code', monospace; font-size: 0.9em; background: var(--code-bg); padding: 2px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 6px; overflow-x: auto; margin: 1em 0; border: 1px solid var(--border); font-size: 0.88em; }
+pre code { background: none; padding: 0; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0 1.5em; font-size: 0.92em; }
+th, td { text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+th { background: var(--sidebar-bg); font-weight: 600; }
+tr:nth-child(even) { background: #f8f9fa; }
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 1em 0; background: var(--accent-light); border-radius: 0 6px 6px 0; }
+blockquote p:last-child { margin-bottom: 0; }
+img { max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: 6px; margin: 0.5em 0; }
+.breadcrumb { font-size: 0.85em; color: var(--muted); margin-bottom: 16px; }
+.breadcrumb a { color: var(--muted); }
+.page-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.82em; color: var(--muted); }
+.mobile-menu-btn { display: none; position: fixed; top: 10px; left: 10px; z-index: 200; background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; }
+@media (max-width: 900px) {
+    nav.sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    nav.sidebar.open { transform: translateX(0); }
+    main { margin-left: 0; padding: 20px; max-width: 100%; padding-top: 50px; }
+    .mobile-menu-btn { display: block; }
+}
+@media print {
+    body * { display: none !important; }
+    body::after { display: block !important; content: "Drukowanie wyłączone. Wiki Statystyczna UŚ — materiał chroniony."; font-size: 24px; text-align: center; padding: 100px; color: #666; }
+}
+</style>
+</head>
+<body oncontextmenu="return false;">
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+<nav class="sidebar" id="sidebar">
+  <a class="logo" href="index.html">Ψ Wiki Statystyczna UŚ</a>
+  <div class="section-title">Start</div>
+  <a href="00_nawigator_od_czego_zaczac.html">Mam dane</a>
+  <div class="section-title">Planowanie badania</div>
+  <a href="I_analiza_mocy.html">Analiza mocy</a>
+  <a href="I_dobor_zmiennych_i_skala.html">Jak dobrać zmienne i skalę pomiaru?</a>
+  <a href="I_planowanie_wielkosci_proby.html">Jak zaplanować wielkość próby?</a>
+  <a href="I_schemat_badawczy.html">Jak zaplanować schemat badawczy?</a>
+  <div class="section-title">Porównywanie grup</div>
+  <a href="II_ANCOVA.html">Kowariant jako kontrola</a>
+  <a href="II_MANOVA.html">Wiele zmiennych zależnych</a>
+  <a href="II_dwie_grupy_niezalezne.html">Dwie grupy niezależne</a>
+  <a href="II_dwie_grupy_zalezne.html">Dwie grupy zależne (pomiary powtarzane)</a>
+  <a href="II_jedna_proba.html">Jedna próba</a>
+  <a href="II_schemat_czynnikowy.html">ANOVA wieloczynnikowa</a>
+  <a href="II_testy_post_hoc.html" class="active">Testy post hoc</a>
+  <a href="II_wiecej_grup_niezaleznych.html">Więcej niż dwie grupy niezależne</a>
+  <a href="II_wiecej_grup_zaleznych.html">Więcej niż dwie grupy zależne (pomiar...</a>
+  <div class="section-title">Związki i predykcja</div>
+  <a href="III_korelacja.html">Dwie zmienne ciągłe</a>
+  <a href="III_mediacja_moderacja.html">Mediacja i moderacja</a>
+  <a href="III_regresja.html">Predykcja zmiennej ciągłej</a>
+  <a href="III_regresja_logistyczna.html">Predykcja zmiennej kategorialnej</a>
+  <a href="III_zmienne_kategorialne.html">Dwie zmienne kategorialne</a>
+  <div class="section-title">Struktura danych</div>
+  <a href="IV_CFA.html">Konfirmacyjna analiza czynnikowa (CFA)</a>
+  <a href="IV_EFA.html">Eksploracyjna analiza czynnikowa (EFA)</a>
+  <a href="IV_SEM.html">Modelowanie równań strukturalnych (SEM)</a>
+  <a href="IV_analiza_skupien.html">Analiza skupień (cluster analysis)</a>
+  <div class="section-title">Psychometria</div>
+  <a href="V_rzetelnosc.html">Rzetelność pomiaru</a>
+  <a href="V_trafnosc.html">Trafność pomiaru</a>
+  <div class="section-title">Kuchnia statystyczna</div>
+  <a href="VI_dane_odstajace_brakujace.html">Dane odstające i brakujące</a>
+  <a href="VI_hipoteza_vs_zalozenie.html">Hipoteza vs. założenie</a>
+  <a href="VI_homogenicznosc_wariancji.html">Homogeniczność wariancji</a>
+  <a href="VI_moc_testu.html">Moc testu</a>
+  <a href="VI_normalnosc_rozkladu.html">Normalność rozkładu</a>
+  <a href="VI_parametr_statystyka_estymator.html">Parametr, statystyka, estymator</a>
+  <a href="VI_podejscie_frekwentystyczne_vs_bayesowskie.html">Podejście frekwentystyczne vs. bayeso...</a>
+  <a href="VI_poprawki_korekty.html">Poprawki i korekty</a>
+  <a href="VI_procedura_NHST.html">Procedura NHST</a>
+  <a href="VI_przedzialy_ufnosci.html">Przedziały ufności</a>
+  <a href="VI_skale_Likerta.html">Skale Likerta</a>
+  <a href="VI_standardy_APA7.html">Standardy raportowania APA 7</a>
+  <a href="VI_statystyka_opisowa.html">Statystyka opisowa</a>
+  <a href="VI_wartosc_p_alfa_blad_I.html">Wartość p, alfa, błąd I rodzaju</a>
+  <a href="VI_wielkosc_efektu.html">Wielkość efektu</a>
+  <a href="VI_wizualizacja_danych.html">Wizualizacja danych</a>
+  <a href="VI_wybor_testu_poziom_pomiaru.html">Wybór testu a poziom pomiaru (świat s...</a>
+  <a href="VI_wynik_nieistotny.html">Wynik nieistotny</a>
+  <a href="VI_wyniki_opis_vs_interpretacja.html">Wyniki badania</a>
+  <a href="VI_zalozenia_niespelnione.html">Założenia niespełnione</a>
+  <div class="section-title">Metody zaawansowane</div>
+  <a href="VII_metaanaliza.html">Meta-analiza</a>
+  <a href="VII_modele_mieszane.html">Modele mieszane (mixed-effects models)</a>
+  <div class="section-title">Narzędzia</div>
+  <a href="VIII_GPower.html">G*Power</a>
+  <a href="VIII_JASP.html">JASP</a>
+  <a href="VIII_R_poradnik.html">R</a>
+  <a href="VIII_SPSS.html">SPSS</a>
+  <div class="section-title">Pojęcia fundamentalne</div>
+  <a href="IX_blad_standardowy.html">Błąd standardowy</a>
+  <a href="IX_centrowanie.html">Centrowanie zmiennych</a>
+  <a href="IX_estymacja.html">Estymacja punktowa vs. przedziałowa</a>
+  <a href="IX_interakcje_i_moderacja.html">Interakcje i moderacja</a>
+  <a href="IX_niezaleznosc.html">Niezależność</a>
+  <a href="IX_rodzaje_zmiennych.html">Rodzaje zmiennych w badaniu</a>
+  <a href="IX_rozklady_prawdopodobienstwa.html">Rozkłady prawdopodobieństwa</a>
+  <a href="IX_standaryzacja.html">Standaryzacja zmiennej</a>
+  <a href="IX_stopnie_swobody.html">Stopnie swobody</a>
+  <a href="IX_twierdzenia_graniczne.html">Centralne twierdzenie graniczne i pra...</a>
+</nav>
+<main>
+<div class="breadcrumb"><a href="index.html">Wiki Statystyczna</a> › Porównywanie grup</div>
+<div id="content"><noscript>Ta strona wymaga JavaScript.</noscript></div>
+<div class="page-footer">Wiki Statystyczna — Instytut Psychologii, Uniwersytet Śląski</div>
+</main>
+<script id="e" type="text/plain">
+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
+</script>
+<script>
+function xorDecrypt(b64, key) {
+    const encrypted = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(key);
+    const decrypted = new Uint8Array(encrypted.length);
+    for (let i = 0; i < encrypted.length; i++) {
+        decrypted[i] = encrypted[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(decrypted);
+}
+(function() {
+    const KEY = "WikiStatUŚ2026psychologia";
+    const blob = document.getElementById('e').textContent.trim();
+    document.getElementById('content').innerHTML = xorDecrypt(blob, KEY);
+})();
+</script>
+<script>
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && ['i','j'].includes(e.key.toLowerCase())) { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', e => e.preventDefault());
+</script>
+</body>
+</html>
